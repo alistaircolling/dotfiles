@@ -1,20 +1,26 @@
-et nocompatible          " get rid of Vi compatibility mode. SET FIRST!
-filetype plugin indent on " filetype detection[ON] plugin[ON] indent[ON]
-set t_Co=256              " enable 256-color mode.
-syntax enable             " enable syntax highlighting (previously syntax on).
-colorscheme desert        " set colorscheme
-set number                " show line numbers
-set laststatus=2          " last window always has a statusline
-filetype indent on        " activates indenting for files
-set nohlsearch            " Don't continue to highlight searched phrases.
-set incsearch             " But do highlight as you type your search.
-set ignorecase            " Make searches case-insensitive.
-set ruler                 " Always show info along bottom.
-set autoindent            " auto-indent
-set tabstop=4             " tab spacing
-set softtabstop=4         " unify
-set shiftwidth=4          " indent/outdent by 4 columns
-set shiftround            " always indent/outdent to the nearest tabstop
-set expandtab             " use spaces instead of tabs
-set smarttab              " use tabs at the start of a line, spaces elsewhere
-set nowrap                " don't wrap text
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+set autowrite                      " Automatically :write before running commands
+set term=xterm-256color            " Set the correct term
+set t_Co=256     
+set cursorline                     " Highlight the current line
+set backspace=2                    " Backspace deletes like most programs in insert mode
+set expandtab                      " Tabs are spaces
+set fileencoding=utf-8             " The encoding written to file
+set fileformat=unix                " That LF life, son
+set hlsearch                       " Highlight searches
+set ignorecase                     " Ignore case when searching
+set number                         " Show line numbers all of the times
+set relativenumber                 " Less arithmetic to navigate around (relative line numbers)
+set scrolloff=3                    " More space around cursor when scrolling
+set showcmd                        " Display incomplete commands
+set ttimeoutlen=50                 " No delay after pressing escape 
+" Theme
+set background=dark
+colorscheme base16-railscasts
+highlight CursorLine ctermbg=235
+highlight CursorLineNR ctermbg=235 ctermfg=white
+highlight LineNr ctermfg=lightgrey ctermbg=23
+

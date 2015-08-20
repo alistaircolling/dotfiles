@@ -1,9 +1,7 @@
+execute pathogen#infect()
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 set autowrite                      " Automatically :write before running commands
-set term=xterm-256color            " Set the correct term
+syntax on
 set t_Co=256     
 set cursorline                     " Highlight the current line
 set backspace=2                    " Backspace deletes like most programs in insert mode
@@ -16,11 +14,11 @@ set number                         " Show line numbers all of the times
 set relativenumber                 " Less arithmetic to navigate around (relative line numbers)
 set scrolloff=3                    " More space around cursor when scrolling
 set showcmd                        " Display incomplete commands
-set ttimeoutlen=50                 " No delay after pressing escape 
+set ttimeoutlen=0                 " No delay after pressing escape 
+filetype plugin indent on
 " Theme
-set background=dark
-colorscheme base16-railscasts
-highlight CursorLine ctermbg=235
+highlight CursorLine ctermbg=darkgrey
 highlight CursorLineNR ctermbg=235 ctermfg=white
 highlight LineNr ctermfg=lightgrey ctermbg=23
-
+highlight Normal ctermfg=white ctermbg=black
+au VimEnter *  NERDTree

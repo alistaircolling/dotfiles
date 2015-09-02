@@ -16,10 +16,11 @@ set fileformat=unix                " That LF life, son
 set hlsearch                       " Highlight searches
 set ignorecase                     " Ignore case when searching
 set number                         " Show line numbers all of the times
+set rnu                            "show relative line numbers
 set showcmd                        " Display incomplete commands
 set ttimeoutlen=0                 " No delay after pressing escape 
+set nowrap
 filetype plugin indent on
-
 
 " Theme
 highlight CursorLine ctermbg=55

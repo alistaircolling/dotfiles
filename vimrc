@@ -22,29 +22,35 @@ set ttimeoutlen=0                 " No delay after pressing escape
 set nowrap
 filetype plugin indent on
 
+" Add solarized theme
+syntax enable
+set background=dark
+colorscheme solarized
+
+
 " Theme
-highlight CursorLine ctermbg=55
+"highlight CursorLine ctermbg=55
 "highlight CursorLineNR ctermbg=red ctermfg=white
-highlight LineNr ctermfg=63 ctermbg=black
+"highlight LineNr ctermfg=63 ctermbg=black
 
 
-hi CursorLine   cterm=NONE ctermbg=236 ctermfg=white guibg=red guifg=white
-hi CursorColumn cterm=NONE ctermbg=236 ctermfg=white guibg=red guifg=white
+"hi CursorLine   cterm=NONE ctermbg=236 ctermfg=white guibg=red guifg=white
+"hi CursorColumn cterm=NONE ctermbg=236 ctermfg=white guibg=red guifg=white
 "nnoremap <Leader>c :set cursorline! && cursorcolumn!<CR>
 
 
 
 
 " Normal text colors
-highlight Normal ctermfg=white ctermbg=black
+"highlight Normal ctermfg=white ctermbg=black
 
-highlight Cursor guifg=white guibg=red
-highlight iCursor guifg=white guibg=steelblue
+"highlight Cursor guifg=white guibg=red
+"highlight iCursor guifg=white guibg=steelblue
 " first, enable status line alwas
-set laststatus=2
-if version >= 700
-        au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta
-        au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
-endif
+"set laststatus=2
+"if version >= 700
+"        au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta
+"        au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
+"endif
 
 au VimEnter *  NERDTree

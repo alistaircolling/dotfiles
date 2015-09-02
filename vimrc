@@ -1,4 +1,8 @@
 execute pathogen#infect()
+
+
+" Use Mouse
+set mouse=a
 " Syntastic
 set autowrite                      " Automatically :write before running commands
 syntax on
@@ -17,7 +21,7 @@ set showcmd                        " Display incomplete commands
 set ttimeoutlen=0                 " No delay after pressing escape 
 filetype plugin indent on
 " Theme
-highlight CursorLine ctermbg=blue
+highlight CursorLine ctermbg=55
 highlight CursorLineNR ctermbg=red ctermfg=white
 highlight LineNr ctermfg=lightgrey ctermbg=23
 highlight Normal ctermfg=white ctermbg=black

@@ -4,11 +4,10 @@ execute pathogen#infect()
 " Use Mouse
 set mouse=a
 set ttymouse=xterm2
-set mouse+=a
-if &term =~ '^screen'
-            " tmux knows the extended mouse mode
-                 set ttymouse=xterm2
-                 endif
+set ttyfast
+set ttyscroll=3 
+set mousefocus
+let g:NERDTreeMouseMode=3 
 
 " Syntastic
 set autowrite                      " Automatically :write before running commands
@@ -35,31 +34,5 @@ filetype plugin indent on
 syntax enable
 set background=dark
 colorscheme solarized
-
-
-" Theme
-"highlight CursorLine ctermbg=55
-"highlight CursorLineNR ctermbg=red ctermfg=white
-"highlight LineNr ctermfg=63 ctermbg=black
-
-
-"hi CursorLine   cterm=NONE ctermbg=236 ctermfg=white guibg=red guifg=white
-"hi CursorColumn cterm=NONE ctermbg=236 ctermfg=white guibg=red guifg=white
-"nnoremap <Leader>c :set cursorline! && cursorcolumn!<CR>
-
-
-
-
-" Normal text colors
-"highlight Normal ctermfg=white ctermbg=black
-
-"highlight Cursor guifg=white guibg=red
-"highlight iCursor guifg=white guibg=steelblue
-" first, enable status line alwas
-"set laststatus=2
-"if version >= 700
-"        au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta
-"        au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
-"endif
 
 au VimEnter *  NERDTree

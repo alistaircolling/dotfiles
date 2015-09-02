@@ -17,8 +17,17 @@ set showcmd                        " Display incomplete commands
 set ttimeoutlen=0                 " No delay after pressing escape 
 filetype plugin indent on
 " Theme
-highlight CursorLine ctermbg=darkgrey
-highlight CursorLineNR ctermbg=235 ctermfg=white
+highlight CursorLine ctermbg=blue
+highlight CursorLineNR ctermbg=red ctermfg=white
 highlight LineNr ctermfg=lightgrey ctermbg=23
 highlight Normal ctermfg=white ctermbg=black
+highlight Cursor guifg=white guibg=red
+highlight iCursor guifg=white guibg=steelblue
+" first, enable status line alwas
+set laststatus=2
+if version >= 700
+        au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta
+        au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
+endif
+
 au VimEnter *  NERDTree

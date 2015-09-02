@@ -8,6 +8,7 @@ set autowrite                      " Automatically :write before running command
 syntax on
 set t_Co=256     
 set cursorline                     " Highlight the current line
+set cursorcolumn
 set backspace=2                    " Backspace deletes like most programs in insert mode
 set expandtab                      " Tabs are spaces
 set fileencoding=utf-8             " The encoding written to file
@@ -15,16 +16,27 @@ set fileformat=unix                " That LF life, son
 set hlsearch                       " Highlight searches
 set ignorecase                     " Ignore case when searching
 set number                         " Show line numbers all of the times
-set relativenumber                 " Less arithmetic to navigate around (relative line numbers)
-set scrolloff=3                    " More space around cursor when scrolling
 set showcmd                        " Display incomplete commands
 set ttimeoutlen=0                 " No delay after pressing escape 
 filetype plugin indent on
+
+
 " Theme
 highlight CursorLine ctermbg=55
 highlight CursorLineNR ctermbg=red ctermfg=white
-highlight LineNr ctermfg=lightgrey ctermbg=23
+highlight LineNr ctermfg=63 ctermbg=black
+
+
+hi CursorLine   cterm=NONE ctermbg=53 ctermfg=white guibg=red guifg=white
+hi CursorColumn cterm=NONE ctermbg=53 ctermfg=white guibg=red guifg=white
+"nnoremap <Leader>c :set cursorline! && cursorcolumn!<CR>
+
+
+
+
+" Normal text colors
 highlight Normal ctermfg=white ctermbg=black
+
 highlight Cursor guifg=white guibg=red
 highlight iCursor guifg=white guibg=steelblue
 " first, enable status line alwas

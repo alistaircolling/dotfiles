@@ -27,8 +27,8 @@ highlight CursorLineNR ctermbg=red ctermfg=white
 highlight LineNr ctermfg=63 ctermbg=black
 
 
-hi CursorLine   cterm=NONE ctermbg=53 ctermfg=white guibg=red guifg=white
-hi CursorColumn cterm=NONE ctermbg=53 ctermfg=white guibg=red guifg=white
+hi CursorLine   cterm=NONE ctermbg=56 ctermfg=white guibg=red guifg=white
+hi CursorColumn cterm=NONE ctermbg=56 ctermfg=white guibg=red guifg=white
 "nnoremap <Leader>c :set cursorline! && cursorcolumn!<CR>
 
 

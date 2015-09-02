@@ -10,8 +10,6 @@ if &term =~ '^screen'
                  set ttymouse=xterm2
                  endif
 
-
-
 " Syntastic
 set autowrite                      " Automatically :write before running commands
 syntax on
@@ -29,6 +27,8 @@ set rnu                            "show relative line numbers
 set showcmd                        " Display incomplete commands
 set ttimeoutlen=0                 " No delay after pressing escape 
 set nowrap
+set paste
+
 filetype plugin indent on
 
 " Add solarized theme

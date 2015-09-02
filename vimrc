@@ -6,7 +6,7 @@ set mouse=a
 " Syntastic
 set autowrite                      " Automatically :write before running commands
 syntax on
-set t_Co=256     
+set t_Co=2236     
 set cursorline                     " Highlight the current line
 set cursorcolumn
 set backspace=2                    " Backspace deletes like most programs in insert mode
@@ -23,12 +23,12 @@ filetype plugin indent on
 
 " Theme
 highlight CursorLine ctermbg=55
-highlight CursorLineNR ctermbg=red ctermfg=white
+"highlight CursorLineNR ctermbg=red ctermfg=white
 highlight LineNr ctermfg=63 ctermbg=black
 
 
-hi CursorLine   cterm=NONE ctermbg=56 ctermfg=white guibg=red guifg=white
-hi CursorColumn cterm=NONE ctermbg=56 ctermfg=white guibg=red guifg=white
+hi CursorLine   cterm=NONE ctermbg=236 ctermfg=white guibg=red guifg=white
+hi CursorColumn cterm=NONE ctermbg=236 ctermfg=white guibg=red guifg=white
 "nnoremap <Leader>c :set cursorline! && cursorcolumn!<CR>
 
 

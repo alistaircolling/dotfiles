@@ -3,6 +3,15 @@ execute pathogen#infect()
 
 " Use Mouse
 set mouse=a
+set ttymouse=xterm2
+set mouse+=a
+if &term =~ '^screen'
+            " tmux knows the extended mouse mode
+                 set ttymouse=xterm2
+                 endif
+
+
+
 " Syntastic
 set autowrite                      " Automatically :write before running commands
 syntax on

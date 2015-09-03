@@ -2,12 +2,16 @@ execute pathogen#infect()
 
 
 " Use Mouse
-set mouse=a
+set mouse=n
 set ttymouse=xterm2
 set ttyfast
 set ttyscroll=3 
 set mousefocus
 let g:NERDTreeMouseMode=3 
+
+" Key Bindings
+nmap <C-n> :NERDTreeToggle<CR>
+
 
 " Syntastic
 set autowrite                      " Automatically :write before running commands

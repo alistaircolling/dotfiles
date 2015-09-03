@@ -2,7 +2,7 @@ execute pathogen#infect()
 
 
 " Use Mouse
-set mouse=n
+set mouse=a
 set ttymouse=xterm2
 set ttyfast
 set ttyscroll=3 

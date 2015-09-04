@@ -7,7 +7,7 @@ set ttymouse=xterm2
 set ttyfast
 set ttyscroll=3 
 set mousefocus
-let g:NERDTreeMouseMode=3 
+let g:NERDTreeMouseMode=3
 
 " Key Bindings
 nmap <C-n> :NERDTreeToggle<CR>

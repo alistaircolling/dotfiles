@@ -18,7 +18,7 @@ set autowrite                      " Automatically :write before running command
 syntax on
 set t_Co=2236     
 set cursorline                     " Highlight the current line
-set cursorcolumn
+"set cursorcolumn
 set backspace=2                    " Backspace deletes like most programs in insert mode
 set expandtab                      " Tabs are spaces
 set fileencoding=utf-8             " The encoding written to file
@@ -37,7 +37,7 @@ filetype plugin indent on
 " Add solarized theme
 syntax enable
 set background=dark
-colorscheme solarized
+" colorscheme solarized
 
 " JS Beautify
 map <c-f> :call JsBeautify()<cr>

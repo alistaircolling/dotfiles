@@ -36,8 +36,10 @@ filetype plugin indent on
 
 " Add solarized theme
 syntax enable
-set background=dark
+"set background=dark
 "colorscheme solarized
+colorscheme monokai
+
 
 " JS Beautify
 map <c-f> :call JsBeautify()<cr>

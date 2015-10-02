@@ -33,6 +33,7 @@ set nowrap
 set paste
 
 filetype plugin indent on
+filetype plugin on
 
 " Add solarized theme
 syntax enable

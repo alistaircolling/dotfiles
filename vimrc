@@ -64,11 +64,6 @@ if version >= 700
 endif
 " persist the yanked clipboard
 xnoremap p pgvy
-" trigger JSBeautify when exiting insert mode
-augroup AuJSBeautify
-   au!
-   au  InsertLeave * call JsBeautify()
-augroup END
 
 au VimEnter *  NERDTree
 

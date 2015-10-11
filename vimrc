@@ -66,5 +66,20 @@ endif
 " persist the yanked clipboard
 xnoremap p pgvy
 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+
+"syntastic errpr checking
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+"ignore attribute errors (e.g. angular directives)
+
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ]
+"always check while editing
+let g:syntastic_auto_loc_list=1
 au VimEnter *  NERDTree
 

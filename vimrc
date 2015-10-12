@@ -99,6 +99,9 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 highlight Pmenu ctermfg=2 ctermbg=20 guifg=#ffffff guibg=#0000ff
+
+
+
 au VimEnter *  NERDTree
 
 

@@ -12,6 +12,10 @@ let g:NERDTreeMouseMode=3
 " Key Bindings
 nmap <C-n> :NERDTreeToggle<CR>
 
+"add a new line when pressing Enter without entering insert mode
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
+
 
 " Syntastic
 set autowrite                      " Automatically :write before running commands

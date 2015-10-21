@@ -83,6 +83,11 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ]
 let g:syntastic_auto_loc_list=1
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
+
+let delimitMate_expand_cr = 1
+filetype indent plugin on
+
+
 "SEARCH AND REPLACE
 :map <C-h> :%s/
 

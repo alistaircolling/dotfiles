@@ -83,14 +83,17 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ]
 let g:syntastic_auto_loc_list=1
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
+"SEARCH AND REPLACE
+:map <C-h> :%s/
+
 " Bi-directional find motion
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{label}`
-nmap s <Plug>(easymotion-s)
+"nmap s <Plug>(easymotion-s)
 " or
 " `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-s2)
+"nmap s <Plug>(easymotion-s2)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
@@ -105,6 +108,8 @@ let g:syntastic_typescript_tsc_args = '--target ES5'
 let g:syntastic_typescript_checkers = ['tslint', 'tsc']
 let g:syntastic_html_tidy_ignore_errors = ['is not recognized!', 'content occurs after end of body', 'discarding unexpected\']
 let g:syntastic_html_tidy_quiet_messages = { "level" : "warnings" }
+" size of a hard tabstop
+set tabstop=4
 au VimEnter *  NERDTree
 
 

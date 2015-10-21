@@ -57,6 +57,11 @@ map <c-h> :noh<cr>
 " first, enable status line always
 set laststatus=2
 
+
+au Filetype html,xml,xsl "source ~/dotfiles/vim/bundle/closetag.vim/
+let g:closetag_html_style=1
+"source ~/dotfiles/vim/bundle/closetag.vim/
+
 " now set it up to change the status line based on mode
 if version >= 700
   au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta

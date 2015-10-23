@@ -61,6 +61,10 @@ map <c-h> :noh<cr>
 " first, enable status line always
 set laststatus=2
 
+"SCSS Auto complete
+autocmd BufNewFile,BufRead *.scss             set ft=scss.css
+set omnifunc=csscomplete#CompleteCSS
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS 
 
 au Filetype html,xml,xsl "source ~/dotfiles/vim/bundle/closetag.vim/
 let g:closetag_html_style=1

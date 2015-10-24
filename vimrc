@@ -66,6 +66,9 @@ autocmd BufNewFile,BufRead *.scss             set ft=scss.css
 set omnifunc=csscomplete#CompleteCSS
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS 
 
+"Set default search directory to src
+let g:CommandTTraverseSCM = 'src' 
+
 au Filetype html,xml,xsl "source ~/dotfiles/vim/bundle/closetag.vim/
 let g:closetag_html_style=1
 "source ~/dotfiles/vim/bundle/closetag.vim/
@@ -100,6 +103,7 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 let delimitMate_expand_cr = 1
 filetype indent plugin on
 
+let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/dist/*"
 
 "SEARCH AND REPLACE
 :map <C-h> :%s/
@@ -115,6 +119,10 @@ filetype indent plugin on
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
+
+"Indent stuff
+set smartindent
+set autoindent
 
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)

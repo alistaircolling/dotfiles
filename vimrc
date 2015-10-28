@@ -35,7 +35,7 @@ set showcmd                        " Display incomplete commands
 set ttimeoutlen=0                 " No delay after pressing escape 
 set wrap
 set paste
-
+set modifiable " makes the buffer modifiable
 filetype plugin indent on
 filetype plugin on
 

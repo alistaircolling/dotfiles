@@ -54,6 +54,7 @@ autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 " for css or scss
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+autocmd FileType scss noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
 "toggle highlighting (e.g. on search)
 map <c-h> :noh<cr>

@@ -33,7 +33,7 @@ set number                         " Show line numbers all of the times
 set rnu                            "show relative line numbers
 set showcmd                        " Display incomplete commands
 set ttimeoutlen=0                 " No delay after pressing escape 
-set nowrap
+set wrap
 set paste
 
 filetype plugin indent on
@@ -108,6 +108,11 @@ let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/dist/*"
 "SEARCH AND REPLACE
 :map <C-h> :%s/
 
+
+"snipmate mapping
+:imap <Tab> <Plug>snipMateTrigger
+
+
 " Bi-directional find motion
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{label}`
@@ -134,6 +139,8 @@ let g:syntastic_typescript_tsc_args = '--target ES5'
 let g:syntastic_typescript_checkers = ['tslint', 'tsc']
 let g:syntastic_html_tidy_ignore_errors = ['is not recognized!', 'content occurs after end of body', 'discarding unexpected\']
 let g:syntastic_html_tidy_quiet_messages = { "level" : "warnings" }
+
+
 " size of a hard tabstop
 set tabstop=4
 au VimEnter *  NERDTree

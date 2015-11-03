@@ -104,7 +104,7 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 let delimitMate_expand_cr = 1
 filetype indent plugin on
 
-let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/dist/*"
+let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/dist/*,*.svg,*.jpg"
 
 "SEARCH AND REPLACE
 :map <C-h> :%s/

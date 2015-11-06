@@ -11,7 +11,6 @@ let g:NERDTreeMouseMode=3
 
 " Key Bindings
 nmap <C-n> :NERDTreeToggle<CR>
-
 "add a new line when pressing Enter without entering insert mode
 nmap <S-Enter> O<Esc>
 nmap <CR> o<Esc>
@@ -87,16 +86,17 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set statusline +=%f
-"syntastic errpr checking
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-"ignore attribute errors (e.g. angular directives)
 
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ]
-"always check while editing
-let g:syntastic_auto_loc_list=1
+"syntastic errpr checking
+":let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+""ignore attribute errors (e.g. angular directives)
+
+"let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ]
+""always check while editing
+"let g:syntastic_auto_loc_list=1
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
 

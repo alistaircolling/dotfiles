@@ -145,4 +145,8 @@ let g:syntastic_html_tidy_quiet_messages = { "level" : "warnings" }
 set tabstop=4
 au VimEnter *  NERDTree
 
+hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen
+hi TabLine ctermfg=Blue ctermbg=20
+hi TabLineSel ctermfg=Red ctermbg=Yellow
+
 

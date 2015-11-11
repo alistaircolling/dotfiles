@@ -1,4 +1,7 @@
 execute pathogen#infect()
+"open in a split if a file contains unsaved edits
+set nohidden
+
 
 
 " Use Mouse
@@ -79,14 +82,26 @@ if version >= 700
   au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
 endif
 
+
+"Percent Function for scroll position
+function! Percent()
+    let byte = line2byte( line( "." ) ) + col( "." ) - 1
+    let size = (line2byte( line( "$" ) + 1 ) - 1)
+    " return byte . " " . size . " " . (byte * 100) / size
+    return (byte * 100) / size
+endfunction
+
+
+
 " persist the yanked clipboard
 xnoremap p pgvy
+set clipboard=unnamed
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-set statusline +=%f
-
+set statusline+=%f
+set statusline+=%{Percent()}%%
 "syntastic errpr checking
 ":let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
@@ -145,8 +160,8 @@ let g:syntastic_html_tidy_quiet_messages = { "level" : "warnings" }
 set tabstop=4
 au VimEnter *  NERDTree
 
-hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen
-hi TabLine ctermfg=Blue ctermbg=20
+hi TabLineFill ctermfg=Black ctermbg=DarkGreen
+"hi TabLine ctermfg=Blue ctermbg=20
 hi TabLineSel ctermfg=Red ctermbg=Yellow
 
 

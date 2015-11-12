@@ -1,4 +1,5 @@
 execute pathogen#infect()
+Helptags
 "open in a split if a file contains unsaved edits
 set nohidden
 

@@ -4,7 +4,6 @@ Helptags
 set nohidden
 
 
-
 " Use Mouse
 set mouse=a
 set ttymouse=xterm2
@@ -159,7 +158,7 @@ let g:syntastic_html_tidy_quiet_messages = { "level" : "warnings" }
 
 " size of a hard tabstop
 set tabstop=4
-au VimEnter *  NERDTree
+"au VimEnter *  NERDTree
 
 hi TabLineFill ctermfg=Black ctermbg=DarkGreen
 "hi TabLine ctermfg=Blue ctermbg=20

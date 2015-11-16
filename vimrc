@@ -10,10 +10,10 @@ set ttymouse=xterm2
 set ttyfast
 set ttyscroll=3 
 set mousefocus
-let g:NERDTreeMouseMode=3
+"let g:NERDTreeMouseMode=3
 
 " Key Bindings
-nmap <C-n> :NERDTreeToggle<CR>
+"nmap <C-n> :NERDTreeToggle<CR>
 "add a new line when pressing Enter without entering insert mode
 nmap <S-Enter> O<Esc>
 "nmap <CR> o<Esc>
@@ -163,5 +163,5 @@ set tabstop=4
 hi TabLineFill ctermfg=Black ctermbg=DarkGreen
 "hi TabLine ctermfg=Blue ctermbg=20
 hi TabLineSel ctermfg=Red ctermbg=Yellow
-
+let g:netrw_banner=0 
 

@@ -101,7 +101,10 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set statusline+=%f
-set statusline+=%{Percent()}%%
+set statusline+=%=
+"set statusline+=%c,
+set statusline+=%l/%L 
+set statusline+=\ %P   
 "syntastic errpr checking
 ":let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1

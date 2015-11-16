@@ -1,7 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/Users/alistair/Development/HTML/BambaramInternal/src/app/directives/pages'
 let g:netrw_dirhist_2='/Users/alistair/Development/HTML/BambaramInternal'
 let g:netrw_dirhist_3='/Users/alistair/Development/HTML/BambaramInternal/src'
 let g:netrw_dirhist_4='/Users/alistair/Development/HTML/BambaramInternal/src/views'
 let g:netrw_dirhist_5='/Users/alistair/Development/HTML/BambaramInternal/src/views/pages'
+let g:netrw_dirhist_6='/Users/alistair/Development/HTML/BambaramInternal'

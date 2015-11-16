@@ -22,7 +22,7 @@ nmap <S-Enter> O<Esc>
 " Syntastic
 set autowrite                      " Automatically :write before running commands
 syntax on
-set t_Co=2236     
+"set t_Co=2236     
 set cursorline                     " Highlight the current line
 "set cursorcolumn
 set backspace=2                    " Backspace deletes like most programs in insert mode
@@ -45,7 +45,10 @@ filetype plugin on
 syntax enable
 "set background=dark
 "colorscheme solarized
-colorscheme monokai
+"colorscheme monokai
+set t_Co=256
+:colo xoria256
+
 
 
 " JS Beautify

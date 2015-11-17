@@ -35,7 +35,7 @@ set number                         " Show line numbers all of the times
 set rnu                            "show relative line numbers
 set showcmd                        " Display incomplete commands
 set ttimeoutlen=0                 " No delay after pressing escape
-set wrap
+set nowrap
 set paste
 set modifiable " makes the buffer modifiable
 filetype plugin indent on
@@ -176,3 +176,7 @@ noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
+"file browser
+let g:netrw_liststyle=3
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'

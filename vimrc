@@ -3,12 +3,12 @@ Helptags
 "open in a split if a file contains unsaved edits
 set nohidden
 
-
+set nocp
 " Use Mouse
 set mouse=a
 set ttymouse=xterm2
 set ttyfast
-set ttyscroll=3 
+set ttyscroll=3
 set mousefocus
 "let g:NERDTreeMouseMode=3
 
@@ -22,7 +22,7 @@ nmap <S-Enter> O<Esc>
 " Syntastic
 set autowrite                      " Automatically :write before running commands
 syntax on
-"set t_Co=2236     
+"set t_Co=2236
 set cursorline                     " Highlight the current line
 "set cursorcolumn
 set backspace=2                    " Backspace deletes like most programs in insert mode
@@ -34,7 +34,7 @@ set ignorecase                     " Ignore case when searching
 set number                         " Show line numbers all of the times
 set rnu                            "show relative line numbers
 set showcmd                        " Display incomplete commands
-set ttimeoutlen=0                 " No delay after pressing escape 
+set ttimeoutlen=0                 " No delay after pressing escape
 set wrap
 set paste
 set modifiable " makes the buffer modifiable
@@ -70,10 +70,10 @@ set laststatus=2
 "SCSS Auto complete
 autocmd BufNewFile,BufRead *.scss             set ft=scss.css
 set omnifunc=csscomplete#CompleteCSS
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS 
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 "Set default search directory to src
-let g:CommandTTraverseSCM = 'src' 
+let g:CommandTTraverseSCM = 'src'
 
 au Filetype html,xml,xsl "source ~/dotfiles/vim/bundle/closetag.vim/
 let g:closetag_html_style=1
@@ -106,13 +106,13 @@ set statusline+=%*
 set statusline+=%f
 set statusline+=%=
 "set statusline+=%c,
-set statusline+=%l/%L 
-set statusline+=\ %P   
+set statusline+=%l/%L
+set statusline+=\ %P
 "syntastic errpr checking
-":let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 ""ignore attribute errors (e.g. angular directives)
 
 "let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ]
@@ -169,5 +169,10 @@ set tabstop=4
 hi TabLineFill ctermfg=Black ctermbg=DarkGreen
 "hi TabLine ctermfg=Blue ctermbg=20
 hi TabLineSel ctermfg=Red ctermbg=Yellow
-let g:netrw_banner=0 
+let g:netrw_banner=0
 
+"disable arrow keys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>

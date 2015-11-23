@@ -43,9 +43,9 @@ filetype plugin on
 
 " Add solarized theme
 syntax enable
-"set background=dark
-colorscheme solarized
-"colorscheme monokai
+set background=dark
+"colorscheme solarized
+colorscheme monokai
 set t_Co=256
 ":colo xoria256
 

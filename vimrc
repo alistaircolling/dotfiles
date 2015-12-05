@@ -3,6 +3,7 @@ Helptags
 "open in a split if a file contains unsaved edits
 set nohidden
 
+
 set nocp
 " Use Mouse
 set mouse=a
@@ -10,6 +11,8 @@ set ttymouse=xterm2
 set ttyfast
 set ttyscroll=3
 set mousefocus
+"clear search my leader space
+nnoremap <leader><space> :noh<cr>
 "let g:NERDTreeMouseMode=3
 
 " Key Bindings

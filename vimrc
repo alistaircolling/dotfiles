@@ -17,7 +17,8 @@ set mousefocus
 "add a new line when pressing Enter without entering insert mode
 nmap <S-Enter> O<Esc>
 "nmap <CR> o<Esc>
-
+"saves undos after a file has been closed
+set undofile
 
 " Syntastic
 set autowrite                      " Automatically :write before running commands
@@ -72,8 +73,7 @@ autocmd BufNewFile,BufRead *.scss             set ft=scss.css
 set omnifunc=csscomplete#CompleteCSS
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
-"Set default search directory to src
-let g:CommandTTraverseSCM = 'src'
+
 
 au Filetype html,xml,xsl "source ~/dotfiles/vim/bundle/closetag.vim/
 let g:closetag_html_style=1
@@ -125,7 +125,9 @@ let delimitMate_expand_cr = 1
 filetype indent plugin on
 
 let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/dist/*,*.svg,*.jpg"
-
+"Set default search directory to src
+let g:CommandTTraverseSCM = 'src'
+let g:CommandTHighlightColor = 'ErrorMsg'
 "SEARCH AND REPLACE
 :map <C-h> :%s/
 
@@ -169,14 +171,14 @@ set tabstop=4
 hi TabLineFill ctermfg=Black ctermbg=DarkGreen
 "hi TabLine ctermfg=Blue ctermbg=20
 hi TabLineSel ctermfg=Red ctermbg=Yellow
-let g:netrw_banner=0
+"let g:netrw_banner=0
 
-"disable arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+"disable "arrow keys
+"noremap <Up> <NOP>
+"noremap <Down> <NOP>
+"noremap <Left> <NOP>
+"noremap <Right> <NOP>
 
 "file browser
-let g:netrw_liststyle=3
+let g:netrw_liststyle=1
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'

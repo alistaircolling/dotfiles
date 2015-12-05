@@ -147,10 +147,17 @@ let g:CommandTHighlightColor = 'ErrorMsg'
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
-
+set ignorecase
+set smartcase
+"applies substitutions globally on lines. For example, instead of :%s/foo/bar/g you just type :%s/foo/bar/
+set gdefault
 "Indent stuff
 set smartindent
 set autoindent
+"work together to highlight search results (as you type). It’s really quite handy, as long as you have the next line as well.
+set incsearch
+set showmatch
+set hlsearch
 
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)

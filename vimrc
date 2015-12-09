@@ -181,7 +181,9 @@ set tabstop=4
 hi TabLineFill ctermfg=Black ctermbg=DarkGreen
 "hi TabLine ctermfg=Blue ctermbg=20
 hi TabLineSel ctermfg=Red ctermbg=Yellow
-"let g:netrw_banner=0
+let g:netrw_banner=0
+"allows previewing of file by pressing p 
+let g:netrw_preview = 1
 
 "disable "arrow keys
 "noremap <Up> <NOP>
@@ -192,3 +194,16 @@ hi TabLineSel ctermfg=Red ctermbg=Yellow
 "file browser
 let g:netrw_liststyle=1
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+"stop the scratch window appearing when autocomplete goes...
+set completeopt-=preview
+
+
+"react highlighting:
+let g:jsx_ext_required = 0
+let g:syntastic_javascript_checkers = ['eslint']
+
+let g:syntastic_javascript_checkers = ['jsxhint']
+let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
+
+"indenting---
+set shiftwidth=4 

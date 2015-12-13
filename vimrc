@@ -16,7 +16,7 @@ nnoremap <leader><space> :noh<cr>
 "let g:NERDTreeMouseMode=3
 
 " Key Bindings
-"nmap <C-n> :NERDTreeToggle<CR>
+nmap <C-n> :NERDTreeToggle<CR>
 "add a new line when pressing Enter without entering insert mode
 nmap <S-Enter> O<Esc>
 "nmap <CR> o<Esc>
@@ -167,9 +167,9 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 highlight Pmenu ctermfg=2 ctermbg=20 guifg=#ffffff guibg=#0000ff
 
-let g:syntastic_typescript_tsc_args = '--target ES5'
+"let g:syntastic_typescript_tsc_args = '--target ES5'
 "let g:syntastic_debug=3
-let g:syntastic_typescript_checkers = ['tslint', 'tsc']
+"let g:syntastic_typescript_checkers = ['tslint', 'tsc']
 let g:syntastic_html_tidy_ignore_errors = ['is not recognized!', 'content occurs after end of body', 'discarding unexpected\']
 let g:syntastic_html_tidy_quiet_messages = { "level" : "warnings" }
 

@@ -207,3 +207,6 @@ let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
 
 "indenting---
 set shiftwidth=4 
+"INCREMENT AMND DECRMENT on ALt
+nnoremap <C-x> <C-a>
+nnoremap <C-z> <C-x>

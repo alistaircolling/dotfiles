@@ -112,7 +112,6 @@ set statusline+=%=
 set statusline+=%l/%L
 set statusline+=\ %P
 "syntastic errpr checking
-let g:syntastic_quiet_messages = { "type": "style" }
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -172,8 +171,8 @@ highlight Pmenu ctermfg=2 ctermbg=20 guifg=#ffffff guibg=#0000ff
 "let g:syntastic_debug=3
 "let g:syntastic_typescript_checkers = ['tslint', 'tsc']
 let g:syntastic_html_tidy_ignore_errors = ['is not recognized!', 'content occurs after end of body', 'discarding unexpected\']
-let g:syntastic_html_tidy_quiet_messages = { "level" : "warnings" }
-
+let g:syntastic_html_tidy_quiet_messages = { "level" : "warnings", "type": "style" }
+let g:syntastic_quiet_messages = { "type": "style" }
 
 " size of a hard tabstop
 set tabstop=4

@@ -130,7 +130,8 @@ filetype indent plugin on
 let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/dist/*,*.svg,*.jpg"
 "Set default search directory to src
 let g:CommandTTraverseSCM = 'src'
-let g:CommandTHighlightColor = 'ErrorMsg'
+let g:CommandTHighlightColor = 'DiffText'
+let g:CommandTCursorColor = 'DiffText'
 "SEARCH AND REPLACE
 :map <C-h> :%s/
 
@@ -191,7 +192,7 @@ let g:netrw_preview = 1
 "noremap <Left> <NOP>
 "noremap <Right> <NOP>
 
-"file browser
+"file browser:
 let g:netrw_liststyle=1
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 "stop the scratch window appearing when autocomplete goes...
@@ -210,3 +211,5 @@ set shiftwidth=4
 "INCREMENT AMND DECRMENT on ALt
 nnoremap <C-x> <C-a>
 nnoremap <C-z> <C-x>
+
+let g:GrepRoot = '.'

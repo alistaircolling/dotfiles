@@ -1,5 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Users/alistair/Development/HTML/green-rooms/src/js/controllers'
-let g:netrw_dirhist_2='/Users/alistair/Development/HTML/green-rooms/src/js'
-let g:netrw_dirhist_3='/Users/alistair/Development/HTML/green-rooms/src'
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/alistair/Development/HTML/ldnhsbcsg'
+let g:netrw_dirhist_2='/Users/alistair/Development/HTML/ldnhsbcsg/src'
+let g:netrw_dirhist_3='/Users/alistair/Development/HTML/ldnhsbcsg/src/js'
+let g:netrw_dirhist_4='/Users/alistair/Development/HTML/ldnhsbcsg/src/js/components'
+let g:netrw_dirhist_5='/Users/alistair/Development/HTML/ldnhsbcsg/src/js/components/carousel-components'
+let g:netrw_dirhist_6='/Users/alistair/Development/HTML/ldnhsbcsg/src/js/utils'
+let g:netrw_dirhist_7='/Users/alistair/Development/HTML/ldnhsbcsg/src/js/utils/animations'
+let g:netrw_dirhist_8='/Users/alistair/Development/HTML/ldnhsbcsg/src/js/components'

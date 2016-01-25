@@ -200,11 +200,11 @@ set completeopt-=preview
 
 
 "react highlighting:
-let g:jsx_ext_required = 0
-let g:syntastic_javascript_checkers = ['eslint']
+"let g:jsx_ext_required = 0
+"let g:syntastic_javascript_checkers = ['eslint']
 
-let g:syntastic_javascript_checkers = ['jsxhint']
-let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
+"let g:syntastic_javascript_checkers = ['jsxhint']
+"let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
 
 "indenting---
 set shiftwidth=4 

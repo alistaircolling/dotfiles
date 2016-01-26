@@ -206,7 +206,8 @@ nnoremap <C-z> <C-x>
 
 let g:GrepRoot = '.'
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{exists('g:loaded_syntastic_plugin')?SyntasticStatuslineFlag():''}
+"set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set statusline+=%f
 set statusline+=%=

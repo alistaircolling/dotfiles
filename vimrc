@@ -103,14 +103,6 @@ endfunction
 xnoremap p pgvy
 set clipboard=unnamed
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-set statusline+=%f
-set statusline+=%=
-"set statusline+=%c,
-set statusline+=%l/%L
-set statusline+=\ %P
 "syntastic errpr checking
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -213,3 +205,11 @@ nnoremap <C-x> <C-a>
 nnoremap <C-z> <C-x>
 
 let g:GrepRoot = '.'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+set statusline+=%f
+set statusline+=%=
+"set statusline+=%c,
+set statusline+=%l/%L
+set statusline+=\ %P

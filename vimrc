@@ -214,3 +214,5 @@ set statusline+=%=
 "set statusline+=%c,
 set statusline+=%l/%L
 set statusline+=\ %P
+" Change directory to the current buffer when opening files. NETRW
+set autochdir

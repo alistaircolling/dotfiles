@@ -1,6 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/Users/alistair/Development/HTML/ldnhsbcsg/src/js/utils'
-let g:netrw_dirhist_2='/Users/alistair/Development/HTML/ldnhsbcsg/src/js/utils/animations'
-let g:netrw_dirhist_3='/Users/alistair/Development/HTML/ldnhsbcsg'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Users/alistair.colling/Development/HTML/ldnhsbcsg'
+let g:netrw_dirhist_2='/Users/alistair.colling/Development/HTML/ldnhsbcsg/src/jekyll/_layouts'
+let g:netrw_dirhist_3='/Users/alistair.colling/Development/HTML/ldnhsbcsg/src/jekyll/_includes'
 let g:netrw_dirhist_4='/Users/alistair.colling/Development/HTML/ldnhsbcsg'
+let g:netrw_dirhist_5='/Users/alistair.colling/Development/HTML/ldnhsbcsg/docs'

@@ -2,4 +2,4 @@ npm-debug.log
 *.un~
 *.swp
 *.DS_Store*
-
+.netrwhist

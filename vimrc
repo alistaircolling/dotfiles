@@ -2,7 +2,13 @@ execute pathogen#infect()
 Helptags
 "open in a split if a file contains unsaved edits
 set nohidden
+"  maximise toggle
+nnoremap <C-W>O :call MaximizeToggle()<CR>
+nnoremap <C-W>o :call MaximizeToggle()<CR>
+nnoremap <C-W><C-O> :call MaximizeToggle()<CR>
 
+nmap t% :tabedit %<CR>
+nmap td :tabclose<CR>
 
 set nocp
 " Use Mouse
@@ -113,7 +119,7 @@ let g:syntastic_check_on_wq = 0
 "let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ]
 ""always check while editing
 "let g:syntastic_auto_loc_list=1
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
+"let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
 
 let delimitMate_expand_cr = 1
@@ -156,8 +162,7 @@ set showmatch
 set hlsearch
 
 " JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+map <Leader> <Plug>(easymotion-prefix)
 highlight Pmenu ctermfg=2 ctermbg=20 guifg=#ffffff guibg=#0000ff
 
 "let g:syntastic_typescript_tsc_args = '--target ES5'

@@ -163,6 +163,9 @@ set hlsearch
 
 " JK motions: Line motions
 map <Leader> <Plug>(easymotion-prefix)
+let mapleader=" "
+
+
 highlight Pmenu ctermfg=2 ctermbg=20 guifg=#ffffff guibg=#0000ff
 
 "let g:syntastic_typescript_tsc_args = '--target ES5'

@@ -1,6 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/Users/alistair.colling/dotfiles/vim'
-let g:netrw_dirhist_2='/Users/alistair.colling/dotfiles'
-let g:netrw_dirhist_3='/Users/alistair.colling/dotfiles/vim'
-let g:netrw_dirhist_4='/Users/alistair.colling/dotfiles'
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/alistair.colling/Development/HTML/ldnhsbcsg/src/scss/core'
+let g:netrw_dirhist_2='/Users/alistair.colling/Development/HTML/ldnhsbcsg'
+let g:netrw_dirhist_3='/Users/alistair.colling/Development/HTML/ldnhsbcsg/src'
+let g:netrw_dirhist_4='/Users/alistair.colling/Development/HTML/ldnhsbcsg/src/scss'
+let g:netrw_dirhist_5='/Users/alistair.colling/Development/HTML/ldnhsbcsg/src/scss/components'
+let g:netrw_dirhist_6='/Users/alistair.colling/Desktop/analogfolk-ondemand-ldnhsbcmbx-c7c95bb64e87'

@@ -1,28 +1,36 @@
 execute pathogen#infect()
 Helptags
-"open in a split if a file contains unsaved edits
-set nohidden
+" open docs
+nmap <silent> <leader>d <Plug>DashSearch
+
+set hidden
 "  maximise toggle
 nnoremap <C-W>O :call MaximizeToggle()<CR>
 nnoremap <C-W>o :call MaximizeToggle()<CR>
 nnoremap <C-W><C-O> :call MaximizeToggle()<CR>
 
+function! MaximizeToggle()
+  if exists("s:maximize_session")
+    exec "source " . s:maximize_session
+    call delete(s:maximize_session)
+    unlet s:maximize_session
+    let &hidden=s:maximize_hidden_save
+    unlet s:maximize_hidden_save
+  else
+    let s:maximize_hidden_save = &hidden
+    let s:maximize_session = tempname()
+    set hidden
+    exec "mksession! " . s:maximize_session
+    only
+  endif
+endfunction
 nmap t% :tabedit %<CR>
 nmap td :tabclose<CR>
 
-set nocp
-" Use Mouse
-set mouse=a
-set ttymouse=xterm2
-set ttyfast
-set ttyscroll=3
-set mousefocus
-"clear search my leader space
-nnoremap <leader><space> :noh<cr>
-"let g:NERDTreeMouseMode=3
+let mapleader=" "
 
 " Key Bindings
-nmap <C-n> :NERDTreeToggle<CR>
+"nmap <C-n> :NERDTreeToggle<CR>
 "add a new line when pressing Enter without entering insert mode
 nmap <S-Enter> O<Esc>
 "nmap <CR> o<Esc>
@@ -163,7 +171,6 @@ set hlsearch
 
 " JK motions: Line motions
 map <Leader> <Plug>(easymotion-prefix)
-let mapleader=" "
 
 
 highlight Pmenu ctermfg=2 ctermbg=20 guifg=#ffffff guibg=#0000ff
@@ -205,6 +212,8 @@ let g:syntastic_javascript_checkers = ['eslint']
 
 "let g:syntastic_javascript_checkers = ['jsxhint']
 "let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
+set history=1000         " remember more commands and search history
+set undolevels=1000   
 
 "indenting---
 set shiftwidth=4 
@@ -224,3 +233,6 @@ set statusline+=%l/%L
 set statusline+=\ %P
 " Change directory to the current buffer when opening files. NETRW
 set autochdir
+"move to next or previous tab ctrl left or right
+nnoremap <C-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>

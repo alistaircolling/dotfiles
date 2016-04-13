@@ -5,6 +5,8 @@ nmap <silent> <leader>d <Plug>DashSearch
 let g:deoplete#enable_at_startup = 1
 set hidden
 
+let g:neomake_javascript_enabled_makers = ['eslint']
+
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
@@ -29,6 +31,17 @@ endif
 
 
 
+" Plugin key-mappings. for NEO SNIPPET
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>" 
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>" 
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
 "  maximise toggle
 " nnoremap <C-W>O :call MaximizeToggle()<CR>
 " nnoremap <C-W>o :call MaximizeToggle()<CR>
@@ -51,8 +64,17 @@ endfunction
 nmap t% :tabedit %<CR>
 nmap td :tabclose<CR>
 
-"let mapleader=" "
-
+let mapleader=" "
+"Map Escape to close terminal mode
+tnoremap <Esc> <C-\><C-n>
+"Terminal nav mappings
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
 " Key Bindings
 "add a new line when pressing Enter without entering insert mode
 nmap <S-Enter> O<Esc>
@@ -72,8 +94,8 @@ set fileencoding=utf-8             " The encoding written to file
 set fileformat=unix                " That LF life, son
 set hlsearch                       " Highlight searches
 set ignorecase                     " Ignore case when searching
-set number                         " Show line numbers all of the times
-set rnu                            "show relative line numbers
+"set number                         " Show line numbers all of the times
+"set rnu                            "show relative line numbers
 set showcmd                        " Display incomplete commands
 " set ttimeoutlen=0u"  THIS BREAKS DEOPLETE                 " No delay after pressing escape
  set nowrap
@@ -132,8 +154,8 @@ endif
 
 
 " " persist the yanked clipboard
-" xnoremap p pgvy
-" set clipboard=unnamed
+xnoremap p pgvy
+set clipboard=unnamed
 
 " "syntastic errpr checking
 " let g:syntastic_always_populate_loc_list = 1

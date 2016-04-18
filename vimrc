@@ -1,5 +1,10 @@
 execute pathogen#infect()
 Helptags
+
+let mapleader=" "
+map <Leader> <Plug>(easymotion-prefix)
+
+
 " open docs
 nmap <silent> <leader>d <Plug>DashSearch
 let g:deoplete#enable_at_startup = 1
@@ -29,7 +34,7 @@ if exists('g:plugs["tern_for_vim"]')
   autocmd FileType javascript setlocal omnifunc=tern#Complete
 endif
 
-
+set rtp+=~/.fzf
 
 " Plugin key-mappings. for NEO SNIPPET
 
@@ -42,29 +47,10 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 
-"  maximise toggle
-" nnoremap <C-W>O :call MaximizeToggle()<CR>
-" nnoremap <C-W>o :call MaximizeToggle()<CR>
-" nnoremap <C-W><C-O> :call MaximizeToggle()<CR>
-function! MaximizeToggle()
-  if exists("s:maximize_session")
-    exec "source " . s:maximize_session
-    call delete(s:maximize_session)
-    unlet s:maximize_session
-    let &hidden=s:maximize_hidden_save
-    unlet s:maximize_hidden_save
-  else
-    let s:maximize_hidden_save = &hidden
-    let s:maximize_session = tempname()
-    set hidden
-    exec "mksession! " . s:maximize_session
-    only
-  endif
-endfunction
+
 nmap t% :tabedit %<CR>
 nmap td :tabclose<CR>
 
-let mapleader=" "
 "Map Escape to close terminal mode
 tnoremap <Esc> <C-\><C-n>
 "Terminal nav mappings
@@ -157,44 +143,6 @@ endif
 xnoremap p pgvy
 set clipboard=unnamed
 
-" "syntastic errpr checking
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" ""ignore attribute errors (e.g. angular directives)
-
-" "let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute " ]
-" ""always check while editing
-" "let g:syntastic_auto_loc_list=1
-" "let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-
-" let delimitMate_expand_cr = 1
-" filetype indent plugin on
-
-let g:CommandTWildIgnore=&wildignore . ",**/node_modules/*,**/dist/*,*.svg,*.jpg"
-"Set default search directory to src
-let g:CommandTTraverseSCM = 'src'
-let g:CommandTHighlightColor = 'DiffText'
-let g:CommandTCursorColor = 'DiffText'
-" "SEARCH AND REPLACE
-map <C-h> :%s/
-
-
-" "snipmate mapping
-" imap <Tab> <Plug>snipMateTrigger
-
-
-" Bi-directional find motion
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-"nmap s <Plug>(easymotion-s)
-" or
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-"nmap s <Plug>(easymotion-s2)
-
  " Turn on case insensitive feature
  let g:EasyMotion_smartcase = 1
  set ignorecase
@@ -210,26 +158,15 @@ map <C-h> :%s/
  set hlsearch
 
 " " JK motions: Line motions
-map <Leader> <Plug>(easymotion-prefix)
 
-
-"highlight Pmenu ctermfg=2 ctermbg=20 guifg=#ffffff guibg=#0000ff
 
 " " size of a hard tabstop
 set tabstop=4
-
-" hi TabLineFill ctermfg=Black ctermbg=DarkGreen
-" "hi TabLine ctermfg=Blue ctermbg=20
-" hi TabLineSel ctermfg=Red ctermbg=Yellow
 let g:netrw_banner=0
- "allows previewing of file by pressing p 
 let g:netrw_preview = 1
+let g:netrw_liststyle=1
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
-" "file browser:
- let g:netrw_liststyle=1
- let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-" "stop the scratch window appearing when autocomplete goes...
-" set completeopt-=preview
 
  set history=1000         " remember more commands and search history
  set undolevels=1000   
@@ -243,15 +180,12 @@ let g:netrw_preview = 1
  let g:GrepRoot = '.'
  set statusline+=%#warningmsg#
  set statusline+=%{exists('g:loaded_syntastic_plugin')?SyntasticStatuslineFlag():''}
- "set statusline+=%{SyntasticStatuslineFlag()}
+
  set statusline+=%*
  set statusline+=%f
  set statusline+=%=
- "set statusline+=%c,
+
  set statusline+=%l/%L
  set statusline+=\ %P
  " Change directory to the current buffer when opening files. NETRW
  set autochdir
- "move to next or previous tab ctrl left or right
- nnoremap <C-Left> :tabprevious<CR>
- nnoremap <C-Right> :tabnext<CR>

@@ -4,7 +4,6 @@ Helptags
 let mapleader=" "
 map <Leader> <Plug>(easymotion-prefix)
 
-
 " open docs
 nmap <silent> <leader>d <Plug>DashSearch
 let g:deoplete#enable_at_startup = 1

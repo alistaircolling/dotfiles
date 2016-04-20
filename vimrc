@@ -79,7 +79,9 @@ set backspace=2                    " Backspace deletes like most programs in ins
 set expandtab                      " Tabs are spaces
 set fileencoding=utf-8             " The encoding written to file
 set fileformat=unix                " That LF life, son
-set hlsearch                       " Highlight searches
+"set hlsearch                       " Highlight searches
+ " map escape to clear highlights
+nnoremap <silent> <esc> :noh<cr><esc>
 set ignorecase                     " Ignore case when searching
 "set number                         " Show line numbers all of the times
 "set rnu                            "show relative line numbers

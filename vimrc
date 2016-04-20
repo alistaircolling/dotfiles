@@ -9,7 +9,8 @@ nmap <silent> <leader>d <Plug>DashSearch
 let g:deoplete#enable_at_startup = 1
 set hidden
 
-let g:neomake_javascript_enabled_makers = ['eslint']
+autocmd BufWritePost * Neomake
+let g:neomake_javascript_enabled_makers = ['jscs']
 
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
@@ -38,8 +39,8 @@ set rtp+=~/.fzf
 " Plugin key-mappings. for NEO SNIPPET
 
 " SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>" 
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>" 
+"imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>" 
+"smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>" 
 
 " For conceal markers.
 if has('conceal')
@@ -50,6 +51,7 @@ endif
 nmap t% :tabedit %<CR>
 nmap td :tabclose<CR>
 
+nmap . :Files<CR>
 "Map Escape to close terminal mode
 tnoremap <Esc> <C-\><C-n>
 "Terminal nav mappings
@@ -187,4 +189,4 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
  set statusline+=%l/%L
  set statusline+=\ %P
  " Change directory to the current buffer when opening files. NETRW
- set autochdir
+ "set autochdir

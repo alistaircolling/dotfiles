@@ -192,3 +192,8 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
  set statusline+=\ %P
  " Change directory to the current buffer when opening files. NETRW
  "set autochdir
+ "Vim diff - change the color scheme
+highlight DiffAdd cterm=none ctermfg=bg ctermbg=Green gui=none guifg=bg guibg=Green
+highlight DiffDelete cterm=none ctermfg=bg ctermbg=Red gui=none guifg=bg guibg=Red
+highlight DiffChange cterm=none ctermfg=bg ctermbg=Yellow gui=none guifg=bg guibg=Yellow
+highlight DiffText cterm=none ctermfg=bg ctermbg=Magenta gui=none guifg=bg guibg=Magenta

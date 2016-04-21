@@ -51,7 +51,7 @@ endif
 nmap t% :tabedit %<CR>
 nmap td :tabclose<CR>
 
-nmap . :Files<CR>
+"nmap <silent> <leader>. <Plug>:Files
 "Map Escape to close terminal mode
 tnoremap <Esc> <C-\><C-n>
 "Terminal nav mappings
@@ -91,24 +91,35 @@ set showcmd                        " Display incomplete commands
 " set paste
 " set modifiable " makes the buffer modifiable
 " filetype plugin indent on
-" filetype plugin on
+filetype plugin on
 syntax enable
 set background=dark
 "colorscheme monokai
 set t_Co=256
 colo xoria256
 
+"for HTML
+filetype indent on  
+"JS BEAUTIFY  .vimrc
+map <c-f> :call JsBeautify()<cr>
+"" or
+"autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+" for json
+"autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
+" for jsx
+"autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
+" for html
+"autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+" for css or scss
+"autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+
+autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+autocmd FileType json vnoremap <buffer> <c-f> :call RangeJsonBeautify()<cr>
+autocmd FileType jsx vnoremap <buffer> <c-f> :call RangeJsxBeautify()<cr>
+autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
+autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
 
 
- " JS Beautify
- map <c-f> :call JsBeautify()<cr>
-  "or
- autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-  "for html
- autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-  "for css or scss
- autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
- autocmd FileType scss noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
 " "color the status based on insert mode
 " " first, enable status line always

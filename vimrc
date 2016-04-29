@@ -51,7 +51,7 @@ endif
 nmap t% :tabedit %<CR>
 nmap td :tabclose<CR>
 
-"nmap <silent> <leader>. <Plug>:Files
+"nmap <silent> <leader>§ <Plug>:Files
 "Map Escape to close terminal mode
 tnoremap <Esc> <C-\><C-n>
 "Terminal nav mappings

@@ -1,7 +1,6 @@
 execute pathogen#infect()
-Helptags
+let mapleader = " "
 
-let mapleader=" "
 map <Leader> <Plug>(easymotion-prefix)
 
 " open docs
@@ -11,6 +10,19 @@ set hidden
 
 autocmd BufWritePost * Neomake
 let g:neomake_javascript_enabled_makers = ['jscs']
+" open list Automatically
+let g:neomake_open_list = 2
+
+
+let g:neomake_javascript_enabled_makers = ['jscs']
+let g:neomake_warning_sign = {
+  \ 'text': 'W',
+  \ 'texthl': 'WarningMsg',
+  \ }
+let g:neomake_error_sign = {
+  \ 'text': 'E',
+  \ 'texthl': 'ErrorMsg',
+  \ }
 
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
@@ -208,3 +220,4 @@ highlight DiffAdd cterm=none ctermfg=bg ctermbg=Green gui=none guifg=bg guibg=Gr
 highlight DiffDelete cterm=none ctermfg=bg ctermbg=Red gui=none guifg=bg guibg=Red
 highlight DiffChange cterm=none ctermfg=bg ctermbg=Yellow gui=none guifg=bg guibg=Yellow
 highlight DiffText cterm=none ctermfg=bg ctermbg=Magenta gui=none guifg=bg guibg=Magenta
+

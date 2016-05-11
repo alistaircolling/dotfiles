@@ -1,1 +1,1 @@
-/Users/alistair.colling/.vimrc
+/Users/alistair/.vimrc

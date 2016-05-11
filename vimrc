@@ -221,3 +221,32 @@ highlight DiffDelete cterm=none ctermfg=bg ctermbg=Red gui=none guifg=bg guibg=R
 highlight DiffChange cterm=none ctermfg=bg ctermbg=Yellow gui=none guifg=bg guibg=Yellow
 highlight DiffText cterm=none ctermfg=bg ctermbg=Magenta gui=none guifg=bg guibg=Magenta
 
+
+"You can map this to a shortcuts. Here is a list of suggested shortcuts:
+" Grep in current directory.
+set grepprg=grep\ -RHIn\ --exclude=\".tags\"\ --exclude-dir=\".svn\"\ --exclude-dir=\".git\"
+" Grep for the word under the cursor.
+nnoremap K :Grep "\\<<C-r><C-w>\\>" .<CR>
+nmap <leader>grep K
+" Versions suffixed with `l` for the location list cause vim to wait for keys
+" after `grep`. Provide versions with extra characters to allow skipping the
+" wait.
+nmap <leader>grepc K
+nmap <leader>grep<Space> K
+nmap <leader>grep<CR> K
+" Grep in the current file's path.
+nmap <leader>grepd :Grep "\\<<C-r><C-w>\\>" %:p:h<CR>
+" Grep for the text selected. Do not look for word boundaries.
+vnoremap K "zy:<C-u>Grep "<C-r>z" .<CR>
+vmap <leader>grep K
+vmap <leader>grepd :Grep "\\<<C-r><C-w>\\>" %:p:h<CR>
+
+" Same as above, but for the location list.
+nnoremap <F9> :GrepL "\\<<C-r><C-w>\\>" .<CR>
+nmap <leader>grepl <F9>
+nmap <leader>grepl<Space> <F9>
+nmap <leader>grepl<CR> <F9>
+nmap <leader>grepld :GrepL "\\<<C-r><C-w>\\>" %:p:h<CR>
+vnoremap <F9> "zy:<C-u>GrepL "<C-r>z" .<CR>
+vmap <leader>grepl <F9>
+vmap <leader>grepld :GrepL "\\<<C-r><C-w>\\>" %:p:h<CR>

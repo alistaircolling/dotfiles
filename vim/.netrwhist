@@ -1,11 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/Users/alistair/Development/HTML/ng-demos/modular/src/client/app/avengers'
-let g:netrw_dirhist_2='/Users/alistair/Development/HTML/ng-demos/modular/src'
-let g:netrw_dirhist_3='/Users/alistair/Development/HTML/ng-demos/cc-bmean'
-let g:netrw_dirhist_4='/Users/alistair/Development/HTML/ng-demos/cc-bmean/src'
-let g:netrw_dirhist_5='/Users/alistair/Development/HTML/ng-demos/cc-bmean'
-let g:netrw_dirhist_6='/Users/alistair/Development/HTML/ng-demos/cc-bmean/src'
-let g:netrw_dirhist_7='/Users/alistair/Development/HTML/ng-demos/cc-bmean/src/client'
-let g:netrw_dirhist_8='/Users/alistair/Development/HTML/ng-demos/cc-bmean/src/client/app'
-let g:netrw_dirhist_9='/Users/alistair/Development/HTML/ng-demos/cc-bmean/src/client/app/data'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/Users/alistair/dotfiles/vim/bundle'
+let g:netrw_dirhist_2='/Users/alistair/dotfiles/vim'
+let g:netrw_dirhist_3='/Users/alistair/dotfiles'

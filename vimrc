@@ -1,52 +1,63 @@
-execute pathogen#infect()
+"execute pathogen#infect()
 let mapleader = " "
 
 map <Leader> <Plug>(easymotion-prefix)
 
 " open docs
 nmap <silent> <leader>d <Plug>DashSearch
+set runtimepath+=~/path/to/deoplete.nvim/
 let g:deoplete#enable_at_startup = 1
 set hidden
 
 autocmd BufWritePost * Neomake
-let g:neomake_javascript_enabled_makers = ['jscs']
+let g:neomake_javascript_enabled_makers = ['eslint']
 " open list Automatically
-let g:neomake_open_list = 2
+let g:neomake_open_list = 1
 
 
-let g:neomake_javascript_enabled_makers = ['jscs']
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_logfile = '/usr/local/var/log/neomake.log'
+
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
 let g:neomake_warning_sign = {
-  \ 'text': 'W',
-  \ 'texthl': 'WarningMsg',
-  \ }
+            \ 'text': 'W',
+            \ 'texthl': 'WarningMsg',
+            \ }
 let g:neomake_error_sign = {
-  \ 'text': 'E',
-  \ 'texthl': 'ErrorMsg',
-  \ }
+            \ 'text': 'E',
+            \ 'texthl': 'ErrorMsg',
+            \ }
 
 if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
+    let g:deoplete#omni#input_patterns = {}
 endif
 " let g:deoplete#disable_auto_complete = 1
 
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " omnifuncs
 augroup omnifuncs
-  autocmd!
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    autocmd!
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    au FileType javascript,jsx setl omnifunc=tern#Complete
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 augroup end
 " tern
 if exists('g:plugs["tern_for_vim"]')
-  let g:tern_show_argument_hints = 'on_hold'
-  let g:tern_show_signature_in_pum = 1
-  autocmd FileType javascript setlocal omnifunc=tern#Complete
+    let g:tern_show_argument_hints = 'on_hold'
+    let g:tern_show_signature_in_pum = 1
+    autocmd FileType javascript setlocal omnifunc=tern#Complete
 endif
+" Use deoplete.
+let g:tern_request_timeout = 1
+let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
+" tern
+autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 
 set rtp+=~/.fzf
+
 
 " Plugin key-mappings. for NEO SNIPPET
 
@@ -56,7 +67,7 @@ set rtp+=~/.fzf
 
 " For conceal markers.
 if has('conceal')
-  set conceallevel=2 concealcursor=niv
+    set conceallevel=2 concealcursor=niv
 endif
 
 
@@ -92,14 +103,14 @@ set expandtab                      " Tabs are spaces
 set fileencoding=utf-8             " The encoding written to file
 set fileformat=unix                " That LF life, son
 "set hlsearch                       " Highlight searches
- " map escape to clear highlights
+" map escape to clear highlights
 nnoremap <silent> <esc> :noh<cr><esc>
 set ignorecase                     " Ignore case when searching
 "set number                         " Show line numbers all of the times
 "set rnu                            "show relative line numbers
 set showcmd                        " Display incomplete commands
 " set ttimeoutlen=0u"  THIS BREAKS DEOPLETE                 " No delay after pressing escape
- set nowrap
+set nowrap
 " set paste
 " set modifiable " makes the buffer modifiable
 " filetype plugin indent on
@@ -112,18 +123,6 @@ colo xoria256
 
 "for HTML
 filetype indent on  
-"JS BEAUTIFY  .vimrc
-map <c-f> :call JsBeautify()<cr>
-"" or
-"autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-" for json
-"autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
-" for jsx
-"autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
-" for html
-"autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-" for css or scss
-"autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
 autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
 autocmd FileType json vnoremap <buffer> <c-f> :call RangeJsonBeautify()<cr>
@@ -136,54 +135,31 @@ autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
 " "color the status based on insert mode
 " " first, enable status line always
 set laststatus=2
-
-" "SCSS Auto complete
-" autocmd BufNewFile,BufRead *.scss             set ft=scss.css
-" set omnifunc=csscomplete#CompleteCSS
-" autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-
-
-
-" au Filetype html,xml,xsl "source ~/dotfiles/vim/bundle/closetag.vim/
-" let g:closetag_html_style=1
-" "source ~/dotfiles/vim/bundle/closetag.vim/
-
+"
 " " now set it up to change the status line based on mode
 if version >= 700
-  au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta
-  au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
+    au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta
+    au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
 endif
-
-
-" "Percent Function for scroll position
-" function! Percent()
-"     let byte = line2byte( line( "." ) ) + col( "." ) - 1
-"     let size = (line2byte( line( "$" ) + 1 ) - 1)
-"     " return byte . " " . size . " " . (byte * 100) / size
-"     return (byte * 100) / size
-" endfunction
-
 
 
 " " persist the yanked clipboard
 xnoremap p pgvy
 set clipboard=unnamed
 
- " Turn on case insensitive feature
- let g:EasyMotion_smartcase = 1
- set ignorecase
- set smartcase
- "applies substitutions globally on lines. For example, instead of :%s/foo/bar/g you just type :%s/foo/bar/
- set gdefault
- "Indent stuff
- set smartindent
- set autoindent
- "work together to highlight search results (as you type). It’s really quite handy, as long as you have the next line as well.
- set incsearch
- set showmatch
- set hlsearch
-
-" " JK motions: Line motions
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+set ignorecase
+set smartcase
+"applies substitutions globally on lines. For example, instead of :%s/foo/bar/g you just type :%s/foo/bar/
+set gdefault
+"Indent stuff
+set smartindent
+set autoindent
+"work together to highlight search results (as you type). It’s really quite handy, as long as you have the next line as well.
+set incsearch
+set showmatch
+set hlsearch
 
 
 " " size of a hard tabstop
@@ -194,28 +170,28 @@ let g:netrw_liststyle=1
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 
- set history=1000         " remember more commands and search history
- set undolevels=1000   
+set history=1000         " remember more commands and search history
+set undolevels=1000   
 
 " "indenting---
- set shiftwidth=4 
+set shiftwidth=4 
 " "INCREMENT AMND DECRMENT on ALt
- nnoremap <C-x> <C-a>
- nnoremap <C-z> <C-x>
+nnoremap <C-x> <C-a>
+nnoremap <C-z> <C-x>
 
- let g:GrepRoot = '.'
- set statusline+=%#warningmsg#
- set statusline+=%{exists('g:loaded_syntastic_plugin')?SyntasticStatuslineFlag():''}
+let g:GrepRoot = '.'
+set statusline+=%#warningmsg#
+set statusline+=%{exists('g:loaded_syntastic_plugin')?SyntasticStatuslineFlag():''}
 
- set statusline+=%*
- set statusline+=%f
- set statusline+=%=
+set statusline+=%*
+set statusline+=%f
+set statusline+=%=
 
- set statusline+=%l/%L
- set statusline+=\ %P
- " Change directory to the current buffer when opening files. NETRW
- "set autochdir
- "Vim diff - change the color scheme
+set statusline+=%l/%L
+set statusline+=\ %P
+" Change directory to the current buffer when opening files. NETRW
+"set autochdir
+"Vim diff - change the color scheme
 highlight DiffAdd cterm=none ctermfg=bg ctermbg=Green gui=none guifg=bg guibg=Green
 highlight DiffDelete cterm=none ctermfg=bg ctermbg=Red gui=none guifg=bg guibg=Red
 highlight DiffChange cterm=none ctermfg=bg ctermbg=Yellow gui=none guifg=bg guibg=Yellow
@@ -250,3 +226,34 @@ nmap <leader>grepld :GrepL "\\<<C-r><C-w>\\>" %:p:h<CR>
 vnoremap <F9> "zy:<C-u>GrepL "<C-r>z" .<CR>
 vmap <leader>grepl <F9>
 vmap <leader>grepld :GrepL "\\<<C-r><C-w>\\>" %:p:h<CR>
+
+" vim-plug *****************************************
+"  *****************************************
+call plug#begin('~/.vim/plugged')
+" relevant javascript + jsx packages
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'othree/javascript-libraries-syntax.vim'
+"""
+Plug 'rizzatti/dash.vim'
+Plug 'dkprice/vim-easygrep'
+Plug 'benekastah/neomake'
+Plug 'raimondi/delimitmate'
+"Plug 'carlitux/deoplete-ternjs'
+Plug 'scrooloose/nerdcommenter'
+Plug 'easymotion/vim-easymotion'
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
+function! DoRemote(arg)
+    UpdateRemotePlugins
+endfunction
+function! DoRemote(arg)
+    UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+" Add plugins to &runtimepath
+call plug#end()
+
+"TAB NAVIGATION
+nnoremap ty  :tabnext<CR>
+nnoremap tr  :tabprev<CR>

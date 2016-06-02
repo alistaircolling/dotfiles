@@ -30,15 +30,13 @@ map <Leader> <Plug>(easymotion-prefix)
 nmap <silent> <leader>d <Plug>DashSearch
 
 set runtimepath+=~/.nvim/plugged/deoplete.nvim 
-let g:deoplete#enable_at_startup = 1
 
 
-set hidden
+autocmd BufWritePost,BufEnter * Neomake
 
-autocmd BufWritePost * Neomake
 let g:neomake_javascript_enabled_makers = ['eslint']
 " open list Automatically
-let g:neomake_open_list = 2
+let g:neomake_open_list = 0
 
 
 let g:neomake_javascript_enabled_makers = ['eslint']
@@ -55,12 +53,14 @@ let g:neomake_error_sign = {
             \ 'texthl': 'ErrorMsg',
             \ }
 
+"************ DEOPLETE ***********
+let g:deoplete#enable_at_startup = 1
 if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
+  let g:deoplete#omni#input_patterns = {}
 endif
 " let g:deoplete#disable_auto_complete = 1
-
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
 " omnifuncs
 augroup omnifuncs
     autocmd!
@@ -76,9 +76,17 @@ if exists('g:plugs["tern_for_vim"]')
     let g:tern_show_signature_in_pum = 1
     autocmd FileType javascript setlocal omnifunc=tern#Complete
 endif
+" deoplete tab-complete
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
+" ,<Tab> for regular tab
+inoremap <Leader><Tab> <Space><Space>
+" tern
+autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+"
 " Use deoplete.
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
+"
 " tern
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 
@@ -96,7 +104,13 @@ if has('conceal')
     set conceallevel=2 concealcursor=niv
 endif
 
-
+"******************************* KEY BINDINGS ******************************* 
+" neomake
+nmap <Leader>o :lopen<CR>      " open location window
+nmap <Leader>c :lclose<CR>     " close location window
+nmap <Leader>, :ll<CR>         " go to current error/warning
+nmap <Leader>n :lnext<CR>      " next error/warning
+nmap <Leader>p :lprev<CR>      " previous error/warning
 nmap t% :tabedit %<CR>
 nmap td :tabclose<CR>
 
@@ -115,9 +129,11 @@ nnoremap <A-k> <C-w>k
 "add a new line when pressing Enter without entering insert mode
 nmap <S-Enter> O<Esc>
 "nmap <CR> o<Esc>
+" map escape to clear highlights
+nnoremap <silent> <esc> :noh<cr><esc>
 "saves undos after a file has been closed
 set undofile
-
+set hidden
 " Syntastic
 set autowrite                      " Automatically :write before running commands
 syntax on
@@ -129,8 +145,6 @@ set expandtab                      " Tabs are spaces
 set fileencoding=utf-8             " The encoding written to file
 set fileformat=unix                " That LF life, son
 "set hlsearch                       " Highlight searches
-" map escape to clear highlights
-nnoremap <silent> <esc> :noh<cr><esc>
 set ignorecase                     " Ignore case when searching
 "set number                         " Show line numbers all of the times
 "set rnu                            "show relative line numbers

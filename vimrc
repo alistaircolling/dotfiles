@@ -1,12 +1,38 @@
-"execute pathogen#infect()
+
+" vim-plug *****************************************
+"  *****************************************
+call plug#begin('~/.vim/plugged')
+" relevant javascript + jsx packages
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'othree/javascript-libraries-syntax.vim'
+"""
+Plug 'rizzatti/dash.vim'
+Plug 'dkprice/vim-easygrep'
+Plug 'benekastah/neomake'
+Plug 'raimondi/delimitmate'
+"Plug 'carlitux/deoplete-ternjs'
+Plug 'scrooloose/nerdcommenter'
+Plug 'easymotion/vim-easymotion'
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
+function! DoRemote(arg)
+    UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+" Add plugins to &runtimepath
+call plug#end()
+
 let mapleader = " "
 
 map <Leader> <Plug>(easymotion-prefix)
 
 " open docs
 nmap <silent> <leader>d <Plug>DashSearch
-set runtimepath+=~/path/to/deoplete.nvim/
+
+set runtimepath+=~/.nvim/plugged/deoplete.nvim 
 let g:deoplete#enable_at_startup = 1
+
 set hidden
 
 autocmd BufWritePost * Neomake
@@ -226,34 +252,6 @@ nmap <leader>grepld :GrepL "\\<<C-r><C-w>\\>" %:p:h<CR>
 vnoremap <F9> "zy:<C-u>GrepL "<C-r>z" .<CR>
 vmap <leader>grepl <F9>
 vmap <leader>grepld :GrepL "\\<<C-r><C-w>\\>" %:p:h<CR>
-
-" vim-plug *****************************************
-"  *****************************************
-call plug#begin('~/.vim/plugged')
-" relevant javascript + jsx packages
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
-Plug 'othree/javascript-libraries-syntax.vim'
-"""
-Plug 'rizzatti/dash.vim'
-Plug 'dkprice/vim-easygrep'
-Plug 'benekastah/neomake'
-Plug 'raimondi/delimitmate'
-"Plug 'carlitux/deoplete-ternjs'
-Plug 'scrooloose/nerdcommenter'
-Plug 'easymotion/vim-easymotion'
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
-function! DoRemote(arg)
-    UpdateRemotePlugins
-endfunction
-function! DoRemote(arg)
-    UpdateRemotePlugins
-endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-" Add plugins to &runtimepath
-call plug#end()
-
 "TAB NAVIGATION
 nnoremap ty  :tabnext<CR>
 nnoremap tr  :tabprev<CR>

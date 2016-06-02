@@ -19,8 +19,7 @@ function! DoRemote(arg)
     UpdateRemotePlugins
 endfunction
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-" Add plugins to &runtimepath
+Plug 'marijnh/tern_for_vim' , { 'do': 'npm install' } " Add plugins to &runtimepath
 call plug#end()
 
 let mapleader = " "
@@ -33,12 +32,13 @@ nmap <silent> <leader>d <Plug>DashSearch
 set runtimepath+=~/.nvim/plugged/deoplete.nvim 
 let g:deoplete#enable_at_startup = 1
 
+
 set hidden
 
 autocmd BufWritePost * Neomake
 let g:neomake_javascript_enabled_makers = ['eslint']
 " open list Automatically
-let g:neomake_open_list = 1
+let g:neomake_open_list = 2
 
 
 let g:neomake_javascript_enabled_makers = ['eslint']

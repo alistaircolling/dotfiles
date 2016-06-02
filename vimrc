@@ -24,19 +24,15 @@ call plug#end()
 
 let mapleader = " "
 
-map <Leader> <Plug>(easymotion-prefix)
-
-" open docs
-nmap <silent> <leader>d <Plug>DashSearch
 
 set runtimepath+=~/.nvim/plugged/deoplete.nvim 
 
 
-autocmd BufWritePost,BufEnter * Neomake
+autocmd InsertChange,TextChanged * update | Neomake
 
 let g:neomake_javascript_enabled_makers = ['eslint']
 " open list Automatically
-let g:neomake_open_list = 0
+let g:neomake_open_list = 1
 
 
 let g:neomake_javascript_enabled_makers = ['eslint']
@@ -59,7 +55,7 @@ if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
 " let g:deoplete#disable_auto_complete = 1
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+autocmd I<CR>nsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " omnifuncs
 augroup omnifuncs
@@ -76,11 +72,7 @@ if exists('g:plugs["tern_for_vim"]')
     let g:tern_show_signature_in_pum = 1
     autocmd FileType javascript setlocal omnifunc=tern#Complete
 endif
-" deoplete tab-complete
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
-" ,<Tab> for regular tab
-inoremap <Leader><Tab> <Space><Space>
-" tern
+"
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 "
 " Use deoplete.
@@ -93,18 +85,17 @@ autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 set rtp+=~/.fzf
 
 
-" Plugin key-mappings. for NEO SNIPPET
-
-" SuperTab like snippets behavior.
-"imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>" 
-"smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>" 
-
 " For conceal markers.
 if has('conceal')
     set conceallevel=2 concealcursor=niv
 endif
 
 "******************************* KEY BINDINGS ******************************* 
+nmap <Leader>a ggVG<CR>
+map <Leader> <Plug>(easymotion-prefix)
+" open docs
+nmap <silent> <leader>d <Plug>DashSearch
+"
 " neomake
 nmap <Leader>o :lopen<CR>      " open location window
 nmap <Leader>c :lclose<CR>     " close location window

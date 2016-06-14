@@ -1,9 +1,9 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/alistair/Development/HTML'
-let g:netrw_dirhist_2='/Users/alistair/Development/HTML/react-rocket-boilerplate'
-let g:netrw_dirhist_3='/Users/alistair/Development/HTML/react-rocket-boilerplate/app'
-let g:netrw_dirhist_4='/Users/alistair/Development/HTML/react-rocket-boilerplate/app/js'
-let g:netrw_dirhist_5='/Users/alistair/Development/HTML/react-rocket-boilerplate/app/js/components'
-let g:netrw_dirhist_6='/Users/alistair/dotfiles'
-let g:netrw_dirhist_7='/Users/alistair/Development/HTML/delete-me'
+let g:netrw_dirhist_1='/Users/alistair/Development/HTML/authy2fa-node'
+let g:netrw_dirhist_2='/Users/alistair/Development/HTML/authy2fa-node/models'
+let g:netrw_dirhist_3='/Users/alistair/Development/HTML/authy2fa-node'
+let g:netrw_dirhist_4='/Users/alistair/Development/HTML/authy2fa-node/public'
+let g:netrw_dirhist_5='/Users/alistair/Development/HTML/authy2fa-node/public/app'
+let g:netrw_dirhist_6='/Users/alistair/Development/HTML/authy2fa-node/public/app/views'
+let g:netrw_dirhist_7='/Users/alistair/Development/HTML/authy2fa-node'

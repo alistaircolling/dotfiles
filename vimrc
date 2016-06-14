@@ -24,7 +24,6 @@ call plug#end()
 
 let mapleader = " "
 
-
 set runtimepath+=~/.nvim/plugged/deoplete.nvim 
 
 
@@ -32,7 +31,7 @@ autocmd InsertChange,TextChanged * update | Neomake
 
 let g:neomake_javascript_enabled_makers = ['eslint']
 " open list Automatically
-let g:neomake_open_list = 1
+let g:neomake_open_list = 2
 
 
 let g:neomake_javascript_enabled_makers = ['eslint']
@@ -55,7 +54,7 @@ if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
 " let g:deoplete#disable_auto_complete = 1
-autocmd I<CR>nsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " omnifuncs
 augroup omnifuncs
@@ -91,6 +90,14 @@ if has('conceal')
 endif
 
 "******************************* KEY BINDINGS ******************************* 
+" Can be typed even faster than jj. Exit Insert Mode
+imap jk <Esc>
+"split navigation
+nmap <Bslash>l :wincmd l<CR>
+nmap <Bslash>k :wincmd k<CR>
+nmap <Bslash>j :wincmd j<CR>
+nmap <Bslash>h :wincmd h<CR>
+
 nmap <Leader>a ggVG<CR>
 map <Leader> <Plug>(easymotion-prefix)
 " open docs
@@ -102,7 +109,7 @@ nmap <Leader>c :lclose<CR>     " close location window
 nmap <Leader>, :ll<CR>         " go to current error/warning
 nmap <Leader>n :lnext<CR>      " next error/warning
 nmap <Leader>p :lprev<CR>      " previous error/warning
-nmap t% :tabedit %<CR>
+nmap tt :tabedit %<CR>
 nmap td :tabclose<CR>
 
 "nmap <silent> <leader>§ <Plug>:Files
@@ -154,6 +161,7 @@ colo xoria256
 
 "for HTML
 filetype indent on  
+filetype plugin indent on  
 
 autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
 autocmd FileType json vnoremap <buffer> <c-f> :call RangeJsonBeautify()<cr>

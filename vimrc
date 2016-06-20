@@ -93,10 +93,10 @@ endif
 " Can be typed even faster than jj. Exit Insert Mode
 imap jk <Esc>
 "split navigation
-nmap <Bslash>l :wincmd l<CR>
-nmap <Bslash>k :wincmd k<CR>
-nmap <Bslash>j :wincmd j<CR>
-nmap <Bslash>h :wincmd h<CR>
+nmap <Leader>l :wincmd l<CR>
+nmap <Leader>j :wincmd j<CR>
+nmap <Leader>k :wincmd k<CR>
+nmap <Leader>h :wincmd h<CR>
 
 nmap <Leader>a ggVG<CR>
 map <Leader> <Plug>(easymotion-prefix)

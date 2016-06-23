@@ -54,7 +54,7 @@ if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
 " let g:deoplete#disable_auto_complete = 1
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " omnifuncs
 augroup omnifuncs
@@ -83,6 +83,8 @@ autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 
 set rtp+=~/.fzf
 
+"set directory for swap files
+set directory=~/dotfiles/swap-files
 
 " For conceal markers.
 if has('conceal')

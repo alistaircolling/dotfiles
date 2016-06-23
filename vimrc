@@ -1,18 +1,37 @@
-"execute pathogen#infect()
+
+" vim-plug *****************************************
+"  *****************************************
+call plug#begin('~/.vim/plugged')
+" relevant javascript + jsx packages
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'othree/javascript-libraries-syntax.vim'
+"""
+Plug 'rizzatti/dash.vim'
+Plug 'dkprice/vim-easygrep'
+Plug 'benekastah/neomake'
+Plug 'raimondi/delimitmate'
+"Plug 'carlitux/deoplete-ternjs'
+Plug 'scrooloose/nerdcommenter'
+Plug 'easymotion/vim-easymotion'
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
+function! DoRemote(arg)
+    UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'marijnh/tern_for_vim' , { 'do': 'npm install' } " Add plugins to &runtimepath
+call plug#end()
+
 let mapleader = " "
 
-map <Leader> <Plug>(easymotion-prefix)
+set runtimepath+=~/.nvim/plugged/deoplete.nvim 
 
-" open docs
-nmap <silent> <leader>d <Plug>DashSearch
-set runtimepath+=~/path/to/deoplete.nvim/
-let g:deoplete#enable_at_startup = 1
-set hidden
 
-autocmd BufWritePost * Neomake
+autocmd InsertChange,TextChanged * update | Neomake
+
 let g:neomake_javascript_enabled_makers = ['eslint']
 " open list Automatically
-let g:neomake_open_list = 1
+let g:neomake_open_list = 2
 
 
 let g:neomake_javascript_enabled_makers = ['eslint']
@@ -29,12 +48,14 @@ let g:neomake_error_sign = {
             \ 'texthl': 'ErrorMsg',
             \ }
 
+"************ DEOPLETE ***********
+let g:deoplete#enable_at_startup = 1
 if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
+  let g:deoplete#omni#input_patterns = {}
 endif
 " let g:deoplete#disable_auto_complete = 1
+"autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " omnifuncs
 augroup omnifuncs
     autocmd!
@@ -50,28 +71,48 @@ if exists('g:plugs["tern_for_vim"]')
     let g:tern_show_signature_in_pum = 1
     autocmd FileType javascript setlocal omnifunc=tern#Complete
 endif
+"
+autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+"
 " Use deoplete.
 let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
+"
 " tern
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 
 set rtp+=~/.fzf
 
-
-" Plugin key-mappings. for NEO SNIPPET
-
-" SuperTab like snippets behavior.
-"imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>" 
-"smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>" 
+"set directory for swap files
+set directory=~/dotfiles/swap-files
 
 " For conceal markers.
 if has('conceal')
     set conceallevel=2 concealcursor=niv
 endif
 
+"******************************* KEY BINDINGS ******************************* 
+" Can be typed even faster than jj. Exit Insert Mode
+imap jk <Esc>
+"split navigation
+"nmap <Leader>l :wincmd l<CR>
+"nmap <Leader>j :wincmd j<CR>
+"nmap <Leader>k :wincmd k<CR>
+"nmap <Leader>h :wincmd h<CR>
+nmap <Leader>; :wincmd w<CR>
 
-nmap t% :tabedit %<CR>
+nmap <Leader>a ggVG<CR>
+map <Leader> <Plug>(easymotion-prefix)
+" open docs
+nmap <silent> <leader>d <Plug>DashSearch
+"
+" neomake
+nmap <Leader>o :lopen<CR>      " open location window
+nmap <Leader>c :lclose<CR>     " close location window
+nmap <Leader>, :ll<CR>         " go to current error/warning
+nmap <Leader>n :lnext<CR>      " next error/warning
+nmap <Leader>p :lprev<CR>      " previous error/warning
+nmap tt :tabedit %<CR>
 nmap td :tabclose<CR>
 
 "nmap <silent> <leader>§ <Plug>:Files
@@ -89,9 +130,11 @@ nnoremap <A-k> <C-w>k
 "add a new line when pressing Enter without entering insert mode
 nmap <S-Enter> O<Esc>
 "nmap <CR> o<Esc>
+" map escape to clear highlights
+nnoremap <silent> <esc> :noh<cr><esc>
 "saves undos after a file has been closed
 set undofile
-
+set hidden
 " Syntastic
 set autowrite                      " Automatically :write before running commands
 syntax on
@@ -103,8 +146,6 @@ set expandtab                      " Tabs are spaces
 set fileencoding=utf-8             " The encoding written to file
 set fileformat=unix                " That LF life, son
 "set hlsearch                       " Highlight searches
-" map escape to clear highlights
-nnoremap <silent> <esc> :noh<cr><esc>
 set ignorecase                     " Ignore case when searching
 "set number                         " Show line numbers all of the times
 "set rnu                            "show relative line numbers
@@ -123,6 +164,7 @@ colo xoria256
 
 "for HTML
 filetype indent on  
+filetype plugin indent on  
 
 autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
 autocmd FileType json vnoremap <buffer> <c-f> :call RangeJsonBeautify()<cr>
@@ -226,34 +268,6 @@ nmap <leader>grepld :GrepL "\\<<C-r><C-w>\\>" %:p:h<CR>
 vnoremap <F9> "zy:<C-u>GrepL "<C-r>z" .<CR>
 vmap <leader>grepl <F9>
 vmap <leader>grepld :GrepL "\\<<C-r><C-w>\\>" %:p:h<CR>
-
-" vim-plug *****************************************
-"  *****************************************
-call plug#begin('~/.vim/plugged')
-" relevant javascript + jsx packages
-Plug 'mxw/vim-jsx'
-Plug 'pangloss/vim-javascript'
-Plug 'othree/javascript-libraries-syntax.vim'
-"""
-Plug 'rizzatti/dash.vim'
-Plug 'dkprice/vim-easygrep'
-Plug 'benekastah/neomake'
-Plug 'raimondi/delimitmate'
-"Plug 'carlitux/deoplete-ternjs'
-Plug 'scrooloose/nerdcommenter'
-Plug 'easymotion/vim-easymotion'
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
-function! DoRemote(arg)
-    UpdateRemotePlugins
-endfunction
-function! DoRemote(arg)
-    UpdateRemotePlugins
-endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-" Add plugins to &runtimepath
-call plug#end()
-
 "TAB NAVIGATION
 nnoremap ty  :tabnext<CR>
 nnoremap tr  :tabprev<CR>

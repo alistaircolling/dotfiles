@@ -100,6 +100,11 @@ imap jk <Esc>
 "nmap <Leader>k :wincmd k<CR>
 "nmap <Leader>h :wincmd h<CR>
 nmap <Leader>; :wincmd w<CR>
+"Resize vertical split
+nmap <Leader>h :vertical resize -5<CR>
+nmap <Leader>l :vertical resize +5<CR>
+nmap <Leader>j :resize +5<CR>
+nmap <Leader>k :resize -5<CR>
 
 nmap <Leader>a ggVG<CR>
 map <Leader> <Plug>(easymotion-prefix)

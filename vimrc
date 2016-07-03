@@ -6,6 +6,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } 
+Plug 'junegunn/fzf.vim'
 """
 Plug 'rizzatti/dash.vim'
 Plug 'dkprice/vim-easygrep'
@@ -92,6 +94,8 @@ if has('conceal')
 endif
 
 "******************************* KEY BINDINGS ******************************* 
+"fzf
+nmap . :FZF<CR> 
 " Can be typed even faster than jj. Exit Insert Mode
 imap jk <Esc>
 "split navigation
@@ -122,7 +126,7 @@ nmap td :tabclose<CR>
 
 "nmap <silent> <leader>§ <Plug>:Files
 "Map Escape to close terminal mode
-tnoremap <Esc> <C-\><C-n>
+"tnoremap <Esc> <C-\><C-n>
 "Terminal nav mappings
 tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j

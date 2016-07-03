@@ -1,10 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/Users/alistair/Development/HTML/authy-workshop-node'
-let g:netrw_dirhist_2='/Users/alistair/Development/HTML/authy2fa-node'
-let g:netrw_dirhist_3='/Users/alistair/Development/HTML/authy2fa-node/api'
-let g:netrw_dirhist_4='/Users/alistair/Downloads/authy-master'
-let g:netrw_dirhist_5='/Users/alistair/Downloads/authy-master/app'
-let g:netrw_dirhist_6='/Users/alistair/Downloads/authy-master/app/scripts'
-let g:netrw_dirhist_7='/Users/alistair/Downloads/authy-master/app/scripts/services'
-let g:netrw_dirhist_8='/Users/alistair/Downloads/authy-master/app'
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/alistair/dotfiles/vim/bundle/matchit.zip'
+let g:netrw_dirhist_2='/Users/alistair/dotfiles'
+let g:netrw_dirhist_3='/Users/alistair/dotfiles/vim'
+let g:netrw_dirhist_4='/Users/alistair/dotfiles/vim/bundle'
+let g:netrw_dirhist_5='/Users/alistair/dotfiles/vim/bundle/vim-surround'
+let g:netrw_dirhist_6='/Users/alistair/dotfiles'

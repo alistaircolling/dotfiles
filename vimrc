@@ -1,4 +1,3 @@
-
 " vim-plug *****************************************
 "  *****************************************
 call plug#begin('~/.vim/plugged')
@@ -94,6 +93,11 @@ if has('conceal')
 endif
 
 "******************************* KEY BINDINGS ******************************* 
+"DEOPLETE
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" tern
+autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 "fzf
 nmap . :FZF<CR> 
 " Can be typed even faster than jj. Exit Insert Mode

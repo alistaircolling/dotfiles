@@ -1,8 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/Users/alistair/dotfiles/vim/bundle/matchit.zip'
-let g:netrw_dirhist_2='/Users/alistair/dotfiles'
-let g:netrw_dirhist_3='/Users/alistair/dotfiles/vim'
-let g:netrw_dirhist_4='/Users/alistair/dotfiles/vim/bundle'
-let g:netrw_dirhist_5='/Users/alistair/dotfiles/vim/bundle/vim-surround'
-let g:netrw_dirhist_6='/Users/alistair/dotfiles'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/Users/alistair/Development/HTML/flowerpot/src'
+let g:netrw_dirhist_2='/Users/alistair/Development/HTML/flowerpot/src/app'

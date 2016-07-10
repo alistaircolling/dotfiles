@@ -24,6 +24,8 @@ Plug 'marijnh/tern_for_vim' , { 'do': 'npm install' } " Add plugins to &runtimep
 call plug#end()
 
 let mapleader = " "
+"respect gitignore through silver surfer
+let $FZF_DEFAULT_COMMAND= 'ag -g ""'  
 
 set runtimepath+=~/.nvim/plugged/deoplete.nvim 
 

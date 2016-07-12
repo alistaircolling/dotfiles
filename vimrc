@@ -7,7 +7,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } 
 Plug 'junegunn/fzf.vim'
-"""
+Plug 'arames/vim-async-grep'
+Plug 'flazz/vim-colorschemes'
 Plug 'rizzatti/dash.vim'
 Plug 'dkprice/vim-easygrep'
 Plug 'benekastah/neomake'
@@ -24,8 +25,6 @@ Plug 'marijnh/tern_for_vim' , { 'do': 'npm install' } " Add plugins to &runtimep
 call plug#end()
 
 let mapleader = " "
-"respect gitignore through silver surfer
-let $FZF_DEFAULT_COMMAND= 'ag -g ""'  
 
 set runtimepath+=~/.nvim/plugged/deoplete.nvim 
 

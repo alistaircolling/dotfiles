@@ -1,8 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/Users/alistair/Development/HTML/flowerpot/src/app'
-let g:netrw_dirhist_2='/Users/alistair/Development/HTML/flowerpot/src/app/services'
-let g:netrw_dirhist_3='/Users/alistair/Development/HTML/flowerpot/src/app'
-let g:netrw_dirhist_4='/Users/alistair/Development/HTML/flowerpot/src/app/main'
-let g:netrw_dirhist_5='/Users/alistair/Development/HTML/flowerpot/src/app'
-let g:netrw_dirhist_6='/Users/alistair/Development/HTML'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/Users/alistair/Development/HTML/flowerpot-www/src'
+let g:netrw_dirhist_2='/Users/alistair/Development/HTML/flowerpot-www/src/app'

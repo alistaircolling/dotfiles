@@ -9,7 +9,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'arames/vim-async-grep'
 Plug 'flazz/vim-colorschemes'
+Plug 'jiangmiao/auto-pairs'
 Plug 'rizzatti/dash.vim'
+Plug 'honza/vim-snippets'
 Plug 'dkprice/vim-easygrep'
 Plug 'benekastah/neomake'
 Plug 'raimondi/delimitmate'
@@ -17,6 +19,8 @@ Plug 'raimondi/delimitmate'
 Plug 'scrooloose/nerdcommenter'
 Plug 'easymotion/vim-easymotion'
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'DirDiff.vim'
+
 function! DoRemote(arg)
     UpdateRemotePlugins
 endfunction
@@ -100,7 +104,7 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " tern
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
 "fzf
-nmap . :FZF<CR> 
+nmap <Leader>. :FZF<CR> 
 " Can be typed even faster than jj. Exit Insert Mode
 imap jk <Esc>
 "split navigation

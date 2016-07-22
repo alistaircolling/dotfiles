@@ -51,7 +51,14 @@ let g:neomake_javascript_eslint_maker = {
 \ 'args': ['--no-color', '--format', 'compact'],
 \ 'errorformat': '%f: line %l\, col %c\, %m'
 \ }
-
+let g:neomake_warning_sign = {
+  \ 'text': 'w',
+  \ 'texthl': 'WarningMsg',
+  \ }
+let g:neomake_error_sign = {
+  \ 'text': 'e',
+  \ 'texthl': 'ErrorMsg',
+  \ }
 "************ DEOPLETE ***********
 let g:deoplete#enable_at_startup = 1
 if !exists('g:deoplete#omni#input_patterns')

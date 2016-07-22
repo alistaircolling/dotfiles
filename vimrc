@@ -56,7 +56,7 @@ let g:neomake_warning_sign = {
   \ 'texthl': 'WarningMsg',
   \ }
 let g:neomake_error_sign = {
-  \ 'text': 'e',
+  \ 'text': '😱',
   \ 'texthl': 'ErrorMsg',
   \ }
 "************ DEOPLETE ***********

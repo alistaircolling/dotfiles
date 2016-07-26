@@ -305,7 +305,7 @@ nnoremap ty  :tabnext<CR>
 nnoremap tr  :tabprev<CR>
 
 "**************** FUNCTIONS ***************
-function! CloseUnused()
+function! DB()
   " list of *all* buffer numbers
   let l:buffers = range(1, bufnr('$'))
 

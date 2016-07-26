@@ -33,15 +33,14 @@ let mapleader = " "
 set runtimepath+=~/.nvim/plugged/deoplete.nvim 
 
 
-"autocmd InsertChange,TextChanged * update | Neomake
-autocmd! BufWritePost * Neomake
+autocmd InsertChange,TextChanged * update | Neomake
+"autocmd! BufWritePost * Neomake
 
 
 let g:neomake_javascript_enabled_makers = ['eslint']
 " open list Automatically
 let g:neomake_verbose=1
 let g:neomake_open_list = 2
-
 
 let g:neomake_logfile = '/usr/local/var/log/neomake.log'
 
@@ -52,7 +51,7 @@ let g:neomake_javascript_eslint_maker = {
 \ 'errorformat': '%f: line %l\, col %c\, %m'
 \ }
 let g:neomake_warning_sign = {
-  \ 'text': 'w',
+  \ 'text': '😱',
   \ 'texthl': 'WarningMsg',
   \ }
 let g:neomake_error_sign = {
@@ -304,3 +303,39 @@ vmap <leader>grepld :GrepL "\\<<C-r><C-w>\\>" %:p:h<CR>
 "TAB NAVIGATION
 nnoremap ty  :tabnext<CR>
 nnoremap tr  :tabprev<CR>
+
+"**************** FUNCTIONS ***************
+function! CloseUnused()
+  " list of *all* buffer numbers
+  let l:buffers = range(1, bufnr('$'))
+
+  " what tab page are we in?
+  let l:currentTab = tabpagenr()
+  try
+    " go through all tab pages
+    let l:tab = 0
+    while l:tab < tabpagenr('$')
+      let l:tab += 1
+
+      " go through all windows
+      let l:win = 0
+      while l:win < winnr('$')
+        let l:win += 1
+        " whatever buffer is in this window in this tab, remove it from
+        " l:buffers list
+        let l:thisbuf = winbufnr(l:win)
+        call remove(l:buffers, index(l:buffers, l:thisbuf))
+      endwhile
+    endwhile
+
+    " if there are any buffers left, delete them
+    if len(l:buffers)
+      execute 'bwipeout' join(l:buffers)
+    endif
+  finally
+    " go back to our original tab page
+    execute 'tabnext' l:currentTab
+  endtry
+endfunction
+
+

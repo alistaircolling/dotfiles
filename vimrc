@@ -20,18 +20,19 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'easymotion/vim-easymotion'
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'DirDiff.vim'
+Plug 'altercation/vim-colors-solarized'
 
 function! DoRemote(arg)
     UpdateRemotePlugins
 endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+"Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'marijnh/tern_for_vim' , { 'do': 'npm install' } " Add plugins to &runtimepath
 call plug#end()
 
 let mapleader = " "
 
 set runtimepath+=~/.nvim/plugged/deoplete.nvim 
-
+let g:netrw_localrmdir='rm -r'
 
 "autocmd InsertChange,TextChanged * update | Neomake
 autocmd! BufWritePost * Neomake
@@ -140,7 +141,7 @@ nmap td :tabclose<CR>
 
 "nmap <silent> <leader>§ <Plug>:Files
 "Map Escape to close terminal mode
-"tnoremap <Esc> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
 "Terminal nav mappings
 tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j
@@ -181,9 +182,9 @@ set nowrap
 filetype plugin on
 syntax enable
 set background=dark
-"colorscheme monokai
 set t_Co=256
-colo xoria256
+"colo xoria256
+colorscheme solarized
 
 "for HTML
 filetype indent on  

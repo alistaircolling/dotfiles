@@ -40,7 +40,7 @@ autocmd! BufWritePost * Neomake
 
 let g:neomake_javascript_enabled_makers = ['eslint']
 " open list Automatically
-let g:neomake_verbose=1
+let g:neomake_verbose=3
 let g:neomake_open_list = 2
 
 

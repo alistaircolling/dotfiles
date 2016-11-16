@@ -1,2 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =0
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/alistair/Development/HTML/roco-trace'
+let g:netrw_dirhist_2='/Users/alistair/Development/HTML/roco-trace/www'
+let g:netrw_dirhist_3='/Users/alistair/Development/HTML/roco-trace/www/waymark'
+let g:netrw_dirhist_4='/Users/alistair/Development/HTML/roco-trace/www'
+let g:netrw_dirhist_5='/Users/alistair/Development/HTML/roco-trace'
+let g:netrw_dirhist_6='/Users/alistair/Development/HTML/roco-trace/www'
+let g:netrw_dirhist_7='/Users/alistair/Development/HTML/roco-trace'
+let g:netrw_dirhist_8='/Users/alistair/Development/HTML/roco-trace/www'

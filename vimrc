@@ -12,20 +12,27 @@ Plug 'flazz/vim-colorschemes'
 Plug 'jiangmiao/auto-pairs'
 Plug 'rizzatti/dash.vim'
 Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'dkprice/vim-easygrep'
 Plug 'benekastah/neomake'
 Plug 'raimondi/delimitmate'
-"Plug 'carlitux/deoplete-ternjs'
+Plug 'carlitux/deoplete-ternjs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'easymotion/vim-easymotion'
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'DirDiff.vim'
 Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-surround'
 
 function! DoRemote(arg)
     UpdateRemotePlugins
 endfunction
-"Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'ervandew/supertab'
 Plug 'marijnh/tern_for_vim' , { 'do': 'npm install' } " Add plugins to &runtimepath
 call plug#end()
 
@@ -40,7 +47,7 @@ autocmd! BufWritePost * Neomake
 
 let g:neomake_javascript_enabled_makers = ['eslint']
 " open list Automatically
-let g:neomake_verbose=3
+let g:neomake_verbose=1
 let g:neomake_open_list = 2
 
 
@@ -49,15 +56,15 @@ let g:neomake_logfile = '/usr/local/var/log/neomake.log'
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 let g:neomake_javascript_eslint_maker = {
-\ 'args': ['--no-color', '--format', 'compact'],
+\ 'args': ['--format', 'compact'],
 \ 'errorformat': '%f: line %l\, col %c\, %m'
 \ }
 let g:neomake_warning_sign = {
-  \ 'text': 'w',
+  \ 'text': '👋',
   \ 'texthl': 'WarningMsg',
   \ }
 let g:neomake_error_sign = {
-  \ 'text': 'e',
+  \ 'text': '😱',
   \ 'texthl': 'ErrorMsg',
   \ }
 "************ DEOPLETE ***********
@@ -77,6 +84,16 @@ augroup omnifuncs
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 augroup end
+
+let g:deoplete#omni#functions = {}
+let g:deoplete#omni#functions.javascript = [
+  \ 'tern#Complete',
+  \ 'jspc#omni'
+\]
+
+autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+let g:UltiSnipsExpandTrigger="<C-j>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " tern
 if exists('g:plugs["tern_for_vim"]')
     let g:tern_show_argument_hints = 'on_hold'

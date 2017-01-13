@@ -7,7 +7,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } 
 Plug 'junegunn/fzf.vim'
-Plug 'arames/vim-async-grep'
 Plug 'flazz/vim-colorschemes'
 Plug 'jiangmiao/auto-pairs'
 Plug 'rizzatti/dash.vim'
@@ -27,6 +26,11 @@ Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'DirDiff.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-surround'
+Plug 'mhinz/vim-grepper'
+Plug 'yssl/qfenter'
+Plug 'danro/rename.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'sbdchd/neoformat'
 
 function! DoRemote(arg)
     UpdateRemotePlugins
@@ -40,7 +44,8 @@ let mapleader = " "
 
 set runtimepath+=~/.nvim/plugged/deoplete.nvim 
 let g:netrw_localrmdir='rm -r'
-
+let g:netrw_liststyle= 3
+    
 "autocmd InsertChange,TextChanged * update | Neomake
 autocmd! BufWritePost * Neomake
 
@@ -48,7 +53,7 @@ autocmd! BufWritePost * Neomake
 let g:neomake_javascript_enabled_makers = ['eslint']
 " open list Automatically
 let g:neomake_verbose=1
-let g:neomake_open_list = 2
+let g:neomake_open_list = 0
 
 
 let g:neomake_logfile = '/usr/local/var/log/neomake.log'
@@ -60,11 +65,11 @@ let g:neomake_javascript_eslint_maker = {
 \ 'errorformat': '%f: line %l\, col %c\, %m'
 \ }
 let g:neomake_warning_sign = {
-  \ 'text': '👋',
+  \ 'text': 'W',
   \ 'texthl': 'WarningMsg',
   \ }
 let g:neomake_error_sign = {
-  \ 'text': '😱',
+  \ 'text': 'E',
   \ 'texthl': 'ErrorMsg',
   \ }
 "************ DEOPLETE ***********
@@ -245,6 +250,8 @@ set incsearch
 set showmatch
 set hlsearch
 
+nnoremap <leader>g :Grepper -tool git<cr>
+nnoremap <leader>G :Grepper -tool ag<cr>
 
 " " size of a hard tabstop
 set tabstop=4

@@ -31,6 +31,8 @@ Plug 'yssl/qfenter'
 Plug 'danro/rename.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'sbdchd/neoformat'
+Plug 'neovim/node-host', { 'do': 'npm install' }
+Plug 'billyvg/tigris.nvim', { 'do': './install.sh' }
 
 function! DoRemote(arg)
     UpdateRemotePlugins
@@ -46,6 +48,10 @@ set runtimepath+=~/.nvim/plugged/deoplete.nvim
 let g:netrw_localrmdir='rm -r'
 let g:netrw_liststyle= 3
     
+"javascript highlighting
+let g:tigris#enabled = 1
+let g:tigris#debug = 1
+
 "autocmd InsertChange,TextChanged * update | Neomake
 autocmd! BufWritePost * Neomake
 
@@ -162,6 +168,7 @@ nmap <Leader>p :lprev<CR>      " previous error/warning
 nmap tt :tabedit %<CR>
 nmap td :tabclose<CR>
 
+nmap <Leader>f :Neoformat<CR> "run neoformat 
 "nmap <silent> <leader>§ <Plug>:Files
 "Map Escape to close terminal mode
 tnoremap <Esc> <C-\><C-n>
@@ -207,7 +214,7 @@ syntax enable
 set background=dark
 set t_Co=256
 "colo xoria256
-colorscheme solarized
+colorscheme Tomorrow-Night-Eighties
 
 "for HTML
 filetype indent on  

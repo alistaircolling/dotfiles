@@ -46,7 +46,7 @@ let mapleader = " "
 
 set runtimepath+=~/.nvim/plugged/deoplete.nvim 
 let g:netrw_localrmdir='rm -r'
-let g:netrw_liststyle= 3
+let g:netrw_liststyle= 2
     
 "javascript highlighting
 let g:tigris#enabled = 1

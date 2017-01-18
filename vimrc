@@ -22,7 +22,7 @@ Plug 'raimondi/delimitmate'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'easymotion/vim-easymotion'
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
+"Plug 'othree/yajs.vim', { 'for': 'javascript' }
 Plug 'DirDiff.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-surround'
@@ -33,6 +33,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'sbdchd/neoformat'
 Plug 'neovim/node-host', { 'do': 'npm install' }
 Plug 'billyvg/tigris.nvim', { 'do': './install.sh' }
+Plug 'brooth/far.vim'
 
 function! DoRemote(arg)
     UpdateRemotePlugins

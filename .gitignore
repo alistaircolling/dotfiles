@@ -5,4 +5,4 @@ npm-debug.log
 .netrwhist
 /swap-files/*
 nvim/*
-vim/*
+vim/

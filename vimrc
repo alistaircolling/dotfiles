@@ -150,10 +150,10 @@ imap jk <Esc>
 "nmap <Leader>h :wincmd h<CR>
 nmap <Leader>; :wincmd w<CR>
 "Resize vertical split
-nmap <Leader>h :vertical resize -5<CR>
-nmap <Leader>l :vertical resize +5<CR>
-nmap <Leader>j :resize +5<CR>
-nmap <Leader>k :resize -5<CR>
+nmap <Leader>h :vertical resize -20<CR>
+nmap <Leader>l :vertical resize +20<CR>
+nmap <Leader>j :resize +10<CR>
+nmap <Leader>k :resize -10<CR>
 
 nmap <Leader>a ggVG<CR>
 map <Leader> <Plug>(easymotion-prefix)
@@ -171,8 +171,8 @@ nmap td :tabclose<CR>
 
 nmap <Leader>f :Neoformat<CR> "run neoformat 
 "nmap <silent> <leader>§ <Plug>:Files
-"Map Escape to close terminal mode
-tnoremap <Esc> <C-\><C-n>
+"Map Escape to close terminal mode changed as was stopping FZF closing on esc 
+"tnoremap <Esc> <C-\><C-n>
 "Terminal nav mappings
 tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j
@@ -194,7 +194,10 @@ set hidden
 set autowrite                      " Automatically :write before running commands
 syntax on
 "set t_Co=2236
-set cursorline                     " Highlight the current line
+"only set cursorline if not in vimdiff
+if !&diff
+    set cursorline
+endif
 "set cursorcolumn
 set backspace=2                    " Backspace deletes like most programs in insert mode
 set expandtab                      " Tabs are spaces
@@ -297,6 +300,7 @@ highlight DiffChange cterm=none ctermfg=bg ctermbg=Yellow gui=none guifg=bg guib
 highlight DiffText cterm=none ctermfg=bg ctermbg=Magenta gui=none guifg=bg guibg=Magenta
 
 
+
 "You can map this to a shortcuts. Here is a list of suggested shortcuts:
 " Grep in current directory.
 set grepprg=grep\ -RHIn\ --exclude=\".tags\"\ --exclude-dir=\".svn\"\ --exclude-dir=\".git\"
@@ -325,6 +329,7 @@ nmap <leader>grepld :GrepL "\\<<C-r><C-w>\\>" %:p:h<CR>
 vnoremap <F9> "zy:<C-u>GrepL "<C-r>z" .<CR>
 vmap <leader>grepl <F9>
 vmap <leader>grepld :GrepL "\\<<C-r><C-w>\\>" %:p:h<CR>
+"
 "TAB NAVIGATION
 nnoremap ty  :tabnext<CR>
 nnoremap tr  :tabprev<CR>

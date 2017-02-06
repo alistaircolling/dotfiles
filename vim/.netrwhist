@@ -1,10 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/Users/alistair/Development/HTML/roco-trace/www/app'
-let g:netrw_dirhist_2='/Users/alistair/Development/HTML/roco-trace/www'
-let g:netrw_dirhist_3='/Users/alistair/Development/HTML/roco-trace/www/app/views'
-let g:netrw_dirhist_4='/Users/alistair/Development/HTML/roco-trace/www'
-let g:netrw_dirhist_5='/Users/alistair/Development/HTML/roco-trace/www/app/views/showPages'
-let g:netrw_dirhist_6='/Users/alistair/Development/HTML/roco-trace/www'
-let g:netrw_dirhist_7='/Users/alistair/Development/HTML/roco-trace/www/app/views/showPages'
-let g:netrw_dirhist_8='/Users/alistair/Development/HTML/roco-trace/www'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Users/alistair/dotfiles'
+let g:netrw_dirhist_2='/Users/alistair/dotfiles/vim'
+let g:netrw_dirhist_3='/Users/alistair/dotfiles/vim/plugged'
+let g:netrw_dirhist_4='/Users/alistair/dotfiles/vim/plugged/vim-jsx'
+let g:netrw_dirhist_5='/Users/alistair/Development/HTML/roco-trace'

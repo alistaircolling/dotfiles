@@ -32,7 +32,7 @@ Plug 'danro/rename.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'sbdchd/neoformat'
 Plug 'neovim/node-host', { 'do': 'npm install' }
-Plug 'billyvg/tigris.nvim', { 'do': './install.sh' }
+"Plug 'billyvg/tigris.nvim', { 'do': './install.sh' }
 Plug 'brooth/far.vim'
 
 function! DoRemote(arg)
@@ -55,6 +55,10 @@ let g:tigris#debug = 1
 
 "autocmd InsertChange,TextChanged * update | Neomake
 autocmd! BufWritePost * Neomake
+
+"auto save folds
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview 
 
 
 let g:neomake_javascript_enabled_makers = ['eslint']
@@ -134,6 +138,7 @@ if has('conceal')
 endif
 
 "******************************* KEY BINDINGS ******************************* 
+"fold a functoin ;
 "DEOPLETE
 " deoplete tab-complete
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -231,14 +236,22 @@ autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
 autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
 
 
+" Easymotion colours
+          hi EasyMotionTarget ctermbg=none ctermfg=175
 
+          hi EasyMotionShade  ctermbg=none ctermfg=8
+
+          hi EasyMotionTarget2First ctermbg=none ctermfg=blue
+          hi EasyMotionTarget2Second ctermbg=none ctermfg=lightred
+          
+          hi EasyMotionMoveHL ctermbg=green ctermfg=black
 " "color the status based on insert mode
 " " first, enable status line always
 set laststatus=2
 "
 " " now set it up to change the status line based on mode
 if version >= 700
-    au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta
+    au InsertEnter * hi StatusLine term=reverse ctermbg=133 gui=undercurl guisp=Magenta
     au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse
 endif
 
@@ -329,7 +342,6 @@ nmap <leader>grepld :GrepL "\\<<C-r><C-w>\\>" %:p:h<CR>
 vnoremap <F9> "zy:<C-u>GrepL "<C-r>z" .<CR>
 vmap <leader>grepl <F9>
 vmap <leader>grepld :GrepL "\\<<C-r><C-w>\\>" %:p:h<CR>
-"
 "TAB NAVIGATION
 nnoremap ty  :tabnext<CR>
 nnoremap tr  :tabprev<CR>

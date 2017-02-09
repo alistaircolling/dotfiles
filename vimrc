@@ -35,6 +35,7 @@ Plug 'neovim/node-host', { 'do': 'npm install' }
 "Plug 'billyvg/tigris.nvim', { 'do': './install.sh' }
 Plug 'brooth/far.vim'
 
+
 function! DoRemote(arg)
     UpdateRemotePlugins
 endfunction
@@ -47,7 +48,7 @@ let mapleader = " "
 
 set runtimepath+=~/.nvim/plugged/deoplete.nvim 
 let g:netrw_localrmdir='rm -r'
-let g:netrw_liststyle= 2
+let g:netrw_liststyle= 3
     
 "javascript highlighting
 let g:tigris#enabled = 1
@@ -281,8 +282,8 @@ nnoremap <leader>G :Grepper -tool ag<cr>
 set tabstop=4
 let g:netrw_banner=0
 let g:netrw_preview = 1
-let g:netrw_liststyle=1
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+"let g:netrw_liststyle=1
+"let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 
 set history=1000         " remember more commands and search history

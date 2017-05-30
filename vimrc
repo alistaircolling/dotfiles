@@ -34,6 +34,7 @@ Plug 'sbdchd/neoformat'
 Plug 'neovim/node-host', { 'do': 'npm install' }
 "Plug 'billyvg/tigris.nvim', { 'do': './install.sh' }
 Plug 'brooth/far.vim'
+Plug 'koron/nyancat-vim'
 
 
 function! DoRemote(arg)
@@ -59,7 +60,7 @@ autocmd! BufWritePost * Neomake
 
 "auto save folds
 autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview 
+"autocmd BufWinEnter *.* silent loadview 
 
 
 let g:neomake_javascript_enabled_makers = ['eslint']

@@ -61,6 +61,8 @@ values."
      syntax-checking
      version-control
      )
+   ;; PASTING INTO MINI BUFFER- use CMD-y
+
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -314,11 +316,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                         ;This is the place where most of your configurations should be done. Unless it is
                                         ;explicitly specified that a variable should be set before a package is loaded,
                                         ;you should place your code here."
+  
   ;;Key Bindings
   (spacemacs/set-leader-keys "wg" 'golden-ratio)
-
+  (setq mac-right-option-modifier nil)
   (setq mac-command-modifier 'control)
-  (setq  mac-right-option-modifier nil)
   (setq-default dotspacemacs-themes '(list-themes-here))
 
   ;;Appearance

@@ -6,3 +6,6 @@ npm-debug.log
 /swap-files/*
 nvim/*
 vim/*
+/node_modules/eslint-plugin-import/node_modules/es6-map/.travis.yml
+*.vim
+*.vim*

@@ -1,3 +1,5 @@
+
+;; -*- mode: emacs-lisp -*-
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
@@ -151,7 +153,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 14
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -306,60 +308,30 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (defun my-setup-indent (n)
-    ;; java/c/c++
-    (setq c-basic-offset n)
-    ;; web development
-    (setq coffee-tab-width n) ; coffeescript
-    (setq javascript-indent-level n) ; javascript-mode
-    (setq js-indent-level n) ; js-mode
-    (setq js2-basic-offset n) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
-    (setq web-mode-markup-indent-offset n) ; web-mode, html tag in html file
-    (setq web-mode-css-indent-offset n) ; web-mode, css in html file
-    (setq web-mode-code-indent-offset n) ; web-mode, js code in html file
-    (setq css-indent-offset n) ; css-mode
-    )
   )
-(global-highlight-parentheses-mode 0)
+
 (defun dotspacemacs/user-config ()
                                         ;  "Configuration function for user code.
                                         ;This function is called at the very end of Spacemacs initialization after
                                         ;layers configuration.
                                         ;This is the place where most of your configurations should be done. Unless it is
                                         ;explicitly specified that a variable should be set before a package is loaded,
-
                                         ;you should place your code here."
-                                        ; ORIGAMI FOLDING:
-  (global-highlight-parentheses-mode -1)
-  (use-package writeroom)
-  (defun nin-origami-toggle-node ()
-    (interactive)
-    (save-excursion ;; leave point where it is
-      (goto-char (point-at-eol))             ;; then go to the end of line
-      (origami-toggle-node (current-buffer) (point))))                 ;; and try to fold
-  (use-package origami :ensure t
-    :config
-    (add-hook 'prog-mode-hook
-              (lambda ()
-                (setq-local origami-fold-style 'triple-braces)
-                (origami-mode)
-                (origami-close-all-nodes (current-buffer)))))
-  (evil-define-key 'normal prog-mode-map (kbd "TAB") 'nin-origami-toggle-node) 
+  (set-background-color "grey19")
+  (setq-default js2-basic-offset 2)
+  (setq-default js-indent-level 2)
+  (defun my-web-mode-hook ()
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
+    (setq web-mode-indent-style 2)
+    )
+  (add-hook 'web-mode-hook  'my-web-mode-hook)
 
-  (define-key evil-search-highlight-persist-map (kbd "ESC") 'evil-search-highlight-persist-remove-all)
-  (setq ac-auto-start 3)
-  (global-aggressive-indent-mode 1)
-  ;; Key Bindings
   (spacemacs/set-leader-keys "wg" 'golden-ratio)
-  (spacemacs/set-leader-keys "ww" 'writeroom-mode)
-  (spacemacs/set-leader-keys "sr" 'render-search)
-  (spacemacs/set-leader-keys "sr" 'search-render)
-  ;; (spacemacs/set-leader-keys "sr" 'render-to-top)
-  (setq company-minimum-prefix-length 2)
   (setq mac-right-option-modifier nil)
   (setq mac-command-modifier 'control)
   (setq-default dotspacemacs-themes '(list-themes-here))
-  (setq-default dotspacemacs-configuration-layers '(writeroom))
 
   ;;Appearance
   (custom-set-faces
@@ -378,7 +350,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; '(rainbow-delimiters-depth-8-face ((t (:foreground "red")))))
   (set-fontset-font t 'unicode "Apple Color Emoji" nil 'prepend)
   ;;                                         ;spaceline customisations
-  (setq powerline-default-separator 'nil)
+  (setq powerline-default-separator 'utf-8)
   (spaceline-toggle-buffer-size-off)
   (spaceline-toggle-buffer-position-off)
   (spaceline-toggle-minor-modes-off)
@@ -386,6 +358,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (spaceline-toggle-buffer-encoding-abbrev-off)
   (spaceline-toggle-point-position-off)
   (spaceline-toggle-buffer-encoding-off)
+  ;; (spaceline-toggle-buffer-id-off)
   (spaceline-toggle-nyan-cat-on)
   (setq truncate-lines 't)
   (setq rainbow-mode 't)
@@ -393,10 +366,18 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   (setq neo-theme 'ascii)
 
-  (my-setup-indent 2)
-
   (push '("\\.js\\'" . react-mode) auto-mode-alist)
+  ;; (setq powerline-default-separator 'alternate)
+  ;; (nyan-minimum-window-width 800);; 
   (setq default js2-mode)
+  
+  ;; (setq-default
+  ;; js2-basic-offset 2
+  ;; web-mode
+  ;; web-mode-markup-indent-offset 2
+  ;; web-mode-css-indent-offset 2
+  ;; web-mode-code-indent-offset 2
+  ;; web-mode-attr-indent-offset 2)
   ;; ----------- DIRED
   (add-hook 'dired-mode-hook
             (lambda () (dired-hide-details-mode 1)))
@@ -404,8 +385,14 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq dired-omit-files "^\\..*$\\|^\\.\\.$");; 
   (setq dired-omit-files "^\\.git$\\|\\.DS_Store$")
   (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
+  ;; (setq glob)
 
+  ;; (setq-default mode-line-format nil)
   (setq dired-hide-details-mode t)
+  ;; (define-key window-numbering-keymap "\M-0" nil)
+  ;; (define-key window-numbering-keymap "\M-1" nil)
+  ;; (define-key window-numbering-keymap "\M-2" nil)
+                                        ;Allow Alt-3 to be a #
   (use-package graphql-mode
     :ensure t
     :init
@@ -421,15 +408,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["#6f7c80" "#d93334" "#40805b" "#b1951d" "#4f97d7" "#c24160" "#22aae1" "#c1c7c9"])
  '(avy-all-windows nil)
- '(background-color "#202020")
- '(background-mode dark)
  '(beacon-color "#ec4780")
- '(compilation-message-face (quote default))
- '(cursor-color "#cccccc")
- '(cursor-type (quote bar))
  '(diary-entry-marker (quote font-lock-variable-name-face))
  '(emms-mode-line-icon-image-cache
    (quote
@@ -457,9 +437,7 @@ static char *note[] = {
  '(evil-normal-state-cursor (quote ("#FFEE58" box)) t)
  '(evil-visual-state-cursor (quote ("#C5E1A5" box)) t)
  '(evil-want-Y-yank-to-eol nil)
- '(fci-rule-color "#383838" t)
- '(foreground-color "#cccccc")
- '(fringe-mode 6 nil (fringe))
+ '(fci-rule-color "#383838")
  '(gnus-logo-colors (quote ("#2fdbde" "#c0c0c0")))
  '(gnus-mode-line-image-cache
    (quote
@@ -484,32 +462,23 @@ static char *gnus-pointer[] = {
 \"###....####.######\",
 \"###..######.######\",
 \"###########.######\" };")))
- '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
  '(highlight-indent-guides-auto-enabled nil)
  '(highlight-symbol-colors
    (quote
     ("#FFEE58" "#C5E1A5" "#80DEEA" "#64B5F6" "#E1BEE7" "#FFCC80")))
  '(highlight-symbol-foreground-color "#E0E0E0")
  '(highlight-tail-colors (quote (("#ec4780" . 0) ("#424242" . 100))))
- '(hl-paren-background-colors
-   (quote
-    ("#00FF99" "#CCFF99" "#FFCC99" "#FF9999" "#FF99CC" "#CC99FF" "#9999FF" "#99CCFF" "#99FFCC" "#7FFF00")))
- '(hl-paren-colors (quote ("#326B6B")))
- '(hl-sexp-background-color "#1c1f26")
- '(linum-format " %7d ")
- '(magit-diff-use-overlays nil)
- '(monokai-background "#ff0000")
  '(nrepl-message-colors
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(ns-command-modifier (quote control))
- '(org-src-block-faces (quote (("emacs-lisp" (:background "#F0FFF0")))))
  '(package-selected-packages
    (quote
-    (origami writeroom-mode graphql-mode zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme tide typescript-mode emoji-cheat-sheet-plus company-emoji winum unfill fuzzy clojure-snippets clj-refactor inflections edn paredit peg cider-eval-sexp-fu cider seq queue clojure-mode helm-dash apropospriate-theme toxi-theme tronesque-theme alect-themes react-snippets yatemplate yaml-mode rainbow-mode rainbow-identifiers color-identifiers-mode company-quickhelp reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl vmd-mode xterm-color web-mode tagedit smeargle slim-mode shell-pop scss-mode sass-mode pug-mode orgit org mwim multi-term mmm-mode markdown-toc markdown-mode magit-gitflow less-css-mode helm-gitignore helm-css-scss helm-company helm-c-yasnippet haml-mode gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help emmet-mode diff-hl company-web web-completion-data company-tern dash-functional company-statistics company auto-yasnippet auto-dictionary ac-ispell auto-complete web-beautify tern livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme)))
+    (graphql-mode zonokai-theme zenburn-theme zen-and-art-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme pastels-on-dark-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme niflheim-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme firebelly-theme farmhouse-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme anti-zenburn-theme ample-zen-theme ample-theme afternoon-theme tide typescript-mode emoji-cheat-sheet-plus company-emoji winum unfill fuzzy clojure-snippets clj-refactor inflections edn paredit peg cider-eval-sexp-fu cider seq queue clojure-mode helm-dash apropospriate-theme toxi-theme tronesque-theme alect-themes react-snippets yatemplate yaml-mode rainbow-mode rainbow-identifiers color-identifiers-mode company-quickhelp reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl vmd-mode xterm-color web-mode tagedit smeargle slim-mode shell-pop scss-mode sass-mode pug-mode orgit org mwim multi-term mmm-mode markdown-toc markdown-mode magit-gitflow less-css-mode helm-gitignore helm-css-scss helm-company helm-c-yasnippet haml-mode gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help emmet-mode diff-hl company-web web-completion-data company-tern dash-functional company-statistics company auto-yasnippet auto-dictionary ac-ispell auto-complete web-beautify tern livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor yasnippet multiple-cursors js2-mode js-doc coffee-mode ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#3a3a3a")
  '(pos-tip-foreground-color "#9E9E9E")
+ '(standard-indent 2)
  '(tabbar-background-color "#353535")
  '(truncate-lines t)
  '(vc-annotate-background "#2B2B2B")
@@ -533,13 +502,7 @@ static char *gnus-pointer[] = {
      (320 . "#8CD0D3")
      (340 . "#94BFF3")
      (360 . "#DC8CC3"))))
- '(vc-annotate-very-old-color "#DC8CC3")
- '(weechat-color-list
-   (unspecified "#272822" "#3C3D37" "#F70057" "#F92672" "#86C30D" "#A6E22E" "#BEB244" "#E6DB74" "#40CAE4" "#66D9EF" "#FB35EA" "#FD5FF0" "#74DBCD" "#A1EFE4" "#F8F8F2" "#F8F8F0"))
- '(xterm-color-names
-   ["#F1EBDD" "#A33555" "#BF5637" "#666E4D" "#3A6E64" "#665843" "#687366" "#50484e"])
- '(xterm-color-names-bright
-   ["#EBE7D9" "#DB4764" "#CE6A38" "#649888" "#848F86" "#857358" "#50484e"]))
+ '(vc-annotate-very-old-color "#DC8CC3"))
 ;; (custom-set-faces
 ;; custom-set-faces was added by Custom.
 ;; If you edit it by hand, you could mess it up, so be careful.
@@ -557,7 +520,6 @@ static char *gnus-pointer[] = {
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "gray16" :foreground "#E0E0E0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 140 :width normal :foundry "nil" :family "Source Code Pro"))))
  '(rainbow-delimiters-depth-1-face ((t (:foreground "cyan"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "deep sky blue"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "aquamarine"))))

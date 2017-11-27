@@ -360,7 +360,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (spaceline-toggle-point-position-off)
   (spaceline-toggle-buffer-encoding-off)
   ;; (spaceline-toggle-buffer-id-off)
-  (spaceline-toggle-nyan-cat-on)
+  (spaceline-toggle-nyan-cat-off)
   (setq truncate-lines 't)
   (setq rainbow-mode 't)
   (setq truncate-lines 't)

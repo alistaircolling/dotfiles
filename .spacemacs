@@ -317,9 +317,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                         ;explicitly specified that a variable should be set before a package is loaded,
                                         ;you should place your code here."
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
+  (set-background-color "grey19")
   (set-face-attribute 'spaceline-evil-normal nil :foreground "black")
   (define-key evil-search-highlight-persist-map (kbd "ESC") 'evil-search-highlight-persist-remove-all)
-  (set-background-color "grey19")
   (setq-default js2-basic-offset 2)
   (setq-default js-indent-level 2)
   (defun my-web-mode-hook ()

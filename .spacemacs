@@ -312,8 +312,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
   )
 
 (defun dotspacemacs/user-config ()
-  ;; To fix the autocomplete when using react layer go to /.emacs.d/layers/+lang/html/funcs.el
-  ;; and change company-minimum-prefix-length to 2
                                         ;  "Configuration function for user code.
                                         ;This function is called at the very end of Spacemacs initialization after
                                         ;layers configuration.
@@ -321,23 +319,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                         ;explicitly specified that a variable should be set before a package is loaded,
                                         ;you should place your code here."
 
-  ;; (setq ispell-program-name "/usr/local/Cellar/emacs-plus/25.2_2/share/emacs/25.2/lisp/textmodes/ispell.el.gz")
-  ;; (add-hook 'js2-mode-hook 'prettier-js-mode)
-  ;; (add-hook 'web-mode-hook 'prettier-js-mode)
-  ;; (defun enable-minor-mode (my-pair)
-  ;;   "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
-  ;;   (if (buffer-file-name)
-  ;;       (if (string-match (car my-pair) buffer-file-name)
-  ;;           (funcall (cdr my-pair)))))
-  ;; (add-hook 'web-mode-hook #'(lambda ()
-  ;;                              (enable-minor-mode
-  ;;                               '("\\.jsx?\\'" . prettier-js-mode))))
+  ;; To fix the autocomplete when using react layer go to /.emacs.d/layers/+lang/html/funcs.el
+  ;; and change company-minimum-prefix-length to 2
 
   (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
   (set-background-color "grey16")
   (set-face-attribute 'spaceline-evil-normal nil :foreground "black")
-  ;; (define-key evil-search-highlight-persist-map (kbd "ESC") 'evil-search-highlight-persist-remove-all)
-  (define-key evil-normal-state-map (kbd "<escape>") 'evil-search-highlight-persist-remove-all)
   (setq-default js2-basic-offset 2)
   (setq-default js-indent-level 2)
   (defun my-web-mode-hook ()
@@ -361,6 +348,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                 '("\\.jsx?\\'" . prettier-js-mode))))
 
   (spacemacs/set-leader-keys "wg" 'golden-ratio)
+  (define-key evil-normal-state-map (kbd "<escape>") 'evil-search-highlight-persist-remove-all)
   (spacemacs/set-leader-keys "ww" 'writeroom-mode)
   (setq mac-right-option-modifier nil)
   (setq mac-command-modifier 'control)

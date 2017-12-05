@@ -154,7 +154,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 12
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -319,6 +319,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                         ;explicitly specified that a variable should be set before a package is loaded,
                                         ;you should place your code here."
 
+  (defun kill-other-buffers ()
+    "Kill all buffers but the current one.
+Don't mess with special buffers."
+    (interactive)
+    (dolist (buffer (buffer-list))
+      (unless (or (eql buffer (current-buffer)) (not (buffer-file-name buffer)))
+        (kill-buffer buffer))))
   ;; To fix the autocomplete when using react layer go to /.emacs.d/layers/+lang/html/funcs.el
   ;; and change company-minimum-prefix-length to 2
 
@@ -347,9 +354,15 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                (enable-minor-mode
                                 '("\\.jsx?\\'" . prettier-js-mode))))
 
+  ;; KEY BINDINGS
+
+  (spacemacs/set-leader-keys "sr" 'find-render-function)
   (spacemacs/set-leader-keys "wg" 'golden-ratio)
   (define-key evil-normal-state-map (kbd "<escape>") 'evil-search-highlight-persist-remove-all)
   (spacemacs/set-leader-keys "ww" 'writeroom-mode)
+
+  ;;
+
   (setq mac-right-option-modifier nil)
   (setq mac-command-modifier 'control)
   (setq-default dotspacemacs-themes '(list-themes-here))

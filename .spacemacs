@@ -154,7 +154,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 14
+                               :size 13
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -229,7 +229,7 @@ values."
    dotspacemacs-enable-paste-transient-state nil
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
-   dotspacemacs-which-key-delay 0.4
+   dotspacemacs-which-key-delay 0.2
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
@@ -319,6 +319,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                         ;explicitly specified that a variable should be set before a package is loaded,
                                         ;you should place your code here."
 
+  ;; (spaceline-define-segment buffer-id
+  ;;   (if (buffer-file-name)
+  ;;       (abbreviate-file-name (buffer-file-name))
+  ;;     (powerline-buffer-id)))
+
   (defun kill-other-buffers ()
     "Kill all buffers but the current one.
 Don't mess with special buffers."
@@ -342,24 +347,28 @@ Don't mess with special buffers."
     )
   (add-hook 'web-mode-hook  'my-web-mode-hook)
 
-  (add-hook 'js2-mode-hook 'prettier-js-mode)
-  (add-hook 'web-mode-hook 'prettier-js-mode)
+  (setq browse-url-browser-function 'browse-url-default-macosx-browser)
+  ;; (add-hook 'js2-mode-hook 'prettier-js-mode)
+  ;; (add-hook 'web-mode-hook 'prettier-js-mode)
+
   (defun enable-minor-mode (my-pair)
     "Enable minor mode if filename match the regexp.  MY-PAIR is a cons cell (regexp . minor-mode)."
     (if (buffer-file-name)
         (if (string-match (car my-pair) buffer-file-name)
             (funcall (cdr my-pair)))))
 
-  (add-hook 'web-mode-hook #'(lambda ()
-                               (enable-minor-mode
-                                '("\\.jsx?\\'" . prettier-js-mode))))
+  ;; (add-hook 'web-mode-hook #'(lambda ()
+  ;;                              (enable-minor-mode
+  ;;                               '("\\.jsx?\\'" . prettier-js-mode))))
 
   ;; KEY BINDINGS
 
+  (spacemacs/set-leader-keys "ab" 'browse-url-default-macosx-browser)
   (spacemacs/set-leader-keys "sr" 'find-render-function)
   (spacemacs/set-leader-keys "wg" 'golden-ratio)
   (define-key evil-normal-state-map (kbd "<escape>") 'evil-search-highlight-persist-remove-all)
   (spacemacs/set-leader-keys "ww" 'writeroom-mode)
+  (spacemacs/set-leader-keys "tmi" 'spaceline-toggle-buffer-id)
 
   ;;
 
@@ -398,7 +407,7 @@ Don't mess with special buffers."
   (setq rainbow-mode 't)
   (setq truncate-lines 't)
 
-  (global-aggressive-indent-mode 1)
+  (global-aggressive-indent-mode 0)
   ;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
   (setq neo-theme 'ascii)
 

@@ -18,8 +18,8 @@ export PATH="$PATH:$HOME/.cargo/bin"
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="kennethreitz"
-ZSH_THEME=""
+ZSH_THEME="kennethreitz"
+#ZSH_THEME=""
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -70,6 +70,7 @@ ZSH_THEME=""
 # export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+fpath=(/usr/local/share/zsh-completions $fpath)
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -79,7 +80,7 @@ source $ZSH/oh-my-zsh.sh
  if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
  else
-   export EDITOR='nvim'
+   export EDITOR='vim'
  fi
 
 # Compilation flags

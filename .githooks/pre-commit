@@ -1,0 +1,12 @@
+#!/bin/sh
+# Block commits that contain secrets. Uses gitleaks when installed
+# (brew install gitleaks); otherwise warns and lets the commit through.
+if command -v gitleaks >/dev/null 2>&1; then
+    if ! gitleaks protect --staged --redact; then
+        echo "pre-commit: potential secret in staged changes — commit blocked." >&2
+        echo "If this is a false positive, add a gitleaks:allow comment or adjust .gitleaks.toml." >&2
+        exit 1
+    fi
+else
+    echo "pre-commit: gitleaks not installed — secret scan skipped (brew install gitleaks)" >&2
+fi

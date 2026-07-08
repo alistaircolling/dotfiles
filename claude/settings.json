@@ -1,0 +1,210 @@
+{
+  "env": {
+    "ENABLE_PNPM_UPDATE_NOTIFIER": "false"
+  },
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch",
+      "Read(//Users/Shared/dotfiles/**)",
+      "Bash(git add:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git fetch:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git ls-remote:*)",
+      "Bash(git ls-files:*)",
+      "Bash(git stash list:*)",
+      "Bash(git remote:*)",
+      "Bash(git tag:*)",
+      "Bash(git blame:*)",
+      "Bash(git shortlog:*)",
+      "Bash(git config:*)",
+      "Bash(git commit:*)",
+      "Bash(git checkout:*)",
+      "Bash(git switch:*)",
+      "Bash(git -C:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh pr status:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh release list:*)",
+      "Bash(gh auth status:*)",
+      "Bash(gh search:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh issue view:*)",
+      "Bash(gh api:*)",
+      "Bash(linear issue:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(find:*)",
+      "Bash(fd:*)",
+      "Bash(ls:*)",
+      "Bash(eza:*)",
+      "Bash(tree:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(cut:*)",
+      "Bash(diff:*)",
+      "Bash(file:*)",
+      "Bash(stat:*)",
+      "Bash(du:*)",
+      "Bash(xargs ls:*)",
+      "Bash(xargs grep:*)",
+      "Bash(xargs cat:*)",
+      "Bash(which:*)",
+      "Bash(type:*)",
+      "Bash(echo:*)",
+      "Bash(printf:*)",
+      "Bash(jq:*)",
+      "Bash(psql:*)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "Bash(python3.14:*)",
+      "Bash(brew:*)",
+      "Bash(nvim:*)",
+      "Bash(pbcopy)",
+      "Bash(ln:*)",
+      "Bash(source:*)",
+      "Bash(mdfind:*)",
+      "Bash(system_profiler:*)",
+      "Bash(afplay:*)",
+      "Skill(keybindings-help)",
+      "mcp__claude_ai_Linear__get_issue",
+      "mcp__claude_ai_Linear__get_issue_status",
+      "mcp__claude_ai_Linear__get_project",
+      "mcp__claude_ai_Linear__get_document",
+      "mcp__claude_ai_Linear__get_initiative",
+      "mcp__claude_ai_Linear__get_milestone",
+      "mcp__claude_ai_Linear__get_team",
+      "mcp__claude_ai_Linear__get_user",
+      "mcp__claude_ai_Linear__get_attachment",
+      "mcp__claude_ai_Linear__get_status_updates",
+      "mcp__claude_ai_Linear__list_issues",
+      "mcp__claude_ai_Linear__list_teams",
+      "mcp__claude_ai_Linear__list_users",
+      "mcp__claude_ai_Linear__list_projects",
+      "mcp__claude_ai_Linear__list_documents",
+      "mcp__claude_ai_Linear__list_initiatives",
+      "mcp__claude_ai_Linear__list_milestones",
+      "mcp__claude_ai_Linear__list_comments",
+      "mcp__claude_ai_Linear__list_cycles",
+      "mcp__claude_ai_Linear__list_issue_labels",
+      "mcp__claude_ai_Linear__list_project_labels",
+      "mcp__claude_ai_Linear__list_issue_statuses",
+      "mcp__claude_ai_Linear__search_documentation",
+      "Bash(fc-list : family)",
+      "Bash(cd:*)",
+      "Bash(npx:*)"
+    ],
+    "defaultMode": "plan"
+  },
+  "model": "claude-fable-5[1m]",
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "playwriter"
+  ],
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r 'if ((.tool_input.command | test(\"^\\\\s*psql\")) and (.tool_input.command | test(\"\\\\$\\\\{\"))) then {\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"allow\",\"permissionDecisionReason\":\"Auto-allowing parameter substitution in psql\"}} else empty end'"
+          },
+          {
+            "type": "command",
+            "command": "jq -r 'if (.tool_input.command | test(\"dev-journal\")) then {\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"allow\",\"permissionDecisionReason\":\"Auto-allowing dev-journal operations\"}} else empty end'"
+          },
+          {
+            "type": "command",
+            "command": "jq -r 'if (.tool_input.command | test(\"pbcopy\")) then {\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"allow\",\"permissionDecisionReason\":\"Auto-allowing clipboard copy\"}} else empty end'"
+          },
+          {
+            "type": "command",
+            "command": "jq -r 'if (.tool_input.command | test(\"^\\\\s*gh pr (view|list|checks|diff|status)\\\\b\")) then {\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"allow\",\"permissionDecisionReason\":\"Auto-allowing read-only gh pr commands\"}} else empty end'"
+          },
+          {
+            "type": "command",
+            "command": "jq -r 'if ((.tool_input.command | test(\"^\\\\s*gh api\\\\b\")) and ((.tool_input.command | test(\"-X\\\\s*(POST|PUT|PATCH|DELETE)|--method\\\\s*(POST|PUT|PATCH|DELETE)|--input\")) | not)) then {\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"allow\",\"permissionDecisionReason\":\"Auto-allowing read-only gh api commands (GET)\"}} else empty end'"
+          },
+          {
+            "type": "command",
+            "command": "jq -r 'if (.tool_input.command | test(\"^\\\\s*git (fetch|diff|log|rev-parse|show|branch -r|ls-remote)\\\\b\")) then {\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"allow\",\"permissionDecisionReason\":\"Auto-allowing read-only git commands\"}} else empty end'"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r 'if (.tool_input.file_path | test(\"dev-journal\")) then {\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"allow\",\"permissionDecisionReason\":\"Auto-allowing dev-journal file writes\"}} else empty end'"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/Shared/dotfiles/claude/log-commands.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/Shared/dotfiles/claude/journal-hook.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "sh /Users/Shared/dotfiles/claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "figma@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true,
+    "vercel@claude-plugins-official": true,
+    "modularity@vladikk-modularity": true,
+    "swift-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "vladikk-modularity": {
+      "source": {
+        "source": "github",
+        "repo": "vladikk/modularity"
+      }
+    }
+  },
+  "effortLevel": "xhigh",
+  "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true,
+  "editorMode": "vim",
+  "preferredNotifChannel": "notifications_disabled",
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": true,
+  "hideVimModeIndicator": true,
+  "allowedUrls": [
+    "linear.app"
+  ]
+}

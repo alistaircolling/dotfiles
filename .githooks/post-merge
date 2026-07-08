@@ -1,0 +1,5 @@
+#!/bin/sh
+# Fires after `git pull` updates the dotfiles working tree (incl. fast-forward).
+# Your chpwd auto-pull triggers this, so a teammate's pushed config change
+# notifies your open sessions automatically.
+exec /Users/Shared/dotfiles/scripts/dotfiles-reload.sh

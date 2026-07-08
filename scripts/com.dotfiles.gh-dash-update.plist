@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Per-user launchd agent: weekly check for a fixed gh-dash release.
+     setup.sh templates __HOME__ and installs this to ~/Library/LaunchAgents/. -->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.dotfiles.gh-dash-update</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/Shared/dotfiles/scripts/gh-dash-update-check.sh</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Weekday</key>
+    <integer>1</integer>
+    <key>Hour</key>
+    <integer>10</integer>
+    <key>Minute</key>
+    <integer>0</integer>
+  </dict>
+  <key>ProcessType</key>
+  <string>Background</string>
+  <key>StandardOutPath</key>
+  <string>__HOME__/Library/Logs/gh-dash-update.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>__HOME__/Library/Logs/gh-dash-update.err.log</string>
+</dict>
+</plist>

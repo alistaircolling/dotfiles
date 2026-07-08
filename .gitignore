@@ -1,0 +1,37 @@
+# OS files
+.DS_Store
+
+# Backups
+*.backup
+
+# Secrets
+shell/.secrets
+scripts/.env
+scripts/.venv/
+
+# Private overlay (work-specific commands, skills, scripts — never published)
+private/
+
+# MCP server artifacts
+.playwright-mcp/
+
+# Local theme state (rewritten by theme cycler)
+themes/current
+
+# Live-reload sentinel (touched by scripts/dotfiles-reload.sh)
+.reload-sentinel
+
+# Codex CLI local config
+.codex/
+
+
+
+
+
+
+
+
+
+
+
+

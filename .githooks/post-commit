@@ -1,0 +1,4 @@
+#!/bin/sh
+# Fires after a commit in the dotfiles repo, so committing a config change
+# notifies your own open sessions right away.
+exec /Users/Shared/dotfiles/scripts/dotfiles-reload.sh

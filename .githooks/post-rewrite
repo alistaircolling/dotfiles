@@ -1,0 +1,3 @@
+#!/bin/sh
+# Fires after history rewrites (e.g. rebase, commit --amend) update the tree.
+exec /Users/Shared/dotfiles/scripts/dotfiles-reload.sh

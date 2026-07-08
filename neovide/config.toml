@@ -1,0 +1,9 @@
+# Neovide reads this from ~/.config/neovide/config.toml (or $NEOVIDE_CONFIG).
+# Monaspace texture healing + coding ligatures: https://github.com/githubnext/monaspace#texture-healing
+
+[font.features]
+"Monaspace Neon" = ["+calt", "+liga"]
+"Monaspace Argon" = ["+calt", "+liga"]
+"Monaspace Krypton" = ["+calt", "+liga"]
+"Monaspace Xenon" = ["+calt", "+liga"]
+"Monaspace Radon" = ["+calt", "+liga"]

@@ -1,0 +1,31 @@
+return {
+  name = 'Nord',
+  wezterm = {
+    colors = {
+      background = '#2e3440',
+      foreground = '#d8dee9',
+      cursor_bg = '#d8dee9',
+      cursor_fg = '#2e3440',
+      selection_bg = '#434c5e',
+      selection_fg = '#d8dee9',
+      ansi = {
+        '#3b4252', '#bf616a', '#a3be8c', '#ebcb8b',
+        '#81a1c1', '#b48ead', '#88c0d0', '#e5e9f0',
+      },
+      brights = {
+        '#4c566a', '#bf616a', '#a3be8c', '#ebcb8b',
+        '#81a1c1', '#b48ead', '#8fbcbb', '#eceff4',
+      },
+    },
+  },
+  nvim = {
+    colorscheme = 'nord',
+    background = 'dark',
+  },
+  shell_palette = {
+    '#bf616a', '#a3be8c', '#ebcb8b', '#81a1c1',
+    '#b48ead', '#88c0d0', '#d08770', '#8fbcbb',
+    '#5e81ac', '#b48ead', '#eceff4', '#bf616a',
+    '#a3be8c', '#ebcb8b',
+  },
+}

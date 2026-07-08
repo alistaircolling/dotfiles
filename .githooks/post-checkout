@@ -1,0 +1,3 @@
+#!/bin/sh
+# Fires after a branch checkout/switch changes the working tree.
+exec /Users/Shared/dotfiles/scripts/dotfiles-reload.sh

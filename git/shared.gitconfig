@@ -1,0 +1,29 @@
+# Shared git config across user accounts on this machine.
+# Included from each account's ~/.gitconfig by setup.sh.
+# Keep identity and credentials out of here — those stay per-user.
+
+[safe]
+	# Trust repos owned by the other account (avoids "dubious ownership").
+	directory = /Users/Shared/dotfiles
+
+[include]
+	# Machine-specific entries (extra safe.directory paths etc.) live in the
+	# gitignored private overlay; git silently skips a missing include.
+	path = /Users/Shared/dotfiles/private/git/local.gitconfig
+
+[core]
+	# delta (git-delta) installed via Homebrew at /opt/homebrew (shared prefix).
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	line-numbers = true
+
+[merge]
+	conflictStyle = zdiff3
+
+[diff]
+	colorMoved = default

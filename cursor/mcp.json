@@ -1,0 +1,45 @@
+{
+  "mcpServers": {
+    "Linear": {
+      "url": "https://mcp.linear.app/sse",
+      "headers": {}
+    },
+    "Slack": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-slack"
+      ],
+      "env": {
+        "SLACK_BOT_TOKEN": "${env:SLACK_BOT_TOKEN}",
+        "SLACK_TEAM_ID": "${env:SLACK_TEAM_ID}"
+      }
+    },
+    "GitHub": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    },
+    "browsermcp": {
+      "command": "npx",
+      "args": [
+        "@browsermcp/mcp@latest"
+      ]
+    },
+    "Notion": {
+      "url": "https://mcp.notion.com/mcp"
+    },
+    "playwriter": {
+      "command": "npx",
+      "args": ["-y", "playwriter@latest"],
+      "env": {
+        "PLAYWRITER_AUTO_ENABLE": "1"
+      }
+    }
+  }
+}

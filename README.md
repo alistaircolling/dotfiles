@@ -1,6 +1,6 @@
 # Dotfiles
 
-Shared configuration files for shell, Cursor, NeoVim, Claude Code, pi.dev, and terminal tools.
+Shared config for shell, NeoVim, WezTerm, tmux, git, Cursor, Claude Code, and pi.dev.
 
 ## Setup
 
@@ -10,85 +10,49 @@ Run this on each macOS user account that should share the config:
 /Users/Shared/dotfiles/setup.sh
 ```
 
-The script creates a timestamped backup before replacing any existing config:
-
-```bash
-~/.dotfiles-backup-YYYYMMDD-HHMMSS
-```
+It links each config into the user's home dir, backing up anything it replaces to `~/.dotfiles-backup-YYYYMMDD-HHMMSS`. Safe to re-run — it's idempotent.
 
 ## Structure
 
 ```
 dotfiles/
-├── shell/
-│   ├── .zshrc
-│   └── .bash_profile
-├── nvim/
-│   ├── init.lua
-│   └── lua/
-├── cursor/
-│   ├── settings.json
-│   ├── keybindings.json
-│   └── mcp.json
-├── claude/
-│   ├── settings.json
-│   ├── commands/
-│   └── hooks (journal, log, statusline)
-├── pidev/
-│   ├── settings.json
-│   ├── keybindings.json
-│   ├── AGENTS.md
-│   ├── prompts/
-│   ├── skills/
-│   └── extensions/
+├── shell/        # .zshrc, .bash_profile
+├── nvim/         # NeoVim config (init.lua, lua/)
+├── wezterm/      # wezterm.lua
+├── tmux/         # .tmux.conf
+├── git/          # shared.gitconfig (included, not replaced)
+├── gh-dash/      # config.yml (extension pinned to v4.23.2)
+├── cursor/       # settings.json, keybindings.json, mcp.json
+├── claude/       # settings, commands, skills, workflows, hooks
+├── pidev/        # settings, prompts, skills, extensions
+├── scripts/      # helper scripts + launchd agents
 └── setup.sh
 ```
 
 ## Multi-user
 
-This is designed for `/Users/Shared/` to work across multiple macOS user accounts.
+Designed to live in `/Users/Shared/` and work across multiple macOS accounts (all in the `staff` group).
 
-### What is shared
+**Shared** (symlinked from home): shell, NeoVim, WezTerm, tmux, gh-dash, Cursor, Claude Code, and pi.dev configs. Git uses `include.path` so identity/credentials stay per-user.
 
-- `~/.zshrc` and `~/.bash_profile` -> shared shell config
-- `~/.config/nvim` -> shared NeoVim config
-- Cursor user files (`settings.json`, `keybindings.json`, `mcp.json`) -> shared versions
-- `~/.claude/settings.json` (+ commands, keybindings) -> shared Claude Code config
-- `~/.pi/agent/settings.json` (+ prompts, skills, extensions) -> shared pi.dev config
+**Per-user:**
 
-### What stays per-user
+- NeoVim plugin/runtime data (`~/.local/share|state/nvim`, `~/.cache/nvim`) — avoids cross-user lock/permission issues.
+- Auth: `~/.claude.json`, `~/.pi/agent/auth.json`, and pi.dev sessions.
 
-**NeoVim:**
+## Automation
 
-- `~/.local/share/nvim` (plugins/runtime data)
-- `~/.local/state/nvim`
-- `~/.cache/nvim`
+`setup.sh` also loads per-user launchd agents:
 
-This avoids cross-user plugin lock/permission issues while keeping one shared config source.
-
-**Claude Code:** `~/.claude.json` (auth token) stays per-user.
-
-**Pi.dev:** `~/.pi/agent/auth.json` and `~/.pi/agent/sessions/` stay per-user.
+- **Live-reload** — git hooks + an fswatch watcher notify open shells/nvim when shared config changes (`brew install fswatch` to activate).
+- **Clipboard sync** — mirrors text/images between accounts via `/Users/Shared/clipboard-sync` (needs `xcode-select --install`).
+- **gh-dash update check** — weekly check for a release past the pinned version.
 
 ## Verify
 
-After running setup, check links:
-
 ```bash
-readlink ~/.config/nvim
 readlink ~/.zshrc
+readlink ~/.config/nvim
 ```
 
-Then open NeoVim once per user so plugins install into that user's data directory.
-
-
-
-
-
-
-
-
-
-
-
-
+Then open NeoVim once per user so plugins install into that user's data dir.

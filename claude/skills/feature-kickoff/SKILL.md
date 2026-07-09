@@ -14,6 +14,7 @@ A Linear project or ticket URL (or name). If none is given, ask for it before do
 ## Ground rules
 
 - Keep all documentation and notes as brief as possible. Use ~8-word bullets where possible.
+- **Never create or draft Linear tickets at any point unless the user specifically instructs it.** All tasks, issues, and notes are tracked as markdown files in the feature directory — not in Linear.
 - All deliverables live in one directory: `docs/features/<feature-slug>/` (create it; if the repo has a different docs convention, follow it). It holds: `findings.md` (Phase 1), `PRD.md` (Phase 2), `prd-review.md` (Phase 3), `plan.md` plus module design docs and `plan-review.md` (Phase 4 Step 1), one file per issue under `issues/` (Phase 4 Step 2), and `progress.md` (maintained throughout).
 - Maintain `progress.md` from the start and update it after every step: current phase, completed steps, decisions made, pending questions. A fresh session must be able to resume the kickoff from this file alone — check for it before starting Phase 1.
 - Save any images, designs, or screenshots encountered or shared (Figma exports, mockups, screenshots from Slack/Notion, files the user pastes) to `docs/features/<feature-slug>/assets/`, and reference them from the markdown files by relative path.
@@ -102,4 +103,4 @@ Two steps, each gated on explicit user approval. Do not start Step 2 until Step 
 2. Write one markdown file per issue under `docs/features/<feature-slug>/issues/` (e.g. `01-<slug>.md`). Each must be self-contained: context, acceptance criteria, files/areas touched, dependencies, a parallel-safe yes/no flag, and links back to the relevant `PRD.md` and `plan.md` sections — an agent with no prior context should be able to execute it.
 3. **Reference supporting resources** where useful — link screenshots/designs from `assets/`, Figma frames, and relevant findings by relative path.
 4. Prefer issues that can run **in parallel** (minimal shared files, clear interfaces); where ordering is required, state the dependency explicitly.
-5. Show the issue breakdown to the user. After approval, offer to create the issues as Linear tickets in the project (via the Linear MCP), linking each to the parent project.
+5. Show the issue breakdown to the user. The issue markdown files under `issues/` are the deliverable — do **not** create Linear tickets from them unless the user specifically asks you to.

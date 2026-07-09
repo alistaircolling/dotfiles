@@ -57,4 +57,4 @@ The script also prints the saved path on the last line. After drawing, just refe
 ## Notes
 
 - Free hosted services: `kroki.io` (deterministic diagram rendering) and `image.pollinations.ai` (Flux image model). Both work with no account.
-- No `GEMINI_API_KEY` or any key is needed. (An earlier version used Gemini; that key in `shell/.secrets` is now unused and can be removed.)
+- No `GEMINI_API_KEY` or any key is needed.

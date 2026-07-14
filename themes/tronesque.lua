@@ -11,11 +11,11 @@ return {
       selection_bg = '#264e78',
       selection_fg = '#cbf9ea',
       ansi = {
-        '#102132', '#f85242', '#62f6c0', '#ffff4d',
+        '#2c3f52', '#f85242', '#62f6c0', '#ffff4d',
         '#aecdda', '#8593cf', '#caeffe', '#cbf9ea',
       },
       brights = {
-        '#1a354d', '#f0a554', '#9bf1d5', '#1a426f',
+        '#4d6a86', '#f0a554', '#9bf1d5', '#1a426f',
         '#235fa0', '#a1b1fa', '#fffed3', '#ecfffe',
       },
     },

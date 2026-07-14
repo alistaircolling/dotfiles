@@ -540,7 +540,11 @@ _dotfiles_nudge() {
   local m; m="$(_dotfiles_sentinel_mtime)"
   if [[ "$m" != "$_DOTFILES_NUDGE_SEEN" ]]; then
     _DOTFILES_NUDGE_SEEN="$m"
-    print -P '%F{yellow}⚠ dotfiles changed — run `reload` (shell) / restart or :source nvim%f'
+    # No backticks/$(…) in this string: print -P re-expands it under PROMPT_SUBST,
+    # which EXECUTES them. A literal `reload` here actually ran reload → exec zsh
+    # inside prompt-expansion's capture subshell, leaving the new shell's stdout a
+    # pipe — prompt still drew, but every command's output vanished.
+    print -P '%F{yellow}⚠ dotfiles changed — run reload (shell) / restart or :source nvim%f'
   fi
 }
 precmd_functions+=(_dotfiles_nudge)

@@ -496,19 +496,17 @@ li() {
 _term_sanitize() {
   # Turn off modes the crashed TUI may have left enabled, restore the cursor.
   printf '\033[?1000l\033[?1002l\033[?1003l\033[?1006l\033[?2004l\033[?1049l\033[?25h'
-  # Drain the tty input queue: leaving canonical mode flushes a partial line,
-  # and the non-blocking read loop clears anything left in raw mode.
-  # Wrap the raw-mode window in an `always` block so the original termios is
-  # ALWAYS restored — otherwise an interrupt (or a read error) between the two
-  # stty calls leaves the terminal in -echo/min-0 and the shell looks dead.
-  local _old
-  _old=$(stty -g 2>/dev/null) || return 0
-  {
-    stty -icanon -echo min 0 time 0 2>/dev/null
-    while IFS= read -t 0.02 -k 1 -s _ 2>/dev/null; do :; done
-  } always {
-    stty "$_old" 2>/dev/null
-  }
+  # Restore a known-good termios in a single atomic call.
+  #
+  # This deliberately does NOT drain the tty input queue any more. The old
+  # version flipped the terminal to `-icanon -echo min 0 time 0` and ran a
+  # non-blocking read loop; anything that interrupted that window left the tty
+  # with echo off and stdin looking non-interactive, so the next commands
+  # produced no output and TUIs refused to start. Un-flushed bytes from a
+  # crashed TUI are the lesser evil: worst case a line of garbage at the next
+  # prompt, cleared with Ctrl-C.
+  stty sane 2>/dev/null
+  return 0
 }
 
 # Reload this shell cleanly (fresh login shell, keeps cwd; avoids the

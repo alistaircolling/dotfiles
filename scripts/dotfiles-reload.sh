@@ -31,9 +31,11 @@ touch "$SENTINEL" 2>/dev/null || true
 SOCK_DIR="${HOME}/.cache/nvim/sockets"
 # Per-socket timestamp of the last notification we sent, used to debounce.
 STATE_DIR="$SOCK_DIR/.notify-state"
-# Message is intentionally literal: $MYVIMRC is expanded by the user inside nvim,
-# not by this shell (single-quoted) — it is instruction text shown in the editor.
-NVIM_EXPR='luaeval("vim.schedule(function() vim.notify([[⚠ dotfiles changed — :source $MYVIMRC or restart nvim]], vim.log.levels.WARN) end)")'
+# Keep this SHORT. A message wider than the cmdline forces nvim's hit-enter
+# prompt, which blocks its main loop until the user presses a key — and a
+# blocked nvim does not answer RPC, which is what used to hang this script
+# indefinitely (and with it, any git command that triggered a hook).
+NVIM_EXPR='luaeval("vim.schedule(function() vim.notify([[⚠ dotfiles changed — restart nvim]], vim.log.levels.WARN) end)")'
 
 # Debounce so editing dotfiles doesn't spam the editor with this notice:
 #   GRACE    — a just-opened nvim already loaded the current config, so there is
@@ -44,6 +46,40 @@ NVIM_EXPR='luaeval("vim.schedule(function() vim.notify([[⚠ dotfiles changed �
 GRACE=60
 DEBOUNCE=60
 now="$(date +%s)"
+
+# Hard ceiling, in seconds, on a single RPC call.
+#
+# `nvim --server --remote-expr` is a *request*: it waits for a reply and has no
+# timeout of its own. An nvim blocked in a modal state (hit-enter prompt, a
+# :confirm dialog, a running :!cmd) does not service RPC, so the client waits
+# FOREVER. That is fatal here, because the git hooks call this script and would
+# hang the git command — and therefore the user's shell — along with it.
+RPC_TIMEOUT=2
+
+# Deliver the notice to one socket under a watchdog.
+#   0 = delivered, 1 = socket is dead (safe to reap), 2 = nvim alive but busy.
+#
+# Status comes from `wait`, never from polling with `kill -0`: a finished child
+# stays a zombie until it is waited on, so `kill -0` still succeeds on it and a
+# fast failure (dead socket) would be misread as a timeout — leaving stale
+# sockets to pile up forever.
+_notify_sock() {
+  local sock="$1" pid killer rc
+  nvim --server "$sock" --remote-expr "$NVIM_EXPR" >/dev/null 2>&1 &
+  pid=$!
+  ( sleep "$RPC_TIMEOUT"; kill -9 "$pid" 2>/dev/null ) &
+  killer=$!
+
+  wait "$pid" 2>/dev/null
+  rc=$?
+  kill "$killer" 2>/dev/null || true
+  wait "$killer" 2>/dev/null || true
+
+  # 137 = 128 + SIGKILL, i.e. the watchdog fired: that nvim is alive but wedged.
+  [ "$rc" -eq 137 ] && return 2
+  [ "$rc" -eq 0 ] && return 0
+  return 1
+}
 
 # Guard on nvim existing: without it, every connect would "fail" and we'd
 # wrongly reap live sockets. Only touch sockets when nvim is actually present.
@@ -62,12 +98,15 @@ if [ -d "$SOCK_DIR" ] && command -v nvim >/dev/null 2>&1; then
     last="$(cat "$stamp" 2>/dev/null || echo 0)"
     [ $(( now - last )) -lt "$DEBOUNCE" ] && continue
 
-    if nvim --server "$sock" --remote-expr "$NVIM_EXPR" >/dev/null 2>&1; then
-      echo "$now" > "$stamp" 2>/dev/null || true
-    else
+    _notify_sock "$sock"
+    case "$?" in
+      0) echo "$now" > "$stamp" 2>/dev/null || true ;;
       # No live server on this socket — clean up the stale file and its state.
-      rm -f "$sock" "$stamp" 2>/dev/null || true
-    fi
+      1) rm -f "$sock" "$stamp" 2>/dev/null || true ;;
+      # Timed out: that nvim is alive but busy, so the socket is NOT stale.
+      # Skip it and try again next time — never reap a live socket here.
+      2) : ;;
+    esac
   done
 
   # Prune state files whose sockets are gone.

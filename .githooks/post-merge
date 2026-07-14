@@ -2,4 +2,8 @@
 # Fires after `git pull` updates the dotfiles working tree (incl. fast-forward).
 # Your chpwd auto-pull triggers this, so a teammate's pushed config change
 # notifies your open sessions automatically.
-exec /Users/Shared/dotfiles/scripts/dotfiles-reload.sh
+# Detached and fully redirected: git waits for the hook AND for anything still
+# holding its stdout/stderr pipe, so both are needed to guarantee git never
+# blocks on the reload (see scripts/dotfiles-reload.sh for the RPC watchdog).
+/Users/Shared/dotfiles/scripts/dotfiles-reload.sh >/dev/null 2>&1 &
+exit 0

@@ -1,4 +1,8 @@
 #!/bin/sh
 # Fires after a commit in the dotfiles repo, so committing a config change
 # notifies your own open sessions right away.
-exec /Users/Shared/dotfiles/scripts/dotfiles-reload.sh
+# Detached and fully redirected: git waits for the hook AND for anything still
+# holding its stdout/stderr pipe, so both are needed to guarantee git never
+# blocks on the reload (see scripts/dotfiles-reload.sh for the RPC watchdog).
+/Users/Shared/dotfiles/scripts/dotfiles-reload.sh >/dev/null 2>&1 &
+exit 0

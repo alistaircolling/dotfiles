@@ -144,6 +144,12 @@ config.window_padding = {
 -- Window appearance
 config.window_decorations = 'RESIZE'
 
+-- Use a real macOS full-screen Space, not a borderless-maximized window.
+-- - Non-native fullscreen sizes once, at toggle time
+-- - User switching detaches the display, leaving it stale
+-- - A native Space is restored correctly by macOS
+config.native_macos_fullscreen_mode = true
+
 -- Tab bar configuration
 config.enable_tab_bar = false
 config.tab_bar_at_bottom = true

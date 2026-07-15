@@ -58,6 +58,7 @@ alias gd="git diff HEAD"
 alias ga="git add ."
 alias redeploy="/Users/Shared/dotfiles/scripts/redeploy-preview.sh"
 gc() { git commit -am "$*" }
+gl() { git log --oneline -n "${1:-10}" }
 search() {
   ddgr --np --json -n 10 "$*" 2>/dev/null | /opt/homebrew/bin/python3 -c "
 import json, sys

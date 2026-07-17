@@ -8,8 +8,6 @@ DOTFILES="/Users/Shared/dotfiles"
 BACKUP_DIR="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 
 echo "Setting up dotfiles for user: $(whoami)"
-echo "Backup directory: $BACKUP_DIR"
-mkdir -p "$BACKUP_DIR"
 
 link_item() {
     local source="$1"
@@ -35,6 +33,7 @@ link_item() {
     if [ -e "$source" ] || [ -L "$source" ]; then
         local backup_name
         backup_name="$(echo "$source" | sed "s|$HOME/||; s|/|__|g")"
+        mkdir -p "$BACKUP_DIR"
         mv "$source" "$BACKUP_DIR/$backup_name"
         echo "Backed up $label -> $BACKUP_DIR/$backup_name"
     fi
@@ -117,21 +116,10 @@ for item in prompts skills extensions themes; do
     fi
 done
 
-# Private overlay: work-specific commands/skills/scripts live in the
-# gitignored private/ dir, mirroring the repo layout. Symlink each file back
-# into its public location so tools pick it up, and hide the symlinks from
-# git via .git/info/exclude (local-only, never published).
-if [ -d "$DOTFILES/private" ]; then
-    EXCLUDE_FILE="$(git -C "$DOTFILES" rev-parse --git-path info/exclude)"
-    while IFS= read -r -d '' priv; do
-        rel="${priv#"$DOTFILES/private/"}"
-        mirror="$DOTFILES/$rel"
-        mkdir -p "$(dirname "$mirror")"
-        ln -sfn "$priv" "$mirror"
-        grep -qxF "$rel" "$EXCLUDE_FILE" 2>/dev/null || echo "$rel" >> "$EXCLUDE_FILE"
-    done < <(find "$DOTFILES/private" -type f -print0)
-    echo "Private overlay linked ($(find "$DOTFILES/private" -type f | wc -l | tr -d ' ') files)"
-fi
+# Private overlay: rebuild work-specific links and their managed local exclude
+# block so renamed/deleted private files cannot leave stale public symlinks.
+chmod +x "$DOTFILES/scripts/link-private-overlay.sh"
+"$DOTFILES/scripts/link-private-overlay.sh"
 
 # Git: include shared config (safe.directory list, etc.) from this user's
 # ~/.gitconfig. Identity and credentials stay per-user.
@@ -143,28 +131,26 @@ else
     echo "Linked shared git config (include.path -> $SHARED_GITCONFIG)"
 fi
 
+# Remove the retired fswatch LaunchAgent from older installations. Live reload
+# is now handled by git hooks, so leaving this loaded would invoke a deleted
+# script after login.
+LEGACY_WATCH_PLIST="$HOME/Library/LaunchAgents/com.dotfiles.watch.plist"
+if [ -e "$LEGACY_WATCH_PLIST" ]; then
+    launchctl unload "$LEGACY_WATCH_PLIST" 2>/dev/null || true
+    rm -f "$LEGACY_WATCH_PLIST" \
+        "$HOME/Library/Logs/dotfiles-watch.out.log" \
+        "$HOME/Library/Logs/dotfiles-watch.err.log"
+    echo "Removed retired fswatch LaunchAgent"
+fi
+
 # Live-reload: notify open shells/nvim when shared dotfiles change.
 # - git hooks (shared via core.hooksPath) run scripts/dotfiles-reload.sh on
 #   commit/pull, which touches a sentinel (shells) and pings nvim sockets.
 # - nvim() in .zshrc launches editors with a socket in this dir.
 mkdir -p "$HOME/.cache/nvim/sockets"
-chmod +x "$DOTFILES"/.githooks/* "$DOTFILES"/scripts/dotfiles-reload.sh "$DOTFILES"/scripts/dotfiles-watch.sh 2>/dev/null || true
+chmod +x "$DOTFILES"/.githooks/* "$DOTFILES"/scripts/dotfiles-reload.sh 2>/dev/null || true
 git -C "$DOTFILES" config core.hooksPath .githooks
 echo "Configured live-reload (core.hooksPath=.githooks)"
-
-# Optional fswatch watcher: also catches UNCOMMITTED local edits (git hooks
-# only fire on commit/pull). Needs `brew install fswatch`; degrades gracefully
-# until then. Installed as a per-user launchd agent.
-WATCH_PLIST_DST="$HOME/Library/LaunchAgents/com.dotfiles.watch.plist"
-mkdir -p "$HOME/Library/LaunchAgents" "$HOME/Library/Logs"
-sed "s|__HOME__|$HOME|g" "$DOTFILES/scripts/com.dotfiles.watch.plist" > "$WATCH_PLIST_DST"
-launchctl unload "$WATCH_PLIST_DST" 2>/dev/null || true
-launchctl load -w "$WATCH_PLIST_DST" 2>/dev/null || true
-if command -v fswatch >/dev/null 2>&1; then
-    echo "Live-reload watcher loaded (fswatch found)"
-else
-    echo "Live-reload watcher loaded — run 'brew install fswatch' to activate it"
-fi
 
 # Weekly check for a fixed gh-dash release (currently pinned to v4.23.2 to
 # avoid the v4.24.1 markdown panic). Notifies when a release > v4.24.1 ships.
@@ -193,11 +179,15 @@ else
     echo "Clipboard sync agent loaded — run 'xcode-select --install' to activate it"
 fi
 
-# Multi-user write access in shared dotfiles via group permissions.
-# Both user accounts share the "staff" group on macOS.
-# chgrp may fail on files owned by the other user, so we best-effort it.
-chgrp -R staff "$DOTFILES" 2>/dev/null || true
-chmod -R g+rwX "$DOTFILES" 2>/dev/null || true
+# Auth remains per-user and must not be readable by the other account.
+for auth_file in "$HOME/.claude.json" "$PI_DIR/auth.json"; do
+    [ -f "$auth_file" ] && chmod 600 "$auth_file"
+done
+
+# Multi-user repository permissions. The helper removes world-write access,
+# protects ignored secrets, and adds inheritable staff ACLs for future files.
+chmod +x "$DOTFILES/scripts/secure-shared-permissions.sh"
+"$DOTFILES/scripts/secure-shared-permissions.sh"
 
 echo ""
 echo "Verification:"
@@ -221,12 +211,8 @@ done
 
 echo ""
 echo "Setup complete."
-echo "Backups were saved in: $BACKUP_DIR"
-
-
-
-
-
-
-
-
+if [ -d "$BACKUP_DIR" ]; then
+    echo "Backups were saved in: $BACKUP_DIR"
+else
+    echo "No backups were needed."
+fi

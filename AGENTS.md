@@ -2,8 +2,7 @@
 
 ## Purpose
 
-This repository contains shared dotfiles and configuration for shell (zsh), NeoVim, 
-Cursor, zshrc, WezTerm, Tmux, Claude Code, and pi.dev — designed to be symlinked from `/Users/Shared/dotfiles` across multiple macOS user accounts.
+This public repository contains shared configuration for zsh, NeoVim, Cursor, WezTerm, tmux, Claude Code, and pi.dev. It is symlinked from `/Users/Shared/dotfiles` across multiple macOS user accounts.
 
 The goal is to maintain a single, clean, working set of configurations that any user account on the machine can use.
 
@@ -18,6 +17,13 @@ If you encounter an issue:
 3. Only proceed with the fix once the user confirms.
 
 This applies even if the issue is unrelated to the current task. The philosophy is: leave things better than you found them, but always with the user's knowledge and consent.
+
+## Public repository safety
+
+- Never add credentials, tokens, private URLs, customer data, or work-specific identifiers to tracked files.
+- Keep work-specific material under the gitignored `private/` overlay.
+- Run the configured Gitleaks check before committing security-sensitive changes.
+- Do not force-add ignored files or public symlinks created by the private overlay.
 
 ## Sudo commands
 

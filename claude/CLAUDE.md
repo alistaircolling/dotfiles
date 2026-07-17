@@ -1,3 +1,9 @@
+# Global safety
+
+- Never run `sudo` commands. Give the exact command to the user instead.
+- Before suggesting a command, shell snippet, or URL for the user to run or visit, copy it with `printf '%s' "<command-or-url>" | pbcopy`, then say it was copied. Do not do this for commands you execute yourself.
+- Treat every repository as public unless its visibility has been verified. Never place credentials or private data in tracked files.
+
 # Response format
 
 Use precise, simple language. Prefer common words over obscure ones.

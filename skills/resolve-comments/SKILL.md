@@ -7,7 +7,7 @@ description: Walk through unresolved PR review comments one by one so the user c
 
 Walk through unresolved PR review comments one by one so the user can address them in their editor.
 
-The user provides a PR number (or ticket number) as the argument: $ARGUMENTS
+Use the PR number or ticket number supplied with the skill invocation. If none was supplied, ask for it before continuing. Call this value `<query>` below and substitute its actual value in every command.
 
 ## Steps
 
@@ -16,7 +16,7 @@ The user provides a PR number (or ticket number) as the argument: $ARGUMENTS
 2. Try to fetch the PR directly by number. If the PR is not found, fall back to searching by branch name:
 
 ```bash
-gh pr list --search "$ARGUMENTS" --json number,title,headRefName --limit 10
+gh pr list --search "<query>" --json number,title,headRefName --limit 10
 ```
 
 Look for a PR whose branch name contains the argument (e.g. branch `feature/abc-1820-fix-upload-flow` matches argument `1820`). If exactly one match is found, use that PR number. If multiple matches are found, show them and ask the user which one to use. If none are found, tell the user and stop.

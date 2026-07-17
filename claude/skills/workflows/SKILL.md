@@ -1,6 +1,20 @@
 ---
 name: workflows
-description: Build or run a dynamic workflow — a custom multi-agent harness Claude writes on the fly via the Workflow tool — for tasks that overwhelm a single context window. Use when the user says "use a workflow", "dynamic workflow", "ultracode", "fan out agents", "orchestrate subagents", or "set up a harness"; AND consider proposing one (ask first) when a task matches a workflow shape: verify every claim in a doc/PR against the code, hunt a flaky/intermittent test, root-cause a failure or outage, rename/refactor a symbol across many callsites, do a large migration, triage a backlog/support queue/alerts, rank or sort a list by a qualitative measure, name something via brainstorm + tournament, run an adversarial review, deep research with cited sources, or run lightweight evals. These are massively-parallel, adversarial/verification-heavy, qualitatively-ranked, unknown-size-sweep, or large-refactor tasks where one context drifts, gets lazy, or prefers its own answers.
+description: >-
+  Build or run a dynamic workflow — a custom multi-agent harness Claude writes
+  on the fly via the Workflow tool — for tasks that overwhelm a single context
+  window. Use when the user says "use a workflow", "dynamic workflow",
+  "ultracode", "fan out agents", "orchestrate subagents", or "set up a harness";
+  AND consider proposing one (ask first) when a task matches a workflow shape:
+  verify every claim in a doc/PR against the code, hunt a flaky/intermittent
+  test, root-cause a failure or outage, rename/refactor a symbol across many
+  callsites, do a large migration, triage a backlog/support queue/alerts, rank
+  or sort a list by a qualitative measure, name something via brainstorm +
+  tournament, run an adversarial review, deep research with cited sources, or
+  run lightweight evals. These are massively-parallel,
+  adversarial/verification-heavy, qualitatively-ranked, unknown-size-sweep, or
+  large-refactor tasks where one context drifts, gets lazy, or prefers its own
+  answers.
 ---
 
 # Dynamic workflows

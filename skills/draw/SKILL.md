@@ -1,6 +1,14 @@
 ---
 name: draw
-description: Draw a diagram or generate an image and render it inline in the WezTerm terminal — using free, no-key web services. Use when the user asks to "draw", "diagram", "visualize", "sketch", "illustrate", "show me a picture/photo of", or "make an image of" something; or proactively when a visual communicates an idea far better than text (architecture, a flow, a layout, a spatial concept). Two engines: labelled diagrams (flows, architecture, ER) render exactly via Mermaid; illustrations and photos generate via a free image model. You write the source/prompt; the script renders it, so your token cost is just the text.
+description: >-
+  Draw a diagram or generate an image and render it inline in the WezTerm
+  terminal — using free, no-key web services. Use when the user asks to "draw",
+  "diagram", "visualize", "sketch", "illustrate", "show me a picture/photo of",
+  or "make an image of" something; or proactively when a visual communicates an
+  idea far better than text (architecture, a flow, a layout, a spatial concept).
+  Two engines: labelled diagrams (flows, architecture, ER) render exactly via
+  Mermaid; illustrations and photos generate via a free image model. You write
+  the source/prompt; the script renders it, so your token cost is just the text.
 ---
 
 # Draw
@@ -23,10 +31,10 @@ Do **not** use it when a short list, a code block, or a table already does the j
 
 ## diagram.sh — exact diagrams (preferred for anything labelled)
 
-Write Mermaid (default) and pipe it in:
+Write Mermaid (default) and pipe it in. Resolve `diagram.sh` relative to this `SKILL.md`; the shared installation is normally `/Users/Shared/dotfiles/skills/draw/diagram.sh`.
 
 ```bash
-~/.claude/skills/draw/diagram.sh <<'EOF'
+/Users/Shared/dotfiles/skills/draw/diagram.sh <<'EOF'
 flowchart LR
   User --> API --> Database
 EOF
@@ -39,7 +47,7 @@ EOF
 ## image.sh — free illustrations / photos
 
 ```bash
-~/.claude/skills/draw/image.sh "a cozy cinematic coffee shop at golden hour, 35mm, shallow depth of field"
+/Users/Shared/dotfiles/skills/draw/image.sh "a cozy cinematic coffee shop at golden hour, 35mm, shallow depth of field"
 ```
 
 - `--size WxH` (default 1024x1024), `--seed N` (reproducible), `--model M` (default flux), `--height PCT`.

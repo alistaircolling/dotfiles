@@ -62,6 +62,9 @@ link_item "$HOME/.tmux.conf" "$DOTFILES/tmux/.tmux.conf" ".tmux.conf"
 # WezTerm config
 link_item "$HOME/.wezterm.lua" "$DOTFILES/wezterm/wezterm.lua" "WezTerm config"
 
+# AeroSpace config (stable workspaces + desktop switcher)
+link_item "$HOME/.config/aerospace/aerospace.toml" "$DOTFILES/aerospace/aerospace.toml" "AeroSpace config"
+
 # gh-dash config (GitHub PR/issue dashboard)
 link_item "$HOME/.config/gh-dash/config.yml" "$DOTFILES/gh-dash/config.yml" "gh-dash config.yml"
 

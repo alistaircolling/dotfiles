@@ -1,6 +1,6 @@
 # Dotfiles
 
-Shared config for shell, NeoVim, WezTerm, tmux, git, Cursor, Claude Code, and pi.dev.
+Shared config for shell, NeoVim, WezTerm, tmux, git, Cursor, Claude Code, pi.dev, and AeroSpace.
 
 ## Setup
 
@@ -16,6 +16,7 @@ It links each config into the user's home dir, backing up anything it replaces t
 
 ```
 dotfiles/
+├── aerospace/    # stable workspaces and desktop switcher
 ├── shell/        # .zshrc, .bash_profile
 ├── nvim/         # NeoVim config (init.lua, lua/)
 ├── wezterm/      # wezterm.lua
@@ -33,7 +34,7 @@ dotfiles/
 
 Designed to live in `/Users/Shared/` and work across multiple macOS accounts (all in the `staff` group).
 
-**Shared** (symlinked from home): shell, NeoVim, WezTerm, tmux, gh-dash, Cursor, Claude Code, and pi.dev configs. Git uses `include.path` so identity/credentials stay per-user.
+**Shared** (symlinked from home): shell, NeoVim, WezTerm, tmux, gh-dash, Cursor, Claude Code, pi.dev, and AeroSpace configs. Git uses `include.path` so identity/credentials stay per-user.
 
 **Per-user:**
 

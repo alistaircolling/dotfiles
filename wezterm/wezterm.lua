@@ -144,12 +144,6 @@ config.window_padding = {
 -- Window appearance
 config.window_decorations = 'RESIZE'
 
--- Use a real macOS full-screen Space, not a borderless-maximized window.
--- - Non-native fullscreen sizes once, at toggle time
--- - User switching detaches the display, leaving it stale
--- - A native Space is restored correctly by macOS
-config.native_macos_fullscreen_mode = true
-
 -- Tab bar configuration
 config.enable_tab_bar = false
 config.tab_bar_at_bottom = true
@@ -355,6 +349,24 @@ wezterm.on('update-status', function(window, pane)
   })
 end)
 
+-- Window title = git branch, so each window is identifiable in the AeroSpace
+-- switcher. Falls back to the directory name, then "shell".
+-- - branch comes from a user var set by the shell (wez-claude.zsh)
+-- - non-git dirs show the folder name
+wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
+  local branch = pane.user_vars and pane.user_vars.git_branch
+  if branch and branch ~= '' then
+    return branch
+  end
+  local cwd = pane.current_working_dir
+  if cwd then
+    local path = cwd.file_path or tostring(cwd)
+    local name = path:match('([^/]+)/?$')
+    if name and name ~= '' then return name end
+  end
+  return 'shell'
+end)
+
 -- Shell
 config.default_prog = { '/bin/zsh', '-l' }
 
@@ -378,6 +390,8 @@ local act = wezterm.action
 config.keys = {
   -- Option+3 → # (shell + nvim in WezTerm; UK layout / Meta quirks)
   { key = '3', mods = 'OPT', action = act.SendString '#' },
+  -- Cmd+Opt+3 → # fallback (AeroSpace grabs plain Opt+3 for workspace nav)
+  { key = '3', mods = 'CMD|OPT', action = act.SendString '#' },
 
   -- Pane splits (Leader + | or -, like tmux)
   { key = '|', mods = 'LEADER|SHIFT', action = wezterm.action_callback(function(window, pane)

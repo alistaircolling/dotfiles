@@ -135,3 +135,15 @@ _wez_heal_winsize() {
   fi
 }
 precmd_functions+=(_wez_heal_winsize)
+
+# Publish the git branch to WezTerm as a user var — shows in the window title
+# and the AeroSpace desktop switcher.
+# - empty outside a git repo
+# - base64-encoded, per the OSC 1337 SetUserVar protocol
+_wez_set_branch_var() {
+  [[ -n "$WEZTERM_PANE" ]] || return
+  local branch
+  branch=$(command git symbolic-ref --short -q HEAD 2>/dev/null)
+  printf '\033]1337;SetUserVar=git_branch=%s\007' "$(printf '%s' "$branch" | base64)"
+}
+precmd_functions+=(_wez_set_branch_var)

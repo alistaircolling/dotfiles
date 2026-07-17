@@ -71,6 +71,7 @@ Never force-add `private/`, `shell/.secrets`, `scripts/.env`, or overlay-generat
 - **Live reload:** git hooks notify open shells and Neovim after shared config changes.
 - **Clipboard sync:** mirrors text and images between GUI sessions through `/Users/Shared/clipboard-sync`.
 - **gh-dash update check:** checks weekly for a safe release newer than the pinned version.
+- **Renovate:** runs weekly against `pidev/settings.json` and opens PRs when pi package pins can be updated.
 
 ## Verify
 

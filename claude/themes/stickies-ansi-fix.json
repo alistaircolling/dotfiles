@@ -1,0 +1,7 @@
+{
+  "name": "Stickies (ANSI fix)",
+  "base": "light-ansi",
+  "overrides": {
+    "promptBorder": "#0E5C5C"
+  }
+}

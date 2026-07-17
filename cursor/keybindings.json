@@ -1,4 +1,4 @@
-// Place your key bindings in this file to override the defaultsauto[]
+// Place your key bindings in this file to override the defaults
 [
   {
     "key": "ctrl+shift+o",
@@ -226,43 +226,33 @@
     "key": "cmd+k",
     "command": "-cursorai.action.generateInTerminal",
     "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported || terminalHasBeenCreated && terminalPromptBarVisible || terminalProcessSupported && terminalPromptBarVisible"
-},
-{
+  },
+  {
     "key": "shift+enter",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
-        "text": "\\\r\n"
+      "text": "\\\r\n"
     },
     "when": "terminalFocus"
-},
-{
-  "key": "cmd+i",
-  "command": "composerMode.agent"
-},
-{
-  "key": "cmd+k",
-  "command": "workbench.action.terminal.sendSequence",
-  "args": { "text": "\u0015\u000c" },
-  "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-},
-{
-  "key": "cmd+k",
-  "command": "workbench.action.terminal.clear",
-  "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
-},
-{
-  "key": "alt+cmd+s",
-  "command": "workbench.action.toggleUnifiedSidebarFromKeyboard",
-  "when": "cursor.agentIdeUnification.enabled == true && !isAuxiliaryWindowFocusedContext"
-},
-{
-  "key": "alt+cmd+s",
-  "command": "workbench.action.toggleUnifiedSidebarFromKeyboard",
-  "when": "cursor.agentIdeUnification.enabled == true && !isAuxiliaryWindowFocusedContext"
-},
-{
-  "key": "alt+cmd+s",
-  "command": "workbench.action.toggleUnifiedSidebarFromKeyboard",
-  "when": "cursor.agentIdeUnification.enabled == true && !isAuxiliaryWindowFocusedContext"
-}
+  },
+  {
+    "key": "cmd+i",
+    "command": "composerMode.agent"
+  },
+  {
+    "key": "cmd+k",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": { "text": "\u0015\u000c" },
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "cmd+k",
+    "command": "workbench.action.terminal.clear",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "alt+cmd+s",
+    "command": "workbench.action.toggleUnifiedSidebarFromKeyboard",
+    "when": "cursor.agentIdeUnification.enabled == true && !isAuxiliaryWindowFocusedContext"
+  }
 ]

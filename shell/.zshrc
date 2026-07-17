@@ -137,8 +137,18 @@ cc() {
   command claude --permission-mode auto "$@"
 }
 
-# Pi.dev — enable all built-in tools by default
-alias pi='pi --tools read,bash,edit,write,grep,find,ls'
+# Pi.dev — enable all built-in tools for agent sessions while leaving package
+# management subcommands in the first argument position expected by the CLI.
+pi() {
+  case "${1:-}" in
+    install|remove|uninstall|update|list|config)
+      command pi "$@"
+      ;;
+    *)
+      command pi --tools read,bash,edit,write,grep,find,ls "$@"
+      ;;
+  esac
+}
 
 # Enhanced history and keybinding configurations
 HISTSIZE=10000

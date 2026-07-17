@@ -1,0 +1,25 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "dependencyDashboard": true,
+  "schedule": ["after 9pm and before 5am on monday"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["^pidev/settings\\.json$"],
+      "matchStrings": [
+        "\"npm:(?<depName>@[^\"/]+/[^\"@]+)@(?<currentValue>[^\"]+)\"",
+        "\"npm:(?<depName>[^\"@/]+)@(?<currentValue>[^\"]+)\""
+      ],
+      "datasourceTemplate": "npm",
+      "versioningTemplate": "npm"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": ["regex"],
+      "groupName": "pi package updates",
+      "labels": ["renovate", "pi"]
+    }
+  ]
+}

@@ -55,48 +55,42 @@ _blend_accent() {
 }
 
 
-# Read shell palette from active theme file
-_read_theme_palette() {
-  local themes_dir="/Users/Shared/dotfiles/themes"
-  local current_file="$themes_dir/current"
-  local theme_name
-  if [[ -r "$current_file" ]]; then
-    theme_name="$(<"$current_file")"
-    theme_name="${theme_name## }"; theme_name="${theme_name%% }"
+# Name of the active theme (themes/current), with the default as fallback
+_THEME_CURRENT_FILE='/Users/Shared/dotfiles/themes/current'
+_read_current_theme() {
+  local name=""
+  if [[ -r "$_THEME_CURRENT_FILE" ]]; then
+    name="$(<"$_THEME_CURRENT_FILE")"
+    name="${name//[[:space:]]/}"
   fi
-  [[ -z "$theme_name" ]] && theme_name="catppuccin-mocha"
-  local theme_file="$themes_dir/${theme_name}.lua"
-  if [[ -r "$theme_file" ]]; then
-    local in_palette=0
-    while IFS= read -r line; do
-      if [[ "$line" == *"shell_palette"* ]]; then
-        in_palette=1; continue
-      fi
-      if (( in_palette )); then
-        [[ "$line" == *"}"* ]] && break
-        if [[ "$line" =~ "'(#[0-9a-fA-F]{6})'" ]]; then
-          echo "${match[1]}"
-        fi
-      fi
-    done < "$theme_file"
-  fi
+  printf '%s' "${name:-catppuccin-mocha}"
 }
 
-_theme_palette_colors=("${(@f)$(_read_theme_palette)}")
-if (( ${#_theme_palette_colors[@]} >= 10 )); then
-  _PASTEL_PALETTE=("${_theme_palette_colors[@]}")
-else
-  _PASTEL_PALETTE=(
-    '#f38ba8' '#a6e3a1' '#f9e2af' '#89b4fa'
-    '#cba6f7' '#94e2d5' '#fab387' '#f5c2e7'
-    '#74c7ec' '#b4befe' '#f2cdcd' '#eba0ac'
-    '#89dceb' '#f5e0dc'
-  )
-fi
+# Read shell palette from a theme file
+_read_theme_palette() {
+  local theme_file="$1"
+  [[ -r "$theme_file" ]] || return 0
+  local line in_palette=0
+  while IFS= read -r line; do
+    if [[ "$line" == *"shell_palette"* ]]; then
+      in_palette=1; continue
+    fi
+    if (( in_palette )); then
+      [[ "$line" == *"}"* ]] && break
+      # Palette entries are several per line, so consume the whole line —
+      # [[ =~ ]] only ever reports the first match.
+      local rest="$line"
+      while [[ "$rest" =~ "'(#[0-9a-fA-F]{6})'" ]]; do
+        echo "${match[1]}"
+        rest="${rest#*${match[1]}\'}"
+      done
+    fi
+  done < "$theme_file"
+}
 
-# Build color map once on shell startup (sorted alphabetically → unique colors)
 typeset -gA _PROJECT_COLOR_MAP
 
+# Assign a palette color per ~/Development project (sorted alphabetically)
 _build_project_colors() {
   local i=1
   for dir in "$HOME/Development"/*(N/on); do
@@ -105,7 +99,6 @@ _build_project_colors() {
     i=$(( i % ${#_PASTEL_PALETTE[@]} + 1 ))
   done
 }
-_build_project_colors
 
 _get_project_color() {
   if [[ -n "${PROJECT_COLOR_OVERRIDES[$1]}" ]]; then
@@ -123,53 +116,49 @@ _hex_fg() {
 }
 _COLOR_RESET='%f'
 
-# Read theme background color for tinting
-_THEME_BG_R=30 _THEME_BG_G=30 _THEME_BG_B=46
-{
-  local themes_dir="/Users/Shared/dotfiles/themes"
-  local current_file="$themes_dir/current"
-  local theme_name=""
-  if [[ -r "$current_file" ]]; then
-    theme_name="$(<"$current_file")"
-    theme_name="${theme_name## }"; theme_name="${theme_name%% }"
-  fi
-  [[ -z "$theme_name" ]] && theme_name="catppuccin-mocha"
-  local theme_file="$themes_dir/${theme_name}.lua"
-  if [[ -r "$theme_file" ]]; then
-    local bg_line=""
-    bg_line=$(command grep "background = '#" "$theme_file" | head -1)
-    if [[ "$bg_line" =~ "'#([0-9a-fA-F]{6})'" ]]; then
-      local bg_hex="${match[1]}"
-      _THEME_BG_R=$((16#${bg_hex:0:2}))
-      _THEME_BG_G=$((16#${bg_hex:2:2}))
-      _THEME_BG_B=$((16#${bg_hex:4:2}))
-    fi
-  fi
-}
+# Every value derived from the active theme, in one place so it can be re-read
+# when the theme changes. Sets: _PASTEL_PALETTE, _PROJECT_COLOR_MAP,
+# _THEME_BG_*, ACCENT_BLENDED, CARET_COLOR.
+_THEME_NAME=""
+_theme_load() {
+  _THEME_NAME="$(_read_current_theme)"
+  local theme_file="/Users/Shared/dotfiles/themes/${_THEME_NAME}.lua"
 
-# 50% accent blended against theme bg (for contexts that don't support rgba)
-ACCENT_BLENDED=$(_blend_accent)
+  local -a colors
+  colors=("${(@f)$(_read_theme_palette "$theme_file")}")
+  if (( ${#colors[@]} >= 10 )); then
+    _PASTEL_PALETTE=("${colors[@]}")
+  else
+    _PASTEL_PALETTE=(
+      '#f38ba8' '#a6e3a1' '#f9e2af' '#89b4fa'
+      '#cba6f7' '#94e2d5' '#fab387' '#f5c2e7'
+      '#74c7ec' '#b4befe' '#f2cdcd' '#eba0ac'
+      '#89dceb' '#f5e0dc'
+    )
+  fi
+  _build_project_colors
 
-# Per-theme caret color (OSC 12). Read the active theme's cursor_bg so the shell
-# caret matches WezTerm and contrasts each theme's text. Falls back to the
-# blended accent if the theme value is too close to the background to see.
-CARET_COLOR="$ACCENT_BLENDED"
-{
-  local themes_dir="/Users/Shared/dotfiles/themes"
-  local current_file="$themes_dir/current"
-  local theme_name=""
-  if [[ -r "$current_file" ]]; then
-    theme_name="$(<"$current_file")"
-    theme_name="${theme_name## }"; theme_name="${theme_name%% }"
+  # Theme background color, used for tinting and contrast checks
+  _THEME_BG_R=30 _THEME_BG_G=30 _THEME_BG_B=46
+  local bg_line=""
+  bg_line=$(command grep -m1 "background = '#" "$theme_file" 2>/dev/null)
+  if [[ "$bg_line" =~ "'#([0-9a-fA-F]{6})'" ]]; then
+    local bg_hex="${match[1]}"
+    _THEME_BG_R=$((16#${bg_hex:0:2}))
+    _THEME_BG_G=$((16#${bg_hex:2:2}))
+    _THEME_BG_B=$((16#${bg_hex:4:2}))
   fi
-  [[ -z "$theme_name" ]] && theme_name="catppuccin-mocha"
-  local theme_file="$themes_dir/${theme_name}.lua"
-  local cursor_hex=""
-  if [[ -r "$theme_file" ]]; then
-    local cur_line
-    cur_line=$(command grep "cursor_bg = '#" "$theme_file" | head -1)
-    [[ "$cur_line" =~ "'#([0-9a-fA-F]{6})'" ]] && cursor_hex="#${match[1]}"
-  fi
+
+  # 50% accent blended against theme bg (for contexts that don't support rgba)
+  ACCENT_BLENDED=$(_blend_accent)
+
+  # Per-theme caret color (OSC 12). Read the active theme's cursor_bg so the
+  # shell caret matches WezTerm and contrasts each theme's text. Falls back to
+  # the blended accent if the theme value is too close to the background to see.
+  CARET_COLOR="$ACCENT_BLENDED"
+  local cursor_hex="" cur_line
+  cur_line=$(command grep -m1 "cursor_bg = '#" "$theme_file" 2>/dev/null)
+  [[ "$cur_line" =~ "'#([0-9a-fA-F]{6})'" ]] && cursor_hex="#${match[1]}"
   if [[ -n "$cursor_hex" ]]; then
     local ch="${cursor_hex#\#}"
     local clum=$(( (16#${ch:0:2} * 299 + 16#${ch:2:2} * 587 + 16#${ch:4:2} * 114) / 1000 ))
@@ -177,6 +166,15 @@ CARET_COLOR="$ACCENT_BLENDED"
     local d=$(( clum - bglum )); (( d < 0 )) && d=$(( -d ))
     (( d >= 32 )) && CARET_COLOR="$cursor_hex"
   fi
+}
+_theme_load
+
+# Re-read the theme if it changed since the last prompt, so `theme set …`
+# (and the WezTerm/Neovim cyclers) apply to already-open shells rather than
+# only to newly spawned ones. Called from precmd, ahead of the prompt build;
+# the caret is re-emitted by _update_project_prompt on the same pass.
+_theme_check_reload() {
+  [[ "$(_read_current_theme)" == "$_THEME_NAME" ]] || _theme_load
 }
 
 # Darken a hex color for use as a subtle background tint

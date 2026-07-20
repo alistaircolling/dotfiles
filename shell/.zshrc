@@ -181,6 +181,7 @@ zstyle ':vcs_info:git:*' formats '%b '
 
 precmd() {
   vcs_info
+  _theme_check_reload
   _update_project_prompt
 }
 

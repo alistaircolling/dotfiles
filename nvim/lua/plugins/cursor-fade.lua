@@ -55,6 +55,15 @@ return {
       return m == "i" or m == "R"
     end
 
+    local function snap_to_blue()
+      idle_timer:stop()
+      fade_timer:stop()
+      is_fading = false
+      is_slate = false
+      current_step = 0
+      set_accent(BLUE, BLUE_FG, BLUE)
+    end
+
     local function do_fade_step()
       current_step = current_step + 1
       if current_step > FADE_STEPS then
@@ -90,15 +99,6 @@ return {
       current_step = 0
       is_fading = true
       fade_timer:start(0, FADE_INTERVAL_MS, do_fade_step)
-    end
-
-    local function snap_to_blue()
-      idle_timer:stop()
-      fade_timer:stop()
-      is_fading = false
-      is_slate = false
-      current_step = 0
-      set_accent(BLUE, BLUE_FG, BLUE)
     end
 
     local group = vim.api.nvim_create_augroup("CursorFade", { clear = true })

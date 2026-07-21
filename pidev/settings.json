@@ -1,6 +1,6 @@
 {
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-luna",
+  "defaultProvider": "deepseek",
+  "defaultModel": "deepseek-v4-pro",
   "defaultThinkingLevel": "high",
   "theme": "dark",
   "compaction": {
@@ -18,14 +18,17 @@
   ],
   "enabledModels": [
     "openai-codex/gpt-5.6-sol",
-    "anthropic/claude-opus-4-6"
+    "anthropic/claude-opus-4-6",
+    "deepseek/deepseek-v4-flash",
+    "deepseek/deepseek-v4-pro"
   ],
   "packages": [
     "npm:pi-annotate@0.4.1",
     "npm:pi-web-access@0.13.0",
     "npm:@bacnh85/pi-sub@0.1.13",
     "npm:visual-explainer@0.8.1",
-    "npm:@leohenon/pi-vim@0.1.4"
+    "npm:@leohenon/pi-vim@0.1.4",
+    "npm:@firstpick/pi-extension-git-footer-status"
   ],
   "shellCommandPrefix": "shopt -s expand_aliases\neval \"$(grep '^alias ' ~/.zshrc)\"",
   "lastChangelogVersion": "0.80.10"

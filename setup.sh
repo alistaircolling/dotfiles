@@ -61,6 +61,9 @@ link_item "$HOME/.tmux.conf" "$DOTFILES/tmux/.tmux.conf" ".tmux.conf"
 # WezTerm config
 link_item "$HOME/.wezterm.lua" "$DOTFILES/wezterm/wezterm.lua" "WezTerm config"
 
+# Herdr config (binary install stays per-user via install.sh; only config is shared)
+link_item "$HOME/.config/herdr/config.toml" "$DOTFILES/herdr/config.toml" "herdr config.toml"
+
 # gh-dash config (GitHub PR/issue dashboard)
 link_item "$HOME/.config/gh-dash/config.yml" "$DOTFILES/gh-dash/config.yml" "gh-dash config.yml"
 

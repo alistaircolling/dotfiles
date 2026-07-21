@@ -23,3 +23,6 @@ themes/current
 
 # Codex CLI local config
 .codex/
+
+# Local scratch review notes
+REPO-REVIEW.md

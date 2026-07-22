@@ -10,7 +10,8 @@ Restate the **last message** in plain, everyday language — like explaining it 
 
 - Cut all jargon, acronyms, and buzzwords. If a technical term is unavoidable, define it in a few plain words.
 - Keep the real meaning intact. Plain does not mean vague — keep the concrete numbers, names, and actions.
-- Be short: a few sentences, not a wall of text.
+- Be short: no more than 3 lines. format your response in an easily readable way
+- if there is an action or decision i need to take put this at the end of your message 
 - No preamble ("Sure, here's…"). Just give the plain version.
 - Talk normally. Skip headings and heavy formatting unless the original was a list.
 

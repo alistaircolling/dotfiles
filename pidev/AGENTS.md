@@ -31,7 +31,11 @@ Instead:
 1. Create the pane: `herdr pane split --current --direction right --cwd "$PWD" --no-focus` → read `.result.pane.pane_id`.
 2. Run the REAL binary (the `command` builtin bypasses the function):
    `herdr pane run <pane-id> "command claude --permission-mode auto"`
-3. Wait ~10s, confirm detection with `herdr agent list`, then name it: `herdr agent rename <pane-id> <name>`.
-4. Drive it normally: `herdr agent prompt <name> "…" --wait`.
+3. Poll for detection every 1s instead of one long sleep, e.g.:
+   `for i in $(seq 1 20); do herdr agent list | grep -q '"pane_id":"<pane-id>"' && break; sleep 1; done`
+   then name it: `herdr agent rename <pane-id> <name>`.
+4. As soon as it's detected (usually within 1-2s), instruct it right away: `herdr agent prompt <name> "…" --wait`. No extra delay needed — the poll in step 3 already gates on readiness, so a sub-agent can be launched and instructed within a second or two.
+
+Keep all waits in this flow to a 1-second poll cadence rather than long fixed sleeps, so sub-agents launch and get instructed quickly.
 
 The same `command <binary>` trick applies to any other agent that's shadowed by a WezTerm-wrapping shell function.

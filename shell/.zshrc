@@ -596,3 +596,10 @@ img() {
 # non-zero unless initialized last, and that noise leaks into non-interactive
 # Bash output (spurious exit 127/143). Keep new additions ABOVE this block.
 eval "$(zoxide init zsh --cmd cd)"
+
+# bun completions
+[ -s "/Users/alistair-personal/.bun/_bun" ] && source "/Users/alistair-personal/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

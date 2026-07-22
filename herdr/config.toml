@@ -1,1 +1,19 @@
 # Herdr config (https://herdr.dev/docs/configuration/)
+
+[theme]
+# Follow the terminal's light/dark appearance (tracks the dotfiles theme cycler).
+# Soft palettes so the UI stays readable without harsh contrast.
+auto_switch = true
+dark_name = "catppuccin"
+light_name = "catppuccin-latte"
+
+[keys]
+prefix = "ctrl+space"
+previous_agent = "prefix+p"
+next_agent = "prefix+n"
+previous_workspace = "prefix+shift+p"
+next_workspace = "prefix+shift+n"
+rename_pane = "prefix+shift+r"
+
+[ui]
+agent_panel_sort = "spaces"

@@ -180,7 +180,7 @@ hi('@constant',            { fg = fg })
 hi('@constant.builtin',    { fg = fg, bold = true })
 hi('@namespace',           { fg = fg })
 hi('@text',                { fg = fg })
-hi('@text.strong',         { fg = fg, bold = true })
+hi('@text.strong',         { fg = fg_dim, bold = true })
 hi('@text.emphasis',       { fg = fg, italic = true })
 hi('@text.uri',            { fg = fg_dim, underline = true })
 

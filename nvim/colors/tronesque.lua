@@ -26,6 +26,7 @@ local cyan_bright = '#caeffe'
 local red = '#f85242'
 local orange = '#f0a554'
 local yellow = '#ffff4d'
+local amber = '#e8b840'
 local blue = '#235fa0'
 local violet = '#a1b1fa'
 local sel = '#264e78'
@@ -172,7 +173,7 @@ hi('@constant', { fg = violet })
 hi('@constant.builtin', { fg = orange, bold = true })
 hi('@namespace', { fg = violet })
 hi('@text', { fg = fg })
-hi('@text.strong', { fg = fg, bold = true })
+hi('@text.strong', { fg = amber, bold = true })
 hi('@text.emphasis', { fg = fg, italic = true })
 hi('@text.uri', { fg = cyan, underline = true })
 

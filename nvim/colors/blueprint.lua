@@ -25,6 +25,7 @@ local string_c = '#8eb8a8'
 local blue_mid = '#5a8aaa'
 local blue_soft = '#6a8a9a'
 local warn = '#b8c49a'
+local amber = '#e8b840'
 local err = '#c47a7a'
 local sel = '#2a4a6a'
 local visual = '#2a4a6a'
@@ -169,7 +170,7 @@ hi('@constant', { fg = mint })
 hi('@constant.builtin', { fg = accent, bold = true })
 hi('@namespace', { fg = blue_mid })
 hi('@text', { fg = fg })
-hi('@text.strong', { fg = fg, bold = true })
+hi('@text.strong', { fg = amber, bold = true })
 hi('@text.emphasis', { fg = fg, italic = true })
 hi('@text.uri', { fg = mint, underline = true })
 

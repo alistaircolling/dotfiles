@@ -52,6 +52,7 @@ apply_theme() {
   fi
   printf '%s\n' "$key" > "$CURRENT_FILE"
   sync_claude_theme "$key"
+  sync_pi_theme "$key"
   nudge_current_window "$key"
   printf 'Applied theme: %s\n' "$key"
 }
@@ -167,6 +168,25 @@ sync_claude_theme() {
     j.theme = process.argv[1];
     fs.writeFileSync(path, JSON.stringify(j, null, 2));
   ' "$mode" 2>/dev/null || true
+}
+
+# Match pi's TUI theme to the terminal theme
+# - pi's active theme is the custom "dotfiles" theme (set in pidev/settings.json)
+# - palette tokens are ANSI indices, so it inherits the WezTerm palette (the same
+#   idea as Claude's -ansi variants); only element backgrounds differ light/dark
+# - copies the variant into pi's themes dir; pi hot-reloads the active theme file,
+#   so already-open pi/herdr sessions update live (no restart)
+sync_pi_theme() {
+  local key="$1" variant="dark"
+  local dest_dir="$HOME/.pi/agent/themes"
+  local src
+  if grep -qE "background *= *'light'" "$THEMES_DIR/$key.lua"; then
+    variant="light"
+  fi
+  src="$DOTFILES_ROOT/pidev/themes/dotfiles-$variant.json"
+  [[ -f "$src" ]] || return 0
+  mkdir -p "$dest_dir" 2>/dev/null || return 0
+  cp "$src" "$dest_dir/dotfiles.json" 2>/dev/null || true
 }
 
 ensure_favorites_file() {

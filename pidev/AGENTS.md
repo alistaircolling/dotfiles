@@ -21,3 +21,17 @@ curl -s -X POST https://api.linear.app/graphql \
 ```
 
 If `$LINEAR_API_KEY` is not set, inform the user and skip Linear-dependent steps.
+
+## Starting Claude in a Herdr pane
+
+Do NOT use `herdr agent start … --kind claude` in this environment. My `claude` command is a zsh function (`/Users/Shared/dotfiles/shell/wez-claude.zsh`) that launches Claude inside a **WezTerm** pane split. Herdr's `agent start` types `claude`, which triggers that function and fails with `pane_id 0 invalid` / `Split failed` (WezTerm CLI can't drive a split from inside Herdr).
+
+Instead:
+
+1. Create the pane: `herdr pane split --current --direction right --cwd "$PWD" --no-focus` → read `.result.pane.pane_id`.
+2. Run the REAL binary (the `command` builtin bypasses the function):
+   `herdr pane run <pane-id> "command claude --permission-mode auto"`
+3. Wait ~10s, confirm detection with `herdr agent list`, then name it: `herdr agent rename <pane-id> <name>`.
+4. Drive it normally: `herdr agent prompt <name> "…" --wait`.
+
+The same `command <binary>` trick applies to any other agent that's shadowed by a WezTerm-wrapping shell function.

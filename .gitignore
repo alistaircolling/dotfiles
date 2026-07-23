@@ -26,3 +26,7 @@ themes/current
 
 # Local scratch review notes
 REPO-REVIEW.md
+
+# User-specific herdr skill symlinks (absolute path outside the repo)
+claude/skills/herdr
+pidev/skills/herdr

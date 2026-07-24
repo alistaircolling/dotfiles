@@ -1,3 +1,7 @@
 {
-  "tui.input.newLine": ["shift+enter"]
+  "tui.input.newLine": ["shift+enter"],
+  "app.tools.expand": ["ctrl+o", "ctrl+shift+o"],
+  "app.thinking.toggle": ["ctrl+t"],
+  "app.tree.foldOrUp": ["alt+left", "ctrl+,"],
+  "app.tree.unfoldOrDown": ["alt+right", "ctrl+."]
 }

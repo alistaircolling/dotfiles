@@ -1,3 +1,4 @@
+onboarding = false
 # Herdr config (https://herdr.dev/docs/configuration/)
 
 [theme]
@@ -17,3 +18,6 @@ rename_pane = "prefix+shift+r"
 
 [ui]
 agent_panel_sort = "spaces"
+
+[ui.sound]
+enabled = false

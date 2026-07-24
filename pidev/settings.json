@@ -33,5 +33,6 @@
     "npm:@gotgenes/pi-anthropic-auth"
   ],
   "shellCommandPrefix": "shopt -s expand_aliases\neval \"$(grep '^alias ' ~/.zshrc)\"",
-  "lastChangelogVersion": "0.81.1"
+  "lastChangelogVersion": "0.81.1",
+  "hideThinkingBlock": true
 }

@@ -17,7 +17,7 @@ return {
           branch = "master"
         end
       end
-      vim.cmd("DiffviewOpen origin/" .. branch .. "...HEAD")
+      vim.cmd("DiffviewOpen origin/" .. branch)
     end, desc = "Diff against main/master" },
     { "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", desc = "File history (current)" },
     { "<leader>gh", "<cmd>DiffviewFileHistory<cr>", desc = "File history (repo)" },

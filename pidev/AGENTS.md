@@ -39,3 +39,7 @@ Instead:
 Keep all waits in this flow to a 1-second poll cadence rather than long fixed sleeps, so sub-agents launch and get instructed quickly.
 
 The same `command <binary>` trick applies to any other agent that's shadowed by a WezTerm-wrapping shell function.
+
+## Deploying pi sub-agents via Herdr
+
+When the user says "deploy pi subagents" or asks to spin up pi agents in panes, always use `herdr agent start --kind pi`. Do **not** launch Claude or any other agent kind. Pi does not have a WezTerm-wrapping shell function, so plain `herdr agent start <name> --kind pi --pane <id>` works directly — no `command` trick needed.

@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/earendil-works/pi/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
-  "name": "dotfiles",
+  "name": "dotfiles-dark",
   "colors": {
     "accent": 6,
     "border": 8,

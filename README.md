@@ -14,6 +14,8 @@ The script links configuration into the current home directory and backs up anyt
 
 ## Structure
 
+![Repository structure: one shared tree symlinked into both accounts by setup.sh](docs/dotfiles-structure.png)
+
 ```text
 dotfiles/
 ├── claude/       # Claude settings, commands, tool-specific skills, workflows

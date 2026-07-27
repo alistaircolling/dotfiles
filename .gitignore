@@ -30,3 +30,7 @@ REPO-REVIEW.md
 # User-specific herdr skill symlinks (absolute path outside the repo)
 claude/skills/herdr
 pidev/skills/herdr
+
+# tldraw canvas: built on first use, shared between accounts
+skills/tldraw/app/node_modules/
+skills/tldraw/dist/

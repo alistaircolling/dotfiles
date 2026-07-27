@@ -65,7 +65,8 @@ while IFS= read -r -d '' dir; do
 done < <(find "$DOTFILES" \
     \( -path "$DOTFILES/.git" \
        -o -path "$DOTFILES/private" \
-       -o -path "$DOTFILES/scripts/.venv" \) -prune \
+       -o -path "$DOTFILES/scripts/.venv" \
+       -o -path "$DOTFILES/skills/tldraw/app/node_modules" \) -prune \
     -o -type d -print0)
 
 while IFS= read -r -d '' file; do
@@ -88,7 +89,8 @@ done < <(find "$DOTFILES" \
        -o -path "$DOTFILES/private" \
        -o -path "$DOTFILES/scripts/.venv" \
        -o -path "$DOTFILES/shell/.secrets" \
-       -o -path "$DOTFILES/scripts/.env" \) -prune \
+       -o -path "$DOTFILES/scripts/.env" \
+       -o -path "$DOTFILES/skills/tldraw/app/node_modules" \) -prune \
     -o -type f -print0)
 
 # Git internals and ignored private data are shared only with the staff group.

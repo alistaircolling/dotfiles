@@ -1,0 +1,27 @@
+theme:
+  ui:
+    table:
+      sectionsShowCount: true
+      # Prefixes each row's title with its issue/PR number (e.g. "#216 …").
+      compact: true
+  colors:
+    # gh-dash requires every colour to be set. Values are ANSI indices where a
+    # colour should follow the active WezTerm palette, and fixed hex only for
+    # element fills (which have no sensible ANSI slot on every theme).
+    text:
+      primary: "0"
+      secondary: "8"
+      inverted: "15"
+      # gh-dash's light-mode default here is #c0c0c0 — invisible on pale
+      # backgrounds, so repo names and timestamps disappear.
+      faint: "8"
+      warning: "1"
+      success: "2"
+    background:
+      # Neutral light fill (same tone as pi's light selectedBg): gh-dash reuses
+      # text.primary on the selected row, so the fill must stay light.
+      selected: "#e6e6ea"
+    border:
+      primary: "6"
+      secondary: "8"
+      faint: "8"

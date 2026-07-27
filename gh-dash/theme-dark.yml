@@ -1,0 +1,23 @@
+theme:
+  ui:
+    table:
+      sectionsShowCount: true
+      # Prefixes each row's title with its issue/PR number (e.g. "#216 …").
+      compact: true
+  colors:
+    # See theme-light.yml — ANSI indices follow the WezTerm palette, hex is only
+    # used for element fills.
+    text:
+      primary: "7"
+      secondary: "8"
+      inverted: "0"
+      faint: "8"
+      warning: "1"
+      success: "2"
+    background:
+      # Same tone as pi's dark selectedBg.
+      selected: "#2d2d30"
+    border:
+      primary: "6"
+      secondary: "8"
+      faint: "8"

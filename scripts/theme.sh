@@ -53,6 +53,7 @@ apply_theme() {
   printf '%s\n' "$key" > "$CURRENT_FILE"
   sync_claude_theme "$key"
   sync_pi_theme "$key"
+  sync_gh_dash_theme "$key"
   nudge_current_window "$key"
   printf 'Applied theme: %s\n' "$key"
 }
@@ -187,6 +188,41 @@ sync_pi_theme() {
   [[ -f "$src" ]] || return 0
   mkdir -p "$dest_dir" 2>/dev/null || return 0
   cp "$src" "$dest_dir/dotfiles.json" 2>/dev/null || true
+}
+
+# Match gh-dash's colours to the terminal theme
+# - gh-dash requires every colour to be set, and its own light-mode defaults are
+#   near-white grays that vanish on pale backgrounds
+# - swaps the marked theme block in the (gitignored) gh-dash config for the
+#   light/dark variant in gh-dash/theme-*.yml — mostly ANSI indices, so it
+#   inherits the WezTerm palette like the pi theme does
+# - applies to new gh-dash sessions only (config is read at startup)
+sync_gh_dash_theme() {
+  local key="$1" variant="dark"
+  local dest="$DOTFILES_ROOT/private/gh-dash/config.yml"
+  local src tmp
+  [[ -w "$dest" ]] || return 0
+  if grep -qE "background *= *'light'" "$THEMES_DIR/$key.lua"; then
+    variant="light"
+  fi
+  src="$DOTFILES_ROOT/gh-dash/theme-$variant.yml"
+  [[ -f "$src" ]] || return 0
+  grep -q '^# BEGIN gh-dash theme' "$dest" || return 0
+  tmp="$(mktemp)" || return 0
+  awk -v src="$src" '
+    /^# BEGIN gh-dash theme/ {
+      print
+      while ((getline line < src) > 0) print line
+      close(src)
+      skip = 1
+      next
+    }
+    /^# END gh-dash theme/ { skip = 0 }
+    !skip
+  ' "$dest" > "$tmp" || { rm -f "$tmp"; return 0; }
+  # Overwrite in place (not mv) so the shared file keeps its owner and mode.
+  [[ -s "$tmp" ]] && cat "$tmp" > "$dest"
+  rm -f "$tmp"
 }
 
 ensure_favorites_file() {

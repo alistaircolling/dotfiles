@@ -12,13 +12,15 @@ return {
       cursor_fg = '#FDFD96',
       selection_bg = '#F0D060',
       selection_fg = '#000000',
+      -- Slots 7 and 15 (white / bright white) stay light: TUIs on light themes
+      -- fill message bands and panels with them, then draw dark text on top.
       ansi = {
         '#5C4A00', '#A52A2A', '#5A7A2E', '#7A5A00',
-        '#5C4A00', '#6B5B00', '#5C4A00', '#6E5D2A',
+        '#5C4A00', '#6B5B00', '#5C4A00', '#E3CF6E',
       },
       brights = {
         '#6E5D2A', '#A52A2A', '#5A7A2E', '#7A5A00',
-        '#5C4A00', '#6B5B00', '#6E5D2A', '#5C4A00',
+        '#5C4A00', '#6B5B00', '#6E5D2A', '#F5EDA8',
       },
     },
   },

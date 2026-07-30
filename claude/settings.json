@@ -184,6 +184,23 @@
           {
             "type": "command",
             "command": "bash /Users/Shared/dotfiles/claude/journal-hook.sh"
+          },
+          {
+            "type": "command",
+            "command": "bash /Users/Shared/dotfiles/claude/voice-hook.sh",
+            "async": true,
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pkill -f \"afplay $HOME/.claude/voice/last.wav\" 2>/dev/null; exit 0",
+            "async": true
           }
         ]
       }

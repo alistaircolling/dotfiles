@@ -1464,5 +1464,5 @@
   "scm.inputFontSize": 14,
   "workbench.colorTheme": "Solarized Dark",
   "window.autoDetectColorScheme": false,
-  "vim.disableExtension": false,
+  "vim.disableExtension": true,
 }

@@ -344,6 +344,8 @@ function M.build(spec)
   hi('GitSignsAdd',    { fg = c.git_add, bg = editor_bg })
   hi('GitSignsChange', { fg = c.git_change, bg = editor_bg })
   hi('GitSignsDelete', { fg = c.git_delete, bg = editor_bg })
+  -- Blame virtual text: gitsigns defaults this to NonText, which is unreadable.
+  hi('GitSignsCurrentLineBlame', { fg = c.fg_dim, italic = true })
 
   -- Neo-tree -------------------------------------------------------------
   hi('NeoTreeNormal',        { fg = c.fg, bg = editor_bg })

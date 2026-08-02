@@ -1,6 +1,6 @@
 ---
 name: feature-kickoff
-description: Prepare a new feature for development in four phases — gather and verify every connected resource (Linear, Notion, Google Docs, Figma, Slack, codebase), run an interactive session to resolve conflicts and produce a single PRD, adversarially stress-test that PRD with parallel subagents, then design the architecture and split it into agent-ready issues (with approval gates on both the PRD and the implementation plan). Use when the user wants to kick off, scope, or plan a new feature and provides a Linear project or ticket link.
+description: Prepare a new feature for development in four phases — gather and verify inputs. The user may define specific inputs or may instruct you to use connected resources (Linear, Notion, Google Docs, Figma, Slack, codebase), run an interactive session to resolve conflicts and produce a single PRD, adversarially stress-test that PRD with parallel subagents, then design the architecture and split it into agent-ready issues (with approval gates on both the PRD and the implementation plan). Use when the user wants to kick off, scope, or plan a new feature and provides a Linear project or ticket link.
 ---
 
 # Feature Kickoff
@@ -22,8 +22,9 @@ A Linear project or ticket URL (or name). If none is given, ask for it before do
 - **Phase handoff:** when a phase is confirmed complete, copy a continuation prompt to the user's clipboard (`printf '%s' "<prompt>" | pbcopy`) and tell them it's copied, so they can start the next phase in a fresh session. Format: `/feature-kickoff <linear-url> — resume at Phase <n> (<phase name>). Read docs/features/<feature-slug>/progress.md first.` Ensure `progress.md` is fully up to date before copying.
 
 ## Phase 1 — Gather and verify
+The user may provide specific inputs.
 
-Collect everything available about the feature:
+They may also ask you to use connected resources:
 
 1. **Linear** — the project overview, its description, all tickets in the project, comments, and linked resources on each.
 2. **Notion** — search for documents mentioning the feature/project name; read anything relevant.

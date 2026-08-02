@@ -20,14 +20,27 @@ transcript=$(jq -r '.transcript_path // empty')
 text=$(jq -rs '[.[] | select(.type == "assistant") | .message.content[]? | select(.type == "text") | .text] | last // empty' "$transcript")
 [ -n "$text" ] || exit 0
 
-summary=$(printf '%s' "$text" | claude -p --model claude-haiku-4-5-20251001 \
-  "Rewrite the assistant reply above as a 1-2 sentence spoken summary. First person, plain conversational words, no markdown, no code, no file paths. Output only the summary." 2>/dev/null)
+# Delimit the reply so Haiku treats it as content, not as the conversation.
+# Piping it bare made Haiku ask "I don't see a response to speak" instead.
+#
+# The prompt must come before the flags: --mcp-config is variadic and
+# would otherwise swallow it as a second config path.
+summary=$(printf '<reply>\n%s\n</reply>\n' "$text" | claude -p \
+  "The text inside the <reply> tags is a message I just sent to a user. Rewrite it as a 1-2 sentence spoken summary. First person, plain conversational words, no markdown, no code, no file paths. Output only the summary." \
+  --model claude-haiku-4-5-20251001 \
+  --strict-mcp-config --mcp-config '{"mcpServers":{}}' 2>/dev/null)
+
+# Belt and braces: never speak a "where is the reply?" answer.
+case $summary in
+  *"don't see a"*|*"do not see a"*|*"no assistant message"*) summary= ;;
+esac
+
 [ -n "$summary" ] || summary=$(printf '%s' "$text" | head -c 300)
 
 wav="$VOICE_DIR/last"
 rm -f "$wav.wav"
 "$VOICE_DIR/venv/bin/python" -m mlx_audio.tts.generate \
-  --model prince-canuma/Kokoro-82M --voice af_heart \
+  --model prince-canuma/Kokoro-82M --voice bm_fable \
   --text "$summary" --file_prefix "$wav" --join_audio >/dev/null 2>&1
 
 # Stop any still-playing previous summary before starting this one

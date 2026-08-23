@@ -107,9 +107,9 @@
       "Bash(cd:*)",
       "Bash(npx:*)"
     ],
-    "defaultMode": "plan"
+    "defaultMode": "auto"
   },
-  "model": "claude-fable-5[1m]",
+  "model": "opus[1m]",
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "playwriter"

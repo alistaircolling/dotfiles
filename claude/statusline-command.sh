@@ -23,7 +23,7 @@ if [ -f "$LOG" ]; then
     else
       printf '%s\n' "$cmd"
     fi
-  done | paste -sd '  │  ' -)
+  done | awk '{ if (NR > 1) printf "  │  "; printf "%s", $0 }')
 fi
 
 if [ -n "$branch" ]; then

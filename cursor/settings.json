@@ -28,7 +28,6 @@
   "zenMode.hideStatusBar": false,
   "search.collapseResults": "alwaysCollapse",
   "typescript.preferences.importModuleSpecifier": "relative",
-  "workbench.editor.showTabs": "none",
   "zenMode.showTabs": "none",
   "workbench.sideBar.location": "left",
   "scm.diffDecorations": "none",
@@ -1465,4 +1464,5 @@
   "workbench.colorTheme": "Solarized Dark",
   "window.autoDetectColorScheme": false,
   "vim.disableExtension": true,
+  "workbench.statusBar.visible": false,
 }

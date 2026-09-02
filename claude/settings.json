@@ -69,7 +69,6 @@
       "Bash(jq:*)",
       "Bash(psql:*)",
       "Bash(curl:*)",
-      "Bash(python3:*)",
       "Bash(python3.14:*)",
       "Bash(brew:*)",
       "Bash(nvim:*)",
@@ -104,8 +103,7 @@
       "mcp__claude_ai_Linear__list_issue_statuses",
       "mcp__claude_ai_Linear__search_documentation",
       "Bash(fc-list : family)",
-      "Bash(cd:*)",
-      "Bash(npx:*)"
+      "Bash(cd:*)"
     ],
     "defaultMode": "auto"
   },

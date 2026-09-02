@@ -3,6 +3,7 @@
   "defaultModel": "gpt-5.6-sol",
   "defaultThinkingLevel": "high",
   "theme": "dotfiles-dark",
+  "quietStartup": true,
   "compaction": {
     "enabled": true,
     "reserveTokens": 16384,
@@ -30,9 +31,10 @@
     "npm:visual-explainer@0.8.1",
     "npm:@leohenon/pi-vim@0.1.4",
     "npm:@firstpick/pi-extension-git-footer-status",
-    "npm:@gotgenes/pi-anthropic-auth"
+    "npm:@gotgenes/pi-anthropic-auth",
+    "npm:pi-tui-pro"
   ],
   "shellCommandPrefix": "shopt -s expand_aliases\neval \"$(grep '^alias ' ~/.zshrc)\"",
-  "lastChangelogVersion": "0.81.1",
+  "lastChangelogVersion": "0.84.3",
   "hideThinkingBlock": false
 }
